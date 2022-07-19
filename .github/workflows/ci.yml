@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    name: Lint and test
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -18,7 +18,6 @@ jobs:
       - run: |
           npm ci
           npm run lint
-          npm test
 
   automerge:
     name: Merge dependabot's PRs

@@ -1,0 +1,27 @@
+{
+  "name": "GitHub Snooze",
+  "version": "1.0.0",
+  "description": "Snooze feature for GitHub Issues and PRs",
+  "manifest_version": 3,
+  "author": "Davide Roffo",
+  "background": {
+    "service_worker": "init.js"
+  },
+  "permissions": ["storage", "activeTab", "scripting"],
+  "options_page": "/screens/options/options.html",
+  "action": {
+    "default_popup": "/screens/popup/popup.html",
+    "default_icon": {
+      "16": "/assets/images/icon16.png",
+      "32": "/assets/images/icon32.png",
+      "48": "/assets/images/icon48.png",
+      "128": "/assets/images/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "/assets/images/icon16.png",
+    "32": "/assets/images/icon32.png",
+    "48": "/assets/images/icon48.png",
+    "128": "/assets/images/icon128.png"
+  }
+}
