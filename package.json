@@ -6,7 +6,6 @@
   "type": "module",
   "scripts": {
     "lint": "eslint .",
-    "test": "tap",
     "prepare": "husky install"
   },
   "repository": {
@@ -28,8 +27,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
-    "prettier": "^2.7.1",
-    "tap": "^16.3.0"
+    "prettier": "^2.7.1"
   },
   "lint-staged": {
     "*.{js,jsx}": "eslint --cache --fix"
