@@ -5,17 +5,18 @@
   "manifest_version": 3,
   "author": "Davide Roffo",
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "content_scripts": [
     {
       "matches": ["https://github.com/*"],
-      "js": ["contentscript.js"],
+      "js": ["gh-snooze.dist.js"],
       "run_at": "document_idle",
       "all_frames": false
     }
   ],
-  "permissions": ["storage", "scripting"],
+  "permissions": ["storage", "scripting", "activeTab", "tabs"],
   "options_page": "/src/screens/options/options.html",
   "action": {
     "default_popup": "/src/screens/popup/popup.html",

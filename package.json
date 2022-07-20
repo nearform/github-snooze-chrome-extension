@@ -2,13 +2,15 @@
   "name": "github-snooze-chrome-extension",
   "version": "1.0.0",
   "description": "GitHub Snooze Chrome Extension",
-  "main": "app/index.js",
+  "main": "app/src/index.js",
   "type": "module",
   "scripts": {
-    "watch": "nodemon --ignore app/contentscript.js --exec npm run build",
+    "watch": "nodemon --ignore app/gh-snooze.dist.js --ignore app/src/index.dist.js --exec npm run build",
     "lint": "eslint .",
     "prepare": "husky install",
-    "build": "browserify app/src/index.js -p esmify > app/contentscript.js"
+    "prebuild": "npx babel app/src/index.js --out-file app/src/index.dist.js",
+    "build": "browserify app/src/index.dist.js -p esmify > app/gh-snooze.dist.js",
+    "postbuild": "rm app/src/index.dist.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,9 @@
   },
   "homepage": "https://github.com/nearform/github-snooze-chrome-extension#readme",
   "devDependencies": {
+    "@babel/cli": "^7.18.9",
+    "@babel/core": "^7.18.9",
+    "@babel/preset-env": "^7.18.9",
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "browserify": "^17.0.0",
