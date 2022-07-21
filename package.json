@@ -2,15 +2,16 @@
   "name": "github-snooze-chrome-extension",
   "version": "1.0.0",
   "description": "GitHub Snooze Chrome Extension",
-  "main": "app/src/index.js",
+  "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "watch": "nodemon --ignore app/gh-snooze.dist.js --ignore app/src/index.dist.js --exec npm run build",
+    "watch": "nodemon --ignore app --ignore src/index.dist.js --exec \"npm run buildplugin && npm run buildworker && npm run buildscreens\"",
     "lint": "eslint .",
     "prepare": "husky install",
-    "prebuild": "npx babel app/src/index.js --out-file app/src/index.dist.js",
-    "build": "browserify app/src/index.dist.js -p esmify > app/gh-snooze.dist.js",
-    "postbuild": "rm app/src/index.dist.js"
+    "buildplugin": "browserify src/index.js -p esmify > app/gh-snooze.js && npx babel app/gh-snooze.js --out-file app/gh-snooze.js",
+    "buildworker": "browserify src/background.js -p esmify > app/background.js",
+    "buildscreens": "cp -r src/screens/* app/screens/",
+    "pack": "npm run buildplugin && npm run buildworker && npm run buildscreens"
   },
   "repository": {
     "type": "git",

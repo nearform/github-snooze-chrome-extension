@@ -1,13 +1,21 @@
 const state = {
+  extensionId: null,
   user: {
     username: null,
     id: null,
     company: null,
     me: null
   },
+  pat: null,
   procedureInProgress: false,
   currentUrl: null
 }
+
+export const setExtensionId = id => {
+  state.extensionId = id
+}
+
+export const getExtensionId = () => state.extensionId
 
 export const setUser = data => {
   state.user = {
@@ -20,6 +28,12 @@ export const setUser = data => {
 }
 
 export const getUser = () => state.user
+
+export const setPat = pat => {
+  state.pat = pat
+}
+
+export const getPat = () => state.pat
 
 export const setProcedureInProgress = value => {
   state.procedureInProgress = value

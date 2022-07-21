@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="options.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light mb-3">
+      <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">GitHub Snooze <span class="badge bg-danger">options page</span></span>
+      </div>
+    </nav>
+    <div class="container-xl">
+
+      <div class="card">
+        <div class="card-header">
+          Personal Access Token  
+        </div>
+        <div class="card-body">
+          <h5 class="card-title mb-2">Insert in the box below your GitHub PAT</h5>
+          <p class="card-text text-muted">Make sure to grant the `read:user` permission to it</p>
+          <hr/>
+          <div class="mb-1">
+            <label for="pat-input" class="form-label">Personal Access Token (PAT)</label>
+            <input type="email" class="form-control" id="pat-input" placeholder="ghp_hTyW2DuXpqtjkWucPwh6MWBy1EDHZ93BGQXz">
+          </div>
+          <button id="save-btn" type="button" class="btn btn-light">Save</button>
+        </div>
+        
+      </div>
+
+    </div>
+    
+    <script src="options.js"></script>
+  </body>
+</html>
