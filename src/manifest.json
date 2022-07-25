@@ -14,7 +14,7 @@
     }
   ],
   "action": {
-    "default_popup": "main/index.html",
+    "default_popup": "index.html",
     "default_title": "GitHub Snooze"
   },
   "permissions": ["activeTab", "tabs", "storage", "background", "scripting"]
