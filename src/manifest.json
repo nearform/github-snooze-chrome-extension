@@ -1,0 +1,21 @@
+{
+  "name": "GitHub Snooze",
+  "description": "Receive a notification when there are Issues or PRs updates",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "GitHub Snooze"
+  },
+  "permissions": ["activeTab", "tabs", "storage", "background", "scripting"]
+}
