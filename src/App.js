@@ -6,17 +6,21 @@ import { CircularProgress } from '@mui/material'
 import { routes } from './routes'
 import DashboardPage from './pages/DashboardPage'
 import AuthPage from './pages/AuthPage'
-import { readFromLocalStorage, sendMessage } from './api/chrome'
+import {
+  getSnoozeList,
+  readFromLocalStorage,
+  writeToLocalStorage
+} from './api/chrome'
 import { getUserByPat } from './api/github'
-import { ACTION_SAVE_TO_LOCAL_STORAGE } from './constants'
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [, setLocalStorage] = useState({})
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [username, setUsername] = useState('')
+  const [user, setUser] = useState({})
   const [pat, setPat] = useState('')
   const [currentUrl, setCurrentUrl] = useState('')
+  const [snoozeList, setSnoozeList] = useState([])
 
   useEffect(() => {
     setIsLoading(true)
@@ -33,16 +37,18 @@ const App = () => {
           throw Error('PAT not available.')
         }
         const userData = await getUserByPat(pat)
-        const { login } = userData
+        const { login, id } = userData
         if (!login) {
           throw Error('Token is not valid.')
         }
-        await sendMessage(ACTION_SAVE_TO_LOCAL_STORAGE, { user: userData })
+        await writeToLocalStorage({ user: userData })
         setIsAuthenticated(true)
         setPat(pat)
-        setUsername(login)
+        setUser(userData)
         setCurrentUrl(url)
         setLocalStorage(storage)
+        const availableSnoozes = await getSnoozeList(id)
+        setSnoozeList(availableSnoozes)
       } catch (err) {
         console.log(err.message)
         setIsAuthenticated(false)
@@ -55,7 +61,11 @@ const App = () => {
   }, [])
 
   if (isLoading) {
-    return <CircularProgress color="secondary" />
+    return (
+      <div style={{ minWidth: '512px' }}>
+        <CircularProgress color="secondary" />
+      </div>
+    )
   }
   return (
     <div style={{ minWidth: '512px' }}>
@@ -67,8 +77,10 @@ const App = () => {
             element={
               <DashboardPage
                 isAuthenticated={isAuthenticated}
-                username={username}
+                pat={pat}
+                user={user}
                 currentUrl={currentUrl}
+                snoozeList={snoozeList}
               />
             }
           />

@@ -39,7 +39,7 @@ function NavBar({ isAuthenticated }) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar component="nav" position="fixed">
         <Toolbar>
           {showBackButton ? (
             <>
@@ -67,6 +67,7 @@ function NavBar({ isAuthenticated }) {
           )}
         </Toolbar>
       </AppBar>
+      <Toolbar />
     </Box>
   )
 }
