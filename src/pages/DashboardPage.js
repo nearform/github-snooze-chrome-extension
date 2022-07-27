@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import * as uuid from 'uuid'
 import { Typography, Alert, Divider, Box } from '@mui/material'
 import DialogFormButton from '../components/DialogFormButton'
 import SnoozeItem from '../components/SnoozeItem'
-import { addSnooze } from '../api/chrome'
+import { addSnooze, checkUrlAlreadySnoozed, getSnoozeList } from '../api/chrome'
 import { addHours } from '../date'
 import { getEntityInfo } from '../parser'
 import { SNOOZE_STATUS_PENDING } from '../constants'
@@ -18,6 +19,12 @@ function DashboardPage({
   const [errorMessage, setErrorMessage] = useState('')
   const [snoozeList, setSnoozeList] = useState(snoozes)
 
+  useEffect(() => {
+    getSnoozeList(user.id).then(list => {
+      setSnoozeList(list)
+    })
+  }, [])
+
   const handleAddSnooze = async hours => {
     setErrorMessage('')
 
@@ -29,15 +36,28 @@ function DashboardPage({
       return
     }
 
+    const urlAlreadyPresent = await checkUrlAlreadySnoozed(user.id, currentUrl)
+    if (urlAlreadyPresent) {
+      setErrorMessage('This URL is already present in your Snooze list.')
+      return
+    }
+
     const now = new Date()
     const notifyDate = addHours(now, numberOfHours)
     const unixTimestamp = notifyDate.getTime()
 
     const entityInfo = getEntityInfo(currentUrl)
     const entity = await getEntity(entityInfo, pat)
+    if (entity.message === 'Not Found') {
+      setErrorMessage(
+        'The provided URL is not valid. Unable to fetch entity information from GitHub.'
+      )
+      return
+    }
     const { updated_at: updatedAt } = entity
 
     const snooze = {
+      id: uuid.v4(),
       url: currentUrl,
       notifyAt: unixTimestamp,
       entityInfo: { ...entityInfo, updatedAt },
@@ -75,15 +95,16 @@ function DashboardPage({
         <>
           <Box height={20} />
           <Alert severity="warning">
-            This is not a valid URL for adding a GitHub Snooze
+            The URL you are navigating on is not a valid URL for adding a GitHub
+            Snooze
           </Alert>
         </>
       )}
       <Box height={20} />
       <DialogFormButton
         label="Add Snooze"
-        title="Add Snooze"
-        description="In how many hours do you want to be notified for this item?"
+        title="In how many hours do you want to be notified for this item?"
+        description={currentUrl}
         placeholder="Number of hours"
         onConfirm={handleAddSnooze}
         disabled={currentUrl === null}

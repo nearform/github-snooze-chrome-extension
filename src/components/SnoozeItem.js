@@ -10,7 +10,12 @@ import {
 } from '@mui/material'
 import { Check, Delete } from '@mui/icons-material'
 import { getFormattedDate } from '../date'
-import { SNOOZE_STATUS_DONE } from '../constants'
+import {
+  COLOR_SUCCESS,
+  COLOR_WHITE,
+  SK_USER,
+  SNOOZE_STATUS_DONE
+} from '../constants'
 import { readFromLocalStorage, removeSnooze } from '../api/chrome'
 
 function SnoozeItem({ index, snooze, onDelete }) {
@@ -21,7 +26,7 @@ function SnoozeItem({ index, snooze, onDelete }) {
 
   useEffect(() => {
     setIsLoading(true)
-    readFromLocalStorage(['user']).then(response => {
+    readFromLocalStorage([SK_USER]).then(response => {
       const { user } = response
       setUserId(user.id)
       setIsLoading(false)
@@ -41,7 +46,8 @@ function SnoozeItem({ index, snooze, onDelete }) {
       <Box height={5} />
       <Card
         style={{
-          backgroundColor: status === SNOOZE_STATUS_DONE ? '#E3FBE3' : '#FFFFFF'
+          backgroundColor:
+            status === SNOOZE_STATUS_DONE ? COLOR_SUCCESS : COLOR_WHITE
         }}
       >
         <CardHeader

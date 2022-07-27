@@ -1,28 +1,25 @@
-import { getSnoozeList, readFromSyncStorage, setSnoozeList, writeToSyncStorage } from './api/chrome'
+import {
+  getSnoozeList,
+  incrementBadgeCounter,
+  readAllFromLocalStorage,
+  setSnoozeList,
+  writeToLocalStorage,
+  updateBadgeCounterUI
+} from './api/chrome'
 import { getEntity } from './api/github'
 import {
   ACTION_UPDATE_BADGE_COUNTER,
   SNOOZE_STATUS_DONE,
-  SNOOZE_STATUS_PENDING
+  SNOOZE_STATUS_PENDING,
+  URL_MATCH
 } from './constants'
-
-const isValidUrl = url => {
-  return url.startsWith('https://github.com/')
-}
-
-const readAllFromLocalStorage = async () => {
-  return await chrome.storage.local.get()
-}
-
-const writeToLocalStorage = async configs => {
-  await chrome.storage.local.set(configs)
-}
+import { isValidUrl } from './url'
 
 chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
   const { action, msg: badgeCounter } = message
   switch (action) {
     case ACTION_UPDATE_BADGE_COUNTER:
-      updateBadgeCounter(badgeCounter)
+      updateBadgeCounterUI(badgeCounter)
       break
     default:
       break
@@ -40,20 +37,20 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     url = changeInfo.url
   }
 
-  if (!isValidUrl(url)) {
+  if (!isValidUrl(url, URL_MATCH)) {
     url = null
   }
 
-  await writeToLocalStorage({ url, extensionId: chrome.runtime.id })
+  await writeToLocalStorage({ url })
 })
 
 chrome.tabs.onActivated.addListener(async activeInfo => {
   const tab = await chrome.tabs.get(activeInfo.tabId)
   let { url } = tab
-  if (!url || !isValidUrl(url)) {
+  if (!url || !isValidUrl(url, URL_MATCH)) {
     url = null
   }
-  await writeToLocalStorage({ url, extensionId: chrome.runtime.id })
+  await writeToLocalStorage({ url })
 })
 
 setInterval(async () => {
@@ -61,11 +58,6 @@ setInterval(async () => {
 
   const localStorage = await readAllFromLocalStorage()
   const { user, pat } = localStorage
-
-  let { badgeCounter } = await readFromSyncStorage(['badgeCounter'])
-  if (!badgeCounter) {
-    await writeToSyncStorage({ badgeCounter: 0 })
-  }
 
   const snoozesList = await getSnoozeList(user.id)
 
@@ -81,8 +73,7 @@ setInterval(async () => {
     }
   }
 
-  badgeCounter = (await readFromSyncStorage(['badgeCounter'])).badgeCounter
-  updateBadgeCounter(badgeCounter)
+  await updateBadgeCounterUI()
 
   await setSnoozeList(user.id, updatedSnoozeList)
 }, 5000)
@@ -98,17 +89,9 @@ const notify = async (snooze, pat) => {
     return snooze
   }
 
-  let { badgeCounter } = await readFromSyncStorage(['badgeCounter'])
-  badgeCounter++
-
-  await writeToSyncStorage({ badgeCounter })
+  await incrementBadgeCounter()
 
   snooze.badgeCount = true
 
   return snooze
-}
-
-const updateBadgeCounter = badgeCounter => {
-  chrome.action.setBadgeBackgroundColor({ color: '#FB7A9C' })
-  chrome.action.setBadgeText({ text: badgeCounter.toString() })
 }

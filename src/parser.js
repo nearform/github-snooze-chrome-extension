@@ -1,9 +1,12 @@
+/**
+ * Parses the provided URL and returns the relevant information
+ * @param {string} url current url
+ * @returns an object with repository owner, repository name, entity type (issue or pr), and entity number
+ */
 export const getEntityInfo = url => {
-  const a = document.createElement('a')
-  a.href = url
+  const { pathname } = new URL(url)
 
-  const pathName = a['pathname']
-  const parts = pathName.split('/').filter(part => part)
+  const parts = pathname.split('/').filter(part => part)
   return {
     owner: parts[0],
     repo: parts[1],

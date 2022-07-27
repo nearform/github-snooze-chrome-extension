@@ -1,3 +1,6 @@
+/**
+ * Available routes, with url and title
+ */
 export const routes = {
   dashboard: {
     url: '/',
