@@ -53,7 +53,7 @@
     "rollup-plugin-empty-dir": "^1.0.4",
     "rollup-plugin-zip": "^1.0.1",
     "styled-jsx": "^3.3.2",
-    "@types/chrome": "^0.0.127",
+    "@types/chrome": "^0.0.193",
     "@types/firefox-webext-browser": "^82.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
