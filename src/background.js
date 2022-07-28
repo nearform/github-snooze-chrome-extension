@@ -4,7 +4,8 @@ import {
   readAllFromLocalStorage,
   setSnoozeList,
   writeToLocalStorage,
-  updateBadgeCounterUI
+  updateBadgeCounterUI,
+  sendBrowserNotification
 } from './api/chrome'
 import { getEntity } from './api/github'
 import {
@@ -59,6 +60,10 @@ setInterval(async () => {
   const localStorage = await readAllFromLocalStorage()
   const { user, pat } = localStorage
 
+  if (!user || !pat) {
+    return console.error('user is not logged in')
+  }
+
   const snoozesList = await getSnoozeList(user.id)
 
   const updatedSnoozeList = []
@@ -92,6 +97,12 @@ const notify = async (snooze, pat) => {
   await incrementBadgeCounter()
 
   snooze.badgeCount = true
+
+  sendBrowserNotification(
+    snooze.id,
+    'GitHub Snooze',
+    `It's time to check this item: ${snooze.url}`
+  )
 
   return snooze
 }
