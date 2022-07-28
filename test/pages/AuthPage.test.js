@@ -14,7 +14,7 @@ describe('AuthPage.js', () => {
     expect(tree.toJSON()).toMatchSnapshot()
   })
 
-  test('renders the Auth Page for authenticated users', async () => {
+  test('renders the Auth Page for authenticated users', () => {
     const tree = renderer.create(<AuthPage {...props} isAuthenticated={true} />)
 
     expect(tree.toJSON()).toMatchSnapshot()

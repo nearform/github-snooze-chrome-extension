@@ -12,13 +12,13 @@ const props = {
 }
 
 describe('DialogFormButton.js', () => {
-  test('shows the proper enabled DialogFormButton', async () => {
+  test('shows the proper enabled DialogFormButton', () => {
     const tree = renderer.create(<DialogFormButton {...props} />)
 
     expect(tree.toJSON()).toMatchSnapshot()
   })
 
-  test('shows the proper disabled DialogFormButton', async () => {
+  test('shows the proper disabled DialogFormButton', () => {
     const tree = renderer.create(
       <DialogFormButton {...props} disabled={true} />
     )

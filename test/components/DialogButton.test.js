@@ -10,7 +10,7 @@ const props = {
 }
 
 describe('DialogButton.js', () => {
-  test('shows the proper DialogButton', async () => {
+  test('shows the proper DialogButton', () => {
     const tree = renderer.create(<DialogButton {...props} />)
 
     expect(tree.toJSON()).toMatchSnapshot()
