@@ -175,6 +175,32 @@ export const updateBadgeCounterUI = async () => {
 }
 
 /**
+ * Sends a new browser notification with the specified title and message.
+ * @param {string} title notification title
+ * @param {string} message notification message
+ */
+export const sendBrowserNotification = (id, title, message) => {
+  chrome.notifications.create(
+    id,
+    {
+      type: 'basic',
+      iconUrl: 'images/48.png',
+      title,
+      message,
+      priority: 2,
+      buttons: [
+        {
+          title: 'OK'
+        }
+      ]
+    },
+    notificationId => {
+      console.log('notification sent successfully: ' + notificationId)
+    }
+  )
+}
+
+/**
  * Retrieves the badge counter value, if does not exist will be created with the specified initial value, otherwise 0
  * @param {number} initialValue default is 0
  * @returns the badge counter value

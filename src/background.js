@@ -4,7 +4,8 @@ import {
   readAllFromLocalStorage,
   setSnoozeList,
   writeToLocalStorage,
-  updateBadgeCounterUI
+  updateBadgeCounterUI,
+  sendBrowserNotification
 } from './api/chrome'
 import { getEntity } from './api/github'
 import {
@@ -92,6 +93,12 @@ const notify = async (snooze, pat) => {
   await incrementBadgeCounter()
 
   snooze.badgeCount = true
+
+  sendBrowserNotification(
+    snooze.id,
+    'GitHub Snooze',
+    `It's time to check this item: ${snooze.url}`
+  )
 
   return snooze
 }

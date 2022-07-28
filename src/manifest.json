@@ -9,7 +9,26 @@
   },
   "action": {
     "default_popup": "index.html",
-    "default_title": "GitHub Snooze"
+    "default_title": "GitHub Snooze",
+    "default_icon": {
+      "16": "images/16.png",
+      "32": "images/32.png",
+      "48": "images/48.png",
+      "128": "images/128.png"
+    }
   },
-  "permissions": ["activeTab", "tabs", "storage", "background", "scripting"]
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "background",
+    "scripting",
+    "notifications"
+  ],
+  "icons": {
+    "16": "images/16.png",
+    "32": "images/32.png",
+    "48": "images/48.png",
+    "128": "images/128.png"
+  }
 }
