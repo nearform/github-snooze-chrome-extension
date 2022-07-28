@@ -6,11 +6,11 @@
 export const getEntityInfo = url => {
   const { pathname } = new URL(url)
 
-  const parts = pathname.split('/').filter(part => part)
+  const [owner, repo, type, number] = pathname.split('/').filter(part => part)
   return {
-    owner: parts[0],
-    repo: parts[1],
-    type: parts[2],
-    number: parts[3]
+    owner,
+    repo,
+    type,
+    number
   }
 }

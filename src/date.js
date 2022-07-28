@@ -5,8 +5,9 @@
  * @returns the date with the number of hours added to it
  */
 export const addHours = (date, numOfHours) => {
-  date.setTime(date.getTime() + numOfHours * 60 * 60 * 1000)
-  return date
+  const updatedDate = new Date(date.getTime())
+  updatedDate.setTime(updatedDate.getTime() + numOfHours * 60 * 60 * 1000)
+  return updatedDate
 }
 
 /**

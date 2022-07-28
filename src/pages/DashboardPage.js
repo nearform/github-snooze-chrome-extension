@@ -122,7 +122,7 @@ function DashboardPage({
       )}
       {snoozeList.map((snooze, index) => (
         <SnoozeItem
-          key={index}
+          key={snooze.id}
           index={index}
           snooze={snooze}
           onDelete={handleDelete}
