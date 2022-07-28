@@ -1,6 +1,6 @@
 // SIMPLE RELOADER IMPORT
-              import "./assets/background-page-reloader-2fad29d2.js"
-              import { A as ACTION_UPDATE_BADGE_COUNTER, u as updateBadgeCounterUI, w as writeToLocalStorage, r as readAllFromLocalStorage, g as getSnoozeList, S as SNOOZE_STATUS_PENDING, s as setSnoozeList, a as getEntity, b as SNOOZE_STATUS_DONE, i as incrementBadgeCounter, U as URL_MATCH } from './chunks/github-80ea17cc.js';
+              import "./assets/background-page-reloader-80739b98.js"
+              import { A as ACTION_UPDATE_BADGE_COUNTER, u as updateBadgeCounterUI, w as writeToLocalStorage, r as readAllFromLocalStorage, g as getSnoozeList, S as SNOOZE_STATUS_PENDING, s as setSnoozeList, a as getEntity, b as SNOOZE_STATUS_DONE, i as incrementBadgeCounter, U as URL_MATCH } from './chunks/github-6217f4bd.js';
 
 /**
  * Checks if the url provided is a valid one.

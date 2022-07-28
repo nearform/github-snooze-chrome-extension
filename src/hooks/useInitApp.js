@@ -11,10 +11,7 @@ import {
   SK_USER,
   SET_LOADING,
   SET_AUTHENTICATED,
-  SET_USER,
-  SET_PAT,
-  SET_CURRENT_URL,
-  SET_SNOOZE_LIST
+  SET_APP_STATE
 } from '../constants'
 
 const initialState = {
@@ -33,14 +30,8 @@ const reducer = (state, action) => {
       return { ...state, isLoading: payload }
     case SET_AUTHENTICATED:
       return { ...state, isAuthenticated: payload }
-    case SET_USER:
-      return { ...state, user: payload }
-    case SET_PAT:
-      return { ...state, pat: payload }
-    case SET_CURRENT_URL:
-      return { ...state, currentUrl: payload }
-    case SET_SNOOZE_LIST:
-      return { ...state, snoozeList: payload }
+    case SET_APP_STATE:
+      return { ...state, ...payload }
     default:
       throw new Error(`Unhandled action type: ${type}`)
   }
@@ -64,12 +55,17 @@ function useInitApp() {
           throw Error('Token is not valid.')
         }
         await writeToLocalStorage({ user: userData })
-        dispatch({ type: SET_AUTHENTICATED, payload: true })
-        dispatch({ type: SET_PAT, payload: pat })
-        dispatch({ type: SET_USER, payload: userData })
-        dispatch({ type: SET_CURRENT_URL, payload: url })
         const availableSnoozes = await getSnoozeList(userId)
-        dispatch({ type: SET_SNOOZE_LIST, payload: availableSnoozes })
+        dispatch({
+          type: SET_APP_STATE,
+          payload: {
+            isAuthenticated: true,
+            pat,
+            user: userData,
+            currentUrl: url,
+            snoozeList: availableSnoozes
+          }
+        })
       } catch (err) {
         console.log(err.message)
         dispatch({ type: SET_AUTHENTICATED, payload: false })

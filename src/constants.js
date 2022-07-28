@@ -47,7 +47,4 @@ export const SK_PAT = 'pat'
  */
 export const SET_LOADING = 'SET_LOADING'
 export const SET_AUTHENTICATED = 'SET_AUTHENTICATED'
-export const SET_USER = 'SET_USER'
-export const SET_PAT = 'SET_PAT'
-export const SET_CURRENT_URL = 'SET_CURRENT_URL'
-export const SET_SNOOZE_LIST = 'SET_SNOOZE_LIST'
+export const SET_APP_STATE = 'SET_APP_STATE'
