@@ -21,7 +21,7 @@ describe('date.js', () => {
     const date = new Date(ISO_STRING_DATE_BASE)
     const unixTimestamp = date.getTime()
     const formattedDate = getFormattedDate(unixTimestamp)
-    expect(formattedDate).toBe('Jul 28 2022 12:00')
+    expect(formattedDate).toBe('Jul 28 2022 10:00')
   })
 
   test('should return true if a date has passed', () => {
