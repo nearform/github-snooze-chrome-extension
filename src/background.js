@@ -1,21 +1,32 @@
 import {
-  ACTION_CLEAR_LOCAL_STORAGE,
-  ACTION_LOG,
-  ACTION_POPUP_INIT,
-  ACTION_SAVE_TO_LOCAL_STORAGE
+  getSnoozeList,
+  incrementBadgeCounter,
+  readAllFromLocalStorage,
+  setSnoozeList,
+  writeToLocalStorage,
+  updateBadgeCounterUI
+} from './api/chrome'
+import { getEntity } from './api/github'
+import {
+  ACTION_UPDATE_BADGE_COUNTER,
+  SNOOZE_STATUS_DONE,
+  SNOOZE_STATUS_PENDING,
+  URL_MATCH
 } from './constants'
+import { isValidUrl } from './url'
 
-const isValidUrl = url => {
-  return url.startsWith('https://github.com/')
-}
+chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+  const { action, msg: badgeCounter } = message
+  switch (action) {
+    case ACTION_UPDATE_BADGE_COUNTER:
+      updateBadgeCounterUI(badgeCounter)
+      break
+    default:
+      break
+  }
 
-const saveToLocalStorage = async configs => {
-  await chrome.storage.local.set(configs)
-}
-
-const clearLocalStorage = async () => {
-  await chrome.storage.local.clear()
-}
+  sendResponse()
+})
 
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   let url = ''
@@ -26,39 +37,61 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     url = changeInfo.url
   }
 
-  if (!isValidUrl(url)) {
+  if (!isValidUrl(url, URL_MATCH)) {
     url = null
   }
 
-  await saveToLocalStorage({ url, extensionId: chrome.runtime.id })
+  await writeToLocalStorage({ url })
 })
 
 chrome.tabs.onActivated.addListener(async activeInfo => {
   const tab = await chrome.tabs.get(activeInfo.tabId)
   let { url } = tab
-  if (!url || !isValidUrl(url)) {
+  if (!url || !isValidUrl(url, URL_MATCH)) {
     url = null
   }
-  await saveToLocalStorage({ url, extensionId: chrome.runtime.id })
+  await writeToLocalStorage({ url })
 })
 
-chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
-  console.log('Message Received: ', message)
-  const { action, msg } = message
-  switch (action) {
-    case ACTION_POPUP_INIT:
-      break
-    case ACTION_LOG:
-      break
-    case ACTION_SAVE_TO_LOCAL_STORAGE:
-      await saveToLocalStorage(msg)
-      break
-    case ACTION_CLEAR_LOCAL_STORAGE:
-      await clearLocalStorage()
-      break
-    default:
-      break
+setInterval(async () => {
+  const now = new Date()
+
+  const localStorage = await readAllFromLocalStorage()
+  const { user, pat } = localStorage
+
+  const snoozesList = await getSnoozeList(user.id)
+
+  const updatedSnoozeList = []
+  for (const snooze of snoozesList) {
+    const snoozeNotifyDate = new Date(snooze.notifyAt)
+    if (snooze.status === SNOOZE_STATUS_PENDING && snoozeNotifyDate < now) {
+      // notify date has passed
+      const updatedSnooze = await notify(snooze, pat)
+      updatedSnoozeList.push(updatedSnooze)
+    } else {
+      updatedSnoozeList.push(snooze)
+    }
   }
 
-  sendResponse()
-})
+  await updateBadgeCounterUI()
+
+  await setSnoozeList(user.id, updatedSnoozeList)
+}, 5000)
+
+const notify = async (snooze, pat) => {
+  const { entityInfo } = snooze
+
+  const entity = await getEntity(entityInfo, pat)
+  const { updated_at: updatedAt } = entity
+  snooze.status = SNOOZE_STATUS_DONE
+  if (updatedAt !== entityInfo.updatedAt) {
+    // there has been an update, so don't notify the user
+    return snooze
+  }
+
+  await incrementBadgeCounter()
+
+  snooze.badgeCount = true
+
+  return snooze
+}

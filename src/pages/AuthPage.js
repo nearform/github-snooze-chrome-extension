@@ -7,16 +7,17 @@ import {
   IconButton,
   Box,
   Typography,
-  Link
+  Link,
+  Alert
 } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { getUserByPat } from '../api/github'
-import { sendMessage } from '../api/chrome'
 import {
-  ACTION_CLEAR_LOCAL_STORAGE,
-  ACTION_SAVE_TO_LOCAL_STORAGE
-} from '../constants'
+  clearLocalStorage,
+  clearSyncStorage,
+  writeToLocalStorage
+} from '../api/chrome'
 import DialogButton from '../components/DialogButton'
 
 function AuthPage({ isAuthenticated, pat }) {
@@ -45,10 +46,8 @@ function AuthPage({ isAuthenticated, pat }) {
         throw Error('The token is not valid.')
       }
 
-      await sendMessage(ACTION_SAVE_TO_LOCAL_STORAGE, {
-        pat: token,
-        user: userData
-      })
+      await writeToLocalStorage({ pat: token, user: userData })
+
       window.location.reload()
     } catch (err) {
       setFormErrorMessage(err.message)
@@ -58,12 +57,18 @@ function AuthPage({ isAuthenticated, pat }) {
   }
 
   const handleLogout = async () => {
-    await sendMessage(ACTION_CLEAR_LOCAL_STORAGE)
+    await clearLocalStorage()
+    window.location.reload()
+  }
+
+  const handleClearSyncStorage = async () => {
+    await clearSyncStorage()
     window.location.reload()
   }
 
   return (
     <div>
+      {formErrorMessage && <Alert severity="error">{formErrorMessage}</Alert>}
       <Typography variant="body1" component="body">
         In order to use this Chrome Extension you have to generate a{' '}
         <Link href="https://github.com/settings/tokens/new" target="_blank">
@@ -72,7 +77,7 @@ function AuthPage({ isAuthenticated, pat }) {
         and insert it into the box below.
       </Typography>
       <Typography variant="subtitle1" component="sub">
-        Remember to add the `read:user` permission to it.
+        Remember to add the `repo` and `read:user` scopes to it.
       </Typography>
       <Box height={20} />
       <FormControl
@@ -100,40 +105,32 @@ function AuthPage({ isAuthenticated, pat }) {
           }
           label="PAT"
         />
-        {formErrorMessage && (
-          <>
-            <Box height={10} />
-            <Typography
-              style={{ color: '#C45150' }}
-              variant="subtitle2"
-              component="p"
-            >
-              {formErrorMessage}
-            </Typography>
-          </>
-        )}
         <Box height={20} />
-        <Box display="flex" justifyContent="center" alignItems="center">
-          <LoadingButton
-            color="secondary"
-            variant="contained"
-            onClick={handleLogin}
-            loading={isLoading}
-          >
-            {isAuthenticated ? 'Save' : 'Login'}
-          </LoadingButton>
-        </Box>
+        <LoadingButton
+          fullWidth
+          color="secondary"
+          variant="contained"
+          onClick={handleLogin}
+          loading={isLoading}
+        >
+          {isAuthenticated ? 'Save' : 'Login'}
+        </LoadingButton>
         {isAuthenticated && (
           <>
             <Box height={20} />
-            <Box display="flex" justifyContent="center" alignItems="center">
-              <DialogButton
-                buttonTitle="Logout"
-                title="Do you want to logout?"
-                description="All your local data will be canceled and you won't be able to use the extension anymore until you log in again."
-                onConfirm={handleLogout}
-              />
-            </Box>
+            <DialogButton
+              label="Logout"
+              title="Do you want to logout?"
+              description="All your local data will be canceled and you won't be able to use the extension anymore until you log in again."
+              onConfirm={handleLogout}
+            />
+            <Box height={20} />
+            <DialogButton
+              label="Clear Sync Storage"
+              title="Do you want to clear the sync storage?"
+              description="All your sync data will be canceled across devices."
+              onConfirm={handleClearSyncStorage}
+            />
           </>
         )}
       </FormControl>
