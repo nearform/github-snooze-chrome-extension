@@ -60,6 +60,10 @@ setInterval(async () => {
   const localStorage = await readAllFromLocalStorage()
   const { user, pat } = localStorage
 
+  if (!user || !pat) {
+    return console.error('user is not logged in')
+  }
+
   const snoozesList = await getSnoozeList(user.id)
 
   const updatedSnoozeList = []
