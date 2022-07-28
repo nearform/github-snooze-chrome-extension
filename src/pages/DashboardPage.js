@@ -20,9 +20,12 @@ function DashboardPage({
   const [snoozeList, setSnoozeList] = useState(snoozes)
 
   useEffect(() => {
-    getSnoozeList(user.id).then(list => {
+    const initList = async () => {
+      const list = await getSnoozeList(user.id)
       setSnoozeList(list)
-    })
+    }
+
+    initList()
   }, [])
 
   const handleAddSnooze = async hours => {
@@ -30,16 +33,14 @@ function DashboardPage({
 
     const numberOfHours = parseFloat(hours)
     if (!numberOfHours || isNaN(numberOfHours)) {
-      setErrorMessage(
+      return setErrorMessage(
         'Snooze not added. Please, insert a valid number of hours.'
       )
-      return
     }
 
     const urlAlreadyPresent = await checkUrlAlreadySnoozed(user.id, currentUrl)
     if (urlAlreadyPresent) {
-      setErrorMessage('This URL is already present in your Snooze list.')
-      return
+      return setErrorMessage('This URL is already present in your Snooze list.')
     }
 
     const now = new Date()
@@ -49,10 +50,9 @@ function DashboardPage({
     const entityInfo = getEntityInfo(currentUrl)
     const entity = await getEntity(entityInfo, pat)
     if (entity.message === 'Not Found') {
-      setErrorMessage(
+      return setErrorMessage(
         'The provided URL is not valid. Unable to fetch entity information from GitHub.'
       )
-      return
     }
     const { updated_at: updatedAt } = entity
 
@@ -65,10 +65,6 @@ function DashboardPage({
     }
 
     const updatedSnoozeList = await addSnooze(user.id, snooze)
-    setSnoozeList(updatedSnoozeList)
-  }
-
-  const handleDelete = updatedSnoozeList => {
     setSnoozeList(updatedSnoozeList)
   }
 
@@ -91,7 +87,7 @@ function DashboardPage({
           <Alert severity="error">{errorMessage}</Alert>
         </>
       )}
-      {currentUrl === null && (
+      {!currentUrl && (
         <>
           <Box height={20} />
           <Alert severity="warning">
@@ -107,7 +103,7 @@ function DashboardPage({
         description={currentUrl}
         placeholder="Number of hours"
         onConfirm={handleAddSnooze}
-        disabled={currentUrl === null}
+        disabled={!currentUrl}
       />
       <Box height={20} />
       <Divider />
@@ -125,7 +121,7 @@ function DashboardPage({
           key={snooze.id}
           index={index}
           snooze={snooze}
-          onDelete={handleDelete}
+          onDelete={setSnoozeList}
         />
       ))}
     </>
