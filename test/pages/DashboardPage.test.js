@@ -9,7 +9,7 @@ const props = {
   snoozeList: [],
   user: {
     id: 123,
-    username: 'User'
+    login: 'User'
   }
 }
 
