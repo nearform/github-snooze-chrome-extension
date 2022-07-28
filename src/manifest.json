@@ -7,12 +7,6 @@
     "service_worker": "background.js",
     "type": "module"
   },
-  "content_scripts": [
-    {
-      "matches": ["https://github.com/*"],
-      "js": ["content.js"]
-    }
-  ],
   "action": {
     "default_popup": "index.html",
     "default_title": "GitHub Snooze"

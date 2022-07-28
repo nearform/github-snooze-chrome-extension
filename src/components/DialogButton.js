@@ -6,22 +6,26 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 
-export default function DialogButton({ buttonTitle, title, description, onConfirm }) {
+export default function DialogButton({ label, title, description, onConfirm }) {
   const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {
     setOpen(true)
   }
 
-  const handleClose = () => {
+  const handleConfirm = () => {
     setOpen(false)
     onConfirm()
   }
 
+  const handleClose = () => {
+    setOpen(false)
+  }
+
   return (
     <div>
-      <Button variant="outlined" color='secondary' onClick={handleClickOpen}>
-        {buttonTitle}
+      <Button fullWidth variant="outlined" color='secondary' onClick={handleClickOpen}>
+        {label}
       </Button>
       <Dialog
         open={open}
@@ -39,7 +43,7 @@ export default function DialogButton({ buttonTitle, title, description, onConfir
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose} autoFocus>
+          <Button onClick={handleConfirm} autoFocus>
             Confirm
           </Button>
         </DialogActions>
