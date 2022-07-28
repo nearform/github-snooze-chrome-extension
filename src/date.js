@@ -18,3 +18,15 @@ export const addHours = (date, numOfHours) => {
 export const getFormattedDate = unixTimestamp => {
   return new Date(unixTimestamp).toString().slice(4, 21)
 }
+
+/**
+ * Checks if a date, expressed as a unique timestamp has passed.
+ * @param {number} checkUnixTimestamp unix timestamp to check
+ * @param {number} compareToUnixTimestamp unix timestamp to compare with
+ * @returns true if it has passed, false otherwise.
+ */
+export const dateHasPassed = (checkUnixTimestamp, compareToUnixTimestamp) => {
+  const checkDate = new Date(checkUnixTimestamp)
+  const compareDate = new Date(compareToUnixTimestamp)
+  return checkDate < compareDate
+}

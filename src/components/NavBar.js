@@ -19,13 +19,13 @@ function NavBar({ isAuthenticated }) {
   const [currentRoute, setCurrentRoute] = useState(routes.dashboard)
 
   useEffect(() => {
-    const locationUrl = location.pathname
-    if (locationUrl !== routes.dashboard.url) {
+    const { pathname } = location
+    if (pathname !== routes.dashboard.url) {
       setShowBackButton(true)
-      setCurrentRoute(getCurrentRoute(locationUrl))
+      setCurrentRoute(getCurrentRoute(pathname))
     } else {
       setShowBackButton(false)
-      setCurrentRoute(getCurrentRoute(locationUrl))
+      setCurrentRoute(getCurrentRoute(pathname))
     }
   }, [location.pathname])
 
@@ -59,10 +59,10 @@ function NavBar({ isAuthenticated }) {
             <Button
               color="secondary"
               variant="contained"
-              endIcon={isAuthenticated ? <Settings/> : <Login />}
+              endIcon={isAuthenticated ? <Settings /> : <Login />}
               onClick={handleLogin}
             >
-              {isAuthenticated ? 'Settings' : 'Login' }
+              {isAuthenticated ? 'Settings' : 'Login'}
             </Button>
           )}
         </Toolbar>

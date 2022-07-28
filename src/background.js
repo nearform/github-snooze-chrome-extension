@@ -13,6 +13,7 @@ import {
   SNOOZE_STATUS_PENDING,
   URL_MATCH
 } from './constants'
+import { dateHasPassed } from './date'
 import { isValidUrl } from './url'
 
 chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
@@ -63,9 +64,8 @@ setInterval(async () => {
 
   const updatedSnoozeList = []
   for (const snooze of snoozesList) {
-    const snoozeNotifyDate = new Date(snooze.notifyAt)
-    if (snooze.status === SNOOZE_STATUS_PENDING && snoozeNotifyDate < now) {
-      // notify date has passed
+    const hasPassed = dateHasPassed(snooze.notifyAt, now.getTime())
+    if (hasPassed && snooze.status === SNOOZE_STATUS_PENDING) {
       const updatedSnooze = await notify(snooze, pat)
       updatedSnoozeList.push(updatedSnooze)
     } else {
