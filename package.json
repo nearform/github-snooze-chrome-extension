@@ -23,7 +23,7 @@
     "@emotion/styled": "^11.9.3",
     "@mui/icons-material": "^5.8.4",
     "@mui/lab": "^5.0.0-alpha.91",
-    "@mui/material": "^5.9.1",
+    "@mui/material": "^5.9.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^6.3.0",
@@ -43,7 +43,7 @@
     "@rollup/plugin-replace": "^2.4.1",
     "@types/chrome": "^0.0.193",
     "cross-env": "^7.0.3",
-    "eslint": "^7.16.0",
+    "eslint": "^8.20.0",
     "eslint-plugin-react": "^7.21.5",
     "husky": "^8.0.1",
     "jest": "^26.6.3",
@@ -54,7 +54,12 @@
     "rollup-plugin-chrome-extension": "^3.5.6",
     "rollup-plugin-empty-dir": "^1.0.4",
     "rollup-plugin-zip": "^1.0.1",
-    "styled-jsx": "^3.3.2"
+    "styled-jsx": "^3.3.2",
+    "@types/chrome": "^0.0.193",
+    "@types/firefox-webext-browser": "^94.0.1",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "prettier": "^2.2.1"
   },
   "lint-staged": {
     "*.{js,jsx}": "eslint --cache --fix"
