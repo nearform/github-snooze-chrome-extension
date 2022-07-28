@@ -41,3 +41,13 @@ export const SK_BADGE_COUNTER = 'badgeCounter'
 export const SK_URL = 'url'
 export const SK_USER = 'user'
 export const SK_PAT = 'pat'
+
+/**
+ * Reducer Action Types
+ */
+export const SET_LOADING = 'SET_LOADING'
+export const SET_AUTHENTICATED = 'SET_AUTHENTICATED'
+export const SET_USER = 'SET_USER'
+export const SET_PAT = 'SET_PAT'
+export const SET_CURRENT_URL = 'SET_CURRENT_URL'
+export const SET_SNOOZE_LIST = 'SET_SNOOZE_LIST'

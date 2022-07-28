@@ -1,23 +1,56 @@
-import { useState, useEffect } from 'react'
+import { useReducer, useEffect } from 'react'
 import {
   readFromLocalStorage,
   writeToLocalStorage,
   getSnoozeList
 } from '../api/chrome'
 import { getUserByPat } from '../api/github'
-import { SK_URL, SK_PAT, SK_USER } from '../constants'
+import {
+  SK_URL,
+  SK_PAT,
+  SK_USER,
+  SET_LOADING,
+  SET_AUTHENTICATED,
+  SET_USER,
+  SET_PAT,
+  SET_CURRENT_URL,
+  SET_SNOOZE_LIST
+} from '../constants'
+
+const initialState = {
+  isLoading: true,
+  isAuthenticated: false,
+  user: null,
+  pat: null,
+  currentUrl: null,
+  snoozeList: []
+}
+
+const reducer = (state, action) => {
+  const { type, payload } = action
+  switch (type) {
+    case SET_LOADING:
+      return { ...state, isLoading: payload }
+    case SET_AUTHENTICATED:
+      return { ...state, isAuthenticated: payload }
+    case SET_USER:
+      return { ...state, user: payload }
+    case SET_PAT:
+      return { ...state, pat: payload }
+    case SET_CURRENT_URL:
+      return { ...state, currentUrl: payload }
+    case SET_SNOOZE_LIST:
+      return { ...state, snoozeList: payload }
+    default:
+      throw new Error(`Unhandled action type: ${type}`)
+  }
+}
 
 function useInitApp() {
-  const [isLoading, setIsLoading] = useState(false)
-  const [, setLocalStorage] = useState({})
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [user, setUser] = useState({})
-  const [pat, setPat] = useState('')
-  const [currentUrl, setCurrentUrl] = useState('')
-  const [snoozeList, setSnoozeList] = useState([])
+  const [state, dispatch] = useReducer(reducer, initialState)
 
   useEffect(() => {
-    setIsLoading(true)
+    dispatch({ type: SET_LOADING, payload: true })
     const init = async () => {
       try {
         const storage = await readFromLocalStorage([SK_URL, SK_PAT, SK_USER])
@@ -31,32 +64,24 @@ function useInitApp() {
           throw Error('Token is not valid.')
         }
         await writeToLocalStorage({ user: userData })
-        setIsAuthenticated(true)
-        setPat(pat)
-        setUser(userData)
-        setCurrentUrl(url)
-        setLocalStorage(storage)
+        dispatch({ type: SET_AUTHENTICATED, payload: true })
+        dispatch({ type: SET_PAT, payload: pat })
+        dispatch({ type: SET_USER, payload: userData })
+        dispatch({ type: SET_CURRENT_URL, payload: url })
         const availableSnoozes = await getSnoozeList(userId)
-        setSnoozeList(availableSnoozes)
+        dispatch({ type: SET_SNOOZE_LIST, payload: availableSnoozes })
       } catch (err) {
         console.log(err.message)
-        setIsAuthenticated(false)
+        dispatch({ type: SET_AUTHENTICATED, payload: false })
       } finally {
-        setIsLoading(false)
+        dispatch({ type: SET_LOADING, payload: false })
       }
     }
 
     init()
   }, [])
 
-  return {
-    isLoading,
-    isAuthenticated,
-    user,
-    pat,
-    currentUrl,
-    snoozeList
-  }
+  return state
 }
 
 export default useInitApp
