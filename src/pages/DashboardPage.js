@@ -78,7 +78,7 @@ function DashboardPage({
   return (
     <>
       <Typography variant="body1" component="p">
-        {`Hello ${user.login} (${user.id})`},
+        {`Hello ${user.login}`},
       </Typography>
       <Divider />
       {errorMessage && (
