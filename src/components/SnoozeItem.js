@@ -59,12 +59,8 @@ function SnoozeItem({ index, snooze, onDelete }) {
           }
           subheader={`Scheduled at ${getFormattedDate(notifyAt)}`}
           action={
-            <IconButton>
-              {status === SNOOZE_STATUS_DONE ? (
-                <Check onClick={handleDelete} />
-              ) : (
-                <Delete onClick={handleDelete} />
-              )}
+            <IconButton onClick={handleDelete}>
+              {status === SNOOZE_STATUS_DONE ? <Check /> : <Delete />}
             </IconButton>
           }
         />
