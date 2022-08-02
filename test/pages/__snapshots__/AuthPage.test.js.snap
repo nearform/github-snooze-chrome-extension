@@ -23,7 +23,37 @@ exports[`AuthPage.js renders the Auth Page for authenticated users 1`] = `
   <sub
     className="MuiTypography-root MuiTypography-subtitle1 css-10wpov9-MuiTypography-root"
   >
-    Remember to add the \`repo\` and \`read:user\` scopes to it.
+    Remember to add the
+     
+    <span
+      style={
+        Object {
+          "backgroundColor": "#FB7A9C",
+          "borderRadius": "25px",
+          "color": "#140048",
+          "padding": "3px",
+        }
+      }
+    >
+      repo
+    </span>
+     
+    and
+     
+    <span
+      style={
+        Object {
+          "backgroundColor": "#FB7A9C",
+          "borderRadius": "25px",
+          "color": "#140048",
+          "padding": "3px",
+        }
+      }
+    >
+      read:user
+    </span>
+     
+    scopes to it.
   </sub>
   <div
     className="MuiBox-root css-1pg8bi"
@@ -220,7 +250,37 @@ exports[`AuthPage.js renders the Auth Page for unauthenticated users 1`] = `
   <sub
     className="MuiTypography-root MuiTypography-subtitle1 css-10wpov9-MuiTypography-root"
   >
-    Remember to add the \`repo\` and \`read:user\` scopes to it.
+    Remember to add the
+     
+    <span
+      style={
+        Object {
+          "backgroundColor": "#FB7A9C",
+          "borderRadius": "25px",
+          "color": "#140048",
+          "padding": "3px",
+        }
+      }
+    >
+      repo
+    </span>
+     
+    and
+     
+    <span
+      style={
+        Object {
+          "backgroundColor": "#FB7A9C",
+          "borderRadius": "25px",
+          "color": "#140048",
+          "padding": "3px",
+        }
+      }
+    >
+      read:user
+    </span>
+     
+    scopes to it.
   </sub>
   <div
     className="MuiBox-root css-1pg8bi"
