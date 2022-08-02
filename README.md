@@ -2,12 +2,10 @@
 This Chrome Extension adds the Snooze feature to GitHub issues and pull requests.
 
 ## Requirements
-To use this extension you will need a _GitHub Personal Access Token_ (_PAT_), with these permissions:
+To use this extension you will need to [generate a GitHub Personal Access Token (PAT)](https://github.com/settings/tokens/new), with these permissions:
 
 - `repo`: used for getting the repository information, such as last update date time on issues and pull requests
 - `read:user`: used for retrieving the current logged in user information _(GitHub ID and username)_
-
-You can generate one through this [link](https://github.com/settings/tokens/new).
 
 ## Usage instructions for the users
 In order to use this extension locally, you have to complete the following steps:
