@@ -9,7 +9,7 @@ To use this extension you will need a _GitHub Personal Access Token_ (_PAT_), wi
 
 You can generate one through this [link](https://github.com/settings/tokens/new).
 
-## Usage instractions for users
+## Usage instructions for the users
 In order to use this extension locally, you have to complete the following steps:
 
 - Download the release artifact with the distribution files, the `dist.zip` and extract it.
@@ -17,7 +17,7 @@ In order to use this extension locally, you have to complete the following steps
 - Enable Developer Mode by clicking the toggle switch next to **Developer mode**
 - Click the **Load unpacked** button and select the extension directory, in this case the previously extracted folder
 
-## Usage instructions for developers
+## Usage instructions for the developers
 In order to use this extension during the development, you have to complete these steps:
 
 - `npm start` in the project root, this command will generate the `dist` folder and will run the extension in `watch` mode
