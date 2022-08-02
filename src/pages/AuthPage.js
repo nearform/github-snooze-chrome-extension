@@ -19,6 +19,8 @@ import {
   writeToLocalStorage
 } from '../api/chrome'
 import DialogButton from '../components/DialogButton'
+import StyledText from '../components/StyledText'
+import { COLOR_PRIMARY, COLOR_SECONDARY } from '../constants'
 
 function AuthPage({ isAuthenticated, pat }) {
   const [isLoading, setIsLoading] = useState(false)
@@ -77,7 +79,19 @@ function AuthPage({ isAuthenticated, pat }) {
         and insert it into the box below.
       </Typography>
       <Typography variant="subtitle1" component="sub">
-        Remember to add the `repo` and `read:user` scopes to it.
+        Remember to add the{' '}
+        <StyledText
+          text="repo"
+          color={COLOR_PRIMARY}
+          backgroundColor={COLOR_SECONDARY}
+        />{' '}
+        and{' '}
+        <StyledText
+          text="read:user"
+          color={COLOR_PRIMARY}
+          backgroundColor={COLOR_SECONDARY}
+        />{' '}
+        scopes to it.
       </Typography>
       <Box height={20} />
       <FormControl
