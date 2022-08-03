@@ -29,18 +29,13 @@ function AuthPage({ isAuthenticated, pat }) {
       isLoading: false,
       token: pat,
       showToken: false,
-      formErrorMessage: '',
-      saveBtnDisabled: true
+      formErrorMessage: ''
     }
   )
 
   const handleChange = e => {
-    let saveBtnDisabled = false
     const { value } = e.target
-    if (!value || value === pat) {
-      saveBtnDisabled = true
-    }
-    setState({ token: value, saveBtnDisabled })
+    setState({ token: value })
   }
 
   const handleShowToken = () => setState({ showToken: !state.showToken })
@@ -79,7 +74,7 @@ function AuthPage({ isAuthenticated, pat }) {
     window.location.reload()
   }
 
-  const { formErrorMessage, isLoading, showToken, token, saveBtnDisabled } =
+  const { formErrorMessage, isLoading, showToken, token } =
     state
 
   return (
@@ -140,7 +135,7 @@ function AuthPage({ isAuthenticated, pat }) {
           variant="contained"
           onClick={handleLogin}
           loading={isLoading}
-          disabled={saveBtnDisabled}
+          disabled={!token || token === pat}
         >
           {isAuthenticated ? 'Save' : 'Login'}
         </LoadingButton>
