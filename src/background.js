@@ -17,6 +17,8 @@ import {
 import { dateHasPassed } from './date'
 import { isValidUrl } from './url'
 
+const CHECK_INTERVAL_TIMER = 60000
+
 chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
   const { action, msg: badgeCounter } = message
   switch (action) {
@@ -81,7 +83,7 @@ setInterval(async () => {
   await updateBadgeCounterUI()
 
   await setSnoozeList(user.id, updatedSnoozeList)
-}, 5000)
+}, CHECK_INTERVAL_TIMER)
 
 const notify = async (snooze, pat) => {
   const { entityInfo } = snooze
