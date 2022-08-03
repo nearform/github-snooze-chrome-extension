@@ -170,8 +170,10 @@ export const incrementBadgeCounter = async (increment = 1) => {
  */
 export const updateBadgeCounterUI = async () => {
   const badgeCounter = await getBadgeCounter()
+  let text = badgeCounter > 0 ? badgeCounter.toString() : ''
+
   chrome.action.setBadgeBackgroundColor({ color: COLOR_SECONDARY })
-  chrome.action.setBadgeText({ text: badgeCounter.toString() })
+  chrome.action.setBadgeText({ text })
 }
 
 /**
