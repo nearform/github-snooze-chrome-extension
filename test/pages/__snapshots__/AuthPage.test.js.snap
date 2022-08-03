@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AuthPage.js renders the Auth Page for authenticated users 1`] = `
-<div>
-  
-  <body
+Array [
+  "",
+  <p
     className="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
   >
     In order to use this Chrome Extension you have to generate a
@@ -19,7 +19,7 @@ exports[`AuthPage.js renders the Auth Page for authenticated users 1`] = `
     </a>
      
     and insert it into the box below.
-  </body>
+  </p>,
   <sub
     className="MuiTypography-root MuiTypography-subtitle1 css-10wpov9-MuiTypography-root"
   >
@@ -54,10 +54,10 @@ exports[`AuthPage.js renders the Auth Page for authenticated users 1`] = `
     </span>
      
     scopes to it.
-  </sub>
+  </sub>,
   <div
     className="MuiBox-root css-1pg8bi"
-  />
+  />,
   <div
     className="MuiFormControl-root MuiFormControl-fullWidth css-q8hpuo-MuiFormControl-root"
   >
@@ -141,8 +141,8 @@ exports[`AuthPage.js renders the Auth Page for authenticated users 1`] = `
       className="MuiBox-root css-1pg8bi"
     />
     <button
-      className="MuiLoadingButton-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth MuiButtonBase-root css-1xy3nps-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
-      disabled={false}
+      className="MuiLoadingButton-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth MuiButtonBase-root Mui-disabled css-1xy3nps-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
+      disabled={true}
       id="mui-2"
       onBlur={[Function]}
       onClick={[Function]}
@@ -157,13 +157,10 @@ exports[`AuthPage.js renders the Auth Page for authenticated users 1`] = `
       onTouchEnd={[Function]}
       onTouchMove={[Function]}
       onTouchStart={[Function]}
-      tabIndex={0}
+      tabIndex={-1}
       type="button"
     >
       Save
-      <span
-        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-      />
     </button>
     <div
       className="MuiBox-root css-1pg8bi"
@@ -223,14 +220,14 @@ exports[`AuthPage.js renders the Auth Page for authenticated users 1`] = `
         />
       </button>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;
 
 exports[`AuthPage.js renders the Auth Page for unauthenticated users 1`] = `
-<div>
-  
-  <body
+Array [
+  "",
+  <p
     className="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
   >
     In order to use this Chrome Extension you have to generate a
@@ -246,7 +243,7 @@ exports[`AuthPage.js renders the Auth Page for unauthenticated users 1`] = `
     </a>
      
     and insert it into the box below.
-  </body>
+  </p>,
   <sub
     className="MuiTypography-root MuiTypography-subtitle1 css-10wpov9-MuiTypography-root"
   >
@@ -281,10 +278,10 @@ exports[`AuthPage.js renders the Auth Page for unauthenticated users 1`] = `
     </span>
      
     scopes to it.
-  </sub>
+  </sub>,
   <div
     className="MuiBox-root css-1pg8bi"
-  />
+  />,
   <div
     className="MuiFormControl-root MuiFormControl-fullWidth css-q8hpuo-MuiFormControl-root"
   >
@@ -365,8 +362,8 @@ exports[`AuthPage.js renders the Auth Page for unauthenticated users 1`] = `
       className="MuiBox-root css-1pg8bi"
     />
     <button
-      className="MuiLoadingButton-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth MuiButtonBase-root css-1xy3nps-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
-      disabled={false}
+      className="MuiLoadingButton-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth MuiButtonBase-root Mui-disabled css-1xy3nps-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
+      disabled={true}
       onBlur={[Function]}
       onClick={[Function]}
       onContextMenu={[Function]}
@@ -380,11 +377,11 @@ exports[`AuthPage.js renders the Auth Page for unauthenticated users 1`] = `
       onTouchEnd={[Function]}
       onTouchMove={[Function]}
       onTouchStart={[Function]}
-      tabIndex={0}
+      tabIndex={-1}
       type="button"
     >
       Login
     </button>
-  </div>
-</div>
+  </div>,
+]
 `;

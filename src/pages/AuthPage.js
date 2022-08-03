@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useReducer } from 'react'
 import {
   FormControl,
   InputLabel,
@@ -23,21 +23,27 @@ import StyledText from '../components/StyledText'
 import { COLOR_PRIMARY, COLOR_SECONDARY } from '../constants'
 
 function AuthPage({ isAuthenticated, pat }) {
-  const [isLoading, setIsLoading] = useState(false)
-  const [token, setToken] = useState(pat)
-  const [showToken, setShowToken] = useState(false)
-  const [formErrorMessage, setFormErrorMessage] = useState('')
+  const [state, setState] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    {
+      isLoading: false,
+      token: pat,
+      showToken: false,
+      formErrorMessage: ''
+    }
+  )
 
   const handleChange = e => {
-    setToken(e.target.value)
+    const { value } = e.target
+    setState({ token: value })
   }
 
-  const handleShowToken = () => setShowToken(!showToken)
+  const handleShowToken = () => setState({ showToken: !state.showToken })
 
   const handleLogin = async () => {
-    setIsLoading(true)
-    setFormErrorMessage('')
+    setState({ isLoading: true, formErrorMessage: '' })
 
+    const { token } = state
     try {
       if (!token) {
         throw Error('A token must be specified.')
@@ -52,9 +58,9 @@ function AuthPage({ isAuthenticated, pat }) {
 
       window.location.reload()
     } catch (err) {
-      setFormErrorMessage(err.message)
+      setState({ formErrorMessage: err.message })
     } finally {
-      setIsLoading(false)
+      setState({ isLoading: false })
     }
   }
 
@@ -68,10 +74,13 @@ function AuthPage({ isAuthenticated, pat }) {
     window.location.reload()
   }
 
+  const { formErrorMessage, isLoading, showToken, token } =
+    state
+
   return (
-    <div>
+    <>
       {formErrorMessage && <Alert severity="error">{formErrorMessage}</Alert>}
-      <Typography variant="body1" component="body">
+      <Typography variant="body1" component="p">
         In order to use this Chrome Extension you have to generate a{' '}
         <Link href="https://github.com/settings/tokens/new" target="_blank">
           GitHub Personal Access Token (PAT)
@@ -126,6 +135,7 @@ function AuthPage({ isAuthenticated, pat }) {
           variant="contained"
           onClick={handleLogin}
           loading={isLoading}
+          disabled={!token || token === pat}
         >
           {isAuthenticated ? 'Save' : 'Login'}
         </LoadingButton>
@@ -142,13 +152,13 @@ function AuthPage({ isAuthenticated, pat }) {
             <DialogButton
               label="Clear Sync Storage"
               title="Do you want to clear the sync storage?"
-              description="All your sync data will be canceled across devices."
+              description="All your sync data (snooze list and badge counter) will be canceled across devices."
               onConfirm={handleClearSyncStorage}
             />
           </>
         )}
       </FormControl>
-    </div>
+    </>
   )
 }
 
