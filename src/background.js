@@ -4,7 +4,8 @@ import {
   readAllFromLocalStorage,
   setSnoozeList,
   writeToLocalStorage,
-  updateBadgeCounterUI
+  updateBadgeCounterUI,
+  sendBrowserNotification
 } from './api/chrome'
 import { getEntity } from './api/github'
 import {
@@ -13,7 +14,10 @@ import {
   SNOOZE_STATUS_PENDING,
   URL_MATCH
 } from './constants'
+import { dateHasPassed } from './date'
 import { isValidUrl } from './url'
+
+const CHECK_INTERVAL_TIMER = 60000
 
 chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
   const { action, msg: badgeCounter } = message
@@ -59,13 +63,16 @@ setInterval(async () => {
   const localStorage = await readAllFromLocalStorage()
   const { user, pat } = localStorage
 
+  if (!user || !pat) {
+    return console.error('user is not logged in')
+  }
+
   const snoozesList = await getSnoozeList(user.id)
 
   const updatedSnoozeList = []
   for (const snooze of snoozesList) {
-    const snoozeNotifyDate = new Date(snooze.notifyAt)
-    if (snooze.status === SNOOZE_STATUS_PENDING && snoozeNotifyDate < now) {
-      // notify date has passed
+    const hasPassed = dateHasPassed(snooze.notifyAt, now.getTime())
+    if (hasPassed && snooze.status === SNOOZE_STATUS_PENDING) {
       const updatedSnooze = await notify(snooze, pat)
       updatedSnoozeList.push(updatedSnooze)
     } else {
@@ -76,7 +83,7 @@ setInterval(async () => {
   await updateBadgeCounterUI()
 
   await setSnoozeList(user.id, updatedSnoozeList)
-}, 5000)
+}, CHECK_INTERVAL_TIMER)
 
 const notify = async (snooze, pat) => {
   const { entityInfo } = snooze
@@ -92,6 +99,12 @@ const notify = async (snooze, pat) => {
   await incrementBadgeCounter()
 
   snooze.badgeCount = true
+
+  sendBrowserNotification(
+    snooze.id,
+    'GitHub Snooze',
+    `It's time to check this item: ${snooze.url}`
+  )
 
   return snooze
 }

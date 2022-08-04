@@ -170,8 +170,36 @@ export const incrementBadgeCounter = async (increment = 1) => {
  */
 export const updateBadgeCounterUI = async () => {
   const badgeCounter = await getBadgeCounter()
+  const text = badgeCounter > 0 ? badgeCounter.toString() : ''
+
   chrome.action.setBadgeBackgroundColor({ color: COLOR_SECONDARY })
-  chrome.action.setBadgeText({ text: badgeCounter.toString() })
+  chrome.action.setBadgeText({ text })
+}
+
+/**
+ * Sends a new browser notification with the specified title and message.
+ * @param {string} title notification title
+ * @param {string} message notification message
+ */
+export const sendBrowserNotification = (id, title, message) => {
+  chrome.notifications.create(
+    id,
+    {
+      type: 'basic',
+      iconUrl: 'images/48.png',
+      title,
+      message,
+      priority: 2,
+      buttons: [
+        {
+          title: 'OK'
+        }
+      ]
+    },
+    notificationId => {
+      console.log('notification sent successfully: ' + notificationId)
+    }
+  )
 }
 
 /**

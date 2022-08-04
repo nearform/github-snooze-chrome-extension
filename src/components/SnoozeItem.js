@@ -3,12 +3,13 @@ import {
   Card,
   CardHeader,
   Avatar,
-  IconButton,
   Link,
   Box,
-  CircularProgress
+  CircularProgress,
+  IconButton
 } from '@mui/material'
 import { Check, Delete } from '@mui/icons-material'
+import DialogButton from './DialogButton'
 import { getFormattedDate } from '../date'
 import {
   COLOR_SUCCESS,
@@ -59,13 +60,18 @@ function SnoozeItem({ index, snooze, onDelete }) {
           }
           subheader={`Scheduled at ${getFormattedDate(notifyAt)}`}
           action={
-            <IconButton>
-              {status === SNOOZE_STATUS_DONE ? (
-                <Check onClick={handleDelete} />
-              ) : (
-                <Delete onClick={handleDelete} />
-              )}
-            </IconButton>
+            status === SNOOZE_STATUS_DONE ? (
+              <IconButton onClick={handleDelete}>
+                <Check />
+              </IconButton>
+            ) : (
+              <DialogButton
+                icon={<Delete />}
+                title="Attention"
+                description="Do you want to delete this snooze?"
+                onConfirm={handleDelete}
+              />
+            )
           }
         />
       </Card>
