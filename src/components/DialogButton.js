@@ -1,12 +1,21 @@
 import * as React from 'react'
-import Button from '@mui/material/Button'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
-import DialogTitle from '@mui/material/DialogTitle'
+import {
+  Button,
+  IconButton,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
+} from '@mui/material'
 
-export default function DialogButton({ label, title, description, onConfirm }) {
+export default function DialogButton({
+  label,
+  title,
+  description,
+  onConfirm,
+  icon = null
+}) {
   const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {
@@ -22,20 +31,32 @@ export default function DialogButton({ label, title, description, onConfirm }) {
     setOpen(false)
   }
 
-  return (
-    <div>
-      <Button fullWidth variant="outlined" color='secondary' onClick={handleClickOpen}>
+  const renderButton = () => {
+    if (icon) {
+      return <IconButton onClick={handleClickOpen}>{icon}</IconButton>
+    }
+    return (
+      <Button
+        fullWidth
+        variant="outlined"
+        color="secondary"
+        onClick={handleClickOpen}
+      >
         {label}
       </Button>
+    )
+  }
+
+  return (
+    <div>
+      {renderButton()}
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {title}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             {description}
