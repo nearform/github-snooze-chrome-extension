@@ -3,7 +3,7 @@
 exports[`DialogFormButton.js shows the proper disabled DialogFormButton 1`] = `
 <div>
   <button
-    className="MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth MuiButtonBase-root Mui-disabled  css-mrzqee-MuiButtonBase-root-MuiButton-root"
+    className="MuiButtonBase-root Mui-disabled MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth css-mrzqee-MuiButtonBase-root-MuiButton-root"
     disabled={true}
     onBlur={[Function]}
     onClick={[Function]}
@@ -29,7 +29,7 @@ exports[`DialogFormButton.js shows the proper disabled DialogFormButton 1`] = `
 exports[`DialogFormButton.js shows the proper enabled DialogFormButton 1`] = `
 <div>
   <button
-    className="MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth MuiButtonBase-root  css-mrzqee-MuiButtonBase-root-MuiButton-root"
+    className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth css-mrzqee-MuiButtonBase-root-MuiButton-root"
     disabled={false}
     onBlur={[Function]}
     onClick={[Function]}
