@@ -2,7 +2,6 @@
 
 exports[`AuthPage.js renders the Auth Page for authenticated users 1`] = `
 Array [
-  "",
   <p
     className="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
   >
@@ -143,7 +142,7 @@ Array [
     <button
       className="MuiButtonBase-root Mui-disabled MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth css-1xy3nps-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
       disabled={true}
-      id="mui-2"
+      id=":r1:"
       onBlur={[Function]}
       onClick={[Function]}
       onContextMenu={[Function]}
@@ -226,7 +225,6 @@ Array [
 
 exports[`AuthPage.js renders the Auth Page for unauthenticated users 1`] = `
 Array [
-  "",
   <p
     className="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
   >
@@ -364,6 +362,7 @@ Array [
     <button
       className="MuiButtonBase-root Mui-disabled MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth css-1xy3nps-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
       disabled={true}
+      id=":r0:"
       onBlur={[Function]}
       onClick={[Function]}
       onContextMenu={[Function]}
