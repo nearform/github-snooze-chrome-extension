@@ -141,8 +141,8 @@ Array [
       className="MuiBox-root css-1pg8bi"
     />
     <button
-      className="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth css-1xy3nps-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
-      disabled={false}
+      className="MuiButtonBase-root Mui-disabled MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth css-1xy3nps-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
+      disabled={true}
       id="mui-2"
       onBlur={[Function]}
       onClick={[Function]}
@@ -362,8 +362,8 @@ Array [
       className="MuiBox-root css-1pg8bi"
     />
     <button
-      className="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth css-1xy3nps-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
-      disabled={false}
+      className="MuiButtonBase-root Mui-disabled MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth css-1xy3nps-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
+      disabled={true}
       onBlur={[Function]}
       onClick={[Function]}
       onContextMenu={[Function]}
