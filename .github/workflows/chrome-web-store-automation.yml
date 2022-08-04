@@ -1,0 +1,32 @@
+name: Chrome Web Store Automation
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  chrome-web-store-automation:
+    runs-on: ubuntu-latest
+    name: Publish an update to the Chrome Web Store
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Build release
+        run: |
+          npm ci
+          npm run release
+      - name: Get NPM version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1
+      - name: Publish to the Chrome Web Store
+        uses: mnao305/chrome-extension-upload@3.0.0
+        with:
+          file-path: releases/github-snooze-${{ steps.package-version.outputs.current-version }}.zip
+          extension-id: ${{ secrets.EXTENSION_ID }}
+          client-id: ${{ secrets.CLIENT_ID }}
+          client-secret: ${{ secrets.CLIENT_SECRET }}
+          refresh-token: ${{ secrets.REFRESH_TOKEN }}
