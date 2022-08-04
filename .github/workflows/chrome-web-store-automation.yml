@@ -1,0 +1,21 @@
+name: Chrome Web Store Automation
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  chrome-web-store-automation:
+    runs-on: ubuntu-latest
+    name: Publish an update to the Chrome Web Store
+    steps:
+      - name: Download release artifact
+        run: curl ${{ github.event.release.assets[0].browser_download_url }} -o ${{ github.event.release.assets[0].name }}
+      - name: Publish to the Chrome Web Store
+        uses: mnao305/chrome-extension-upload@3.0.0
+        with:
+          file-path: ${{ github.event.release.assets[0].name }}
+          extension-id: ${{ secrets.EXTENSION_ID }}
+          client-id: ${{ secrets.CLIENT_ID }}
+          client-secret: ${{ secrets.CLIENT_SECRET }}
+          refresh-token: ${{ secrets.REFRESH_TOKEN }}
