@@ -26,5 +26,6 @@ jobs:
           commit-message: 'chore: release {version}'
           build-command: |
             npm ci
+            npm run update-manifest
             npm run build
           artifact-path: dist
