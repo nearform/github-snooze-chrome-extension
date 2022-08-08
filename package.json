@@ -16,7 +16,7 @@
     "build": "rollup -c",
     "release": "cross-env NODE_ENV=production rollup -c",
     "start": "rollup -c -w",
-    "manifest": "node updateManifest.js",
+    "update-manifest": "node ./scripts/updateManifest.js",
     "test": "jest"
   },
   "dependencies": {
