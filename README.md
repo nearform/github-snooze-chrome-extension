@@ -29,11 +29,9 @@ In order to use this extension during the development, you have to complete thes
 ## Permissions
 This extension will require to the browser these set of permissions:
 
-- `activeTab`: used for checking the current navigation URL on the current tab and if it matches the `https://github.com/*` pattern
 - `tabs`: used for checking the current navigation URL on different tabs and if it matches the `https://github.com/*` pattern
 - `storage`: used for storing in the `sync` and `local` storage data
 - `background`: used for running in background a `service_worker` that will manage all the background operations, such as: checking current url, set initial state, ...
-- `scripting`: used for adding scripts functionalities to the extension
 - `notifications`: used for sending in-browser notifications
 
 No action is required by the user to allow or enable these permissions, the browser will manage those automatically.
