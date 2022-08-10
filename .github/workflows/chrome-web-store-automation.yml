@@ -10,7 +10,7 @@ jobs:
     name: Publish an update to the Chrome Web Store
     steps:
       - name: Download release artifact
-        run: curl --fail-with-body -LO ${{ github.event.release.assets[0].browser_download_url }}
+        run: curl -fLO ${{ github.event.release.assets[0].browser_download_url }}
       - name: Publish to the Chrome Web Store
         uses: mnao305/chrome-extension-upload@3.0.0
         with:
