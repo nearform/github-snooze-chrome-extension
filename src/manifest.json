@@ -18,11 +18,9 @@
     }
   },
   "permissions": [
-    "activeTab",
     "tabs",
     "storage",
     "background",
-    "scripting",
     "notifications"
   ],
   "icons": {
