@@ -11,41 +11,20 @@ on:
         type: string
 
 jobs:
-  release-on-published:
-    if: ${{ github.event_name == 'release' }}
+  publish:
     runs-on: ubuntu-latest
-    name: Publish an update to the Chrome Web Store - on release
-    steps:
-      - name: Download release artifact
-        run: curl -fLO ${{ github.event.release.assets[0].browser_download_url }}
-      - name: Publish to the Chrome Web Store
-        uses: mnao305/chrome-extension-upload@3.0.0
-        with:
-          file-path: ${{ github.event.release.assets[0].name }}
-          extension-id: ${{ secrets.EXTENSION_ID }}
-          client-id: ${{ secrets.CLIENT_ID }}
-          client-secret: ${{ secrets.CLIENT_SECRET }}
-          refresh-token: ${{ secrets.REFRESH_TOKEN }}
-  release-on-workflow-dispatch:
-    if: ${{ github.event_name == 'workflow_dispatch' }}
-    runs-on: ubuntu-latest
-    name: Publish an update to the Chrome Web Store - on workflow dispatch
+    name: Publish to the Chrome Web Store
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Get release artifact
-        id: get-release-artifact
-        run: echo "::set-output name=artifact-name::$(gh release view ${{ github.event.inputs.release-version }} | grep -o ".*\.zip$" | sed 's/asset://' | sed 's/\t//')"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Download release artifact
-        run: gh release download ${{ github.event.inputs.release-version }} --pattern '${{ steps.get-release-artifact.outputs.artifact-name }}'
+        run: gh release download ${{ github.event.inputs.release-version && github.event.inputs.release-version || github.event.release.tag_name }} --pattern 'dist.zip'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish to the Chrome Web Store
         uses: mnao305/chrome-extension-upload@3.0.0
         with:
-          file-path: ${{ steps.get-release-artifact.outputs.artifact-name }}
+          file-path: dist.zip
           extension-id: ${{ secrets.EXTENSION_ID }}
           client-id: ${{ secrets.CLIENT_ID }}
           client-secret: ${{ secrets.CLIENT_SECRET }}
