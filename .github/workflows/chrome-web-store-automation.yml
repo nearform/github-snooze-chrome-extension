@@ -5,28 +5,20 @@ on:
     types: [published]
   workflow_dispatch:
     inputs:
-      artifact-url:
-        description: Release artifact URL
-        required: true
-        type: string
-      artifact-name:
-        description: Release artifact name
+      release-version:
+        description: Release version
         required: true
         type: string
 
 jobs:
-  chrome-web-store-automation:
+  release-on-published:
+    if: ${{ github.event_name == 'release' }}
     runs-on: ubuntu-latest
-    name: Publish an update to the Chrome Web Store
+    name: Publish an update to the Chrome Web Store - on release
     steps:
-      - name: On Release - download release artifact
-        if: ${{ github.event_name == 'release' }}
+      - name: Download release artifact
         run: curl -fLO ${{ github.event.release.assets[0].browser_download_url }}
-      - name: On Workflow Dispatch - download release artifact
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        run: curl -fLO ${{ github.event.inputs.artifact-url }}
-      - name: On Release - publish to the Chrome Web Store
-        if: ${{ github.event_name == 'release' }}
+      - name: Publish to the Chrome Web Store
         uses: mnao305/chrome-extension-upload@3.0.0
         with:
           file-path: ${{ github.event.release.assets[0].name }}
@@ -34,11 +26,26 @@ jobs:
           client-id: ${{ secrets.CLIENT_ID }}
           client-secret: ${{ secrets.CLIENT_SECRET }}
           refresh-token: ${{ secrets.REFRESH_TOKEN }}
-      - name: On Workflow Dispatch - publish to the Chrome Web Store
-        if: ${{ github.event_name == 'workflow_dispatch' }}
+  release-on-workflow-dispatch:
+    if: ${{ github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    name: Publish an update to the Chrome Web Store - on workflow dispatch
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Get release artifact
+        id: get-release-artifact
+        run: echo "::set-output name=artifact-name::$(gh release view ${{ github.event.inputs.release-version }} | grep -o ".*\.zip$" | sed 's/asset://' | sed 's/\t//')"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Download release artifact
+        run: gh release download ${{ github.event.inputs.release-version }} --pattern '${{ steps.get-release-artifact.outputs.artifact-name }}'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish to the Chrome Web Store
         uses: mnao305/chrome-extension-upload@3.0.0
         with:
-          file-path: ${{ github.event.inputs.artifact-name }}
+          file-path: ${{ steps.get-release-artifact.outputs.artifact-name }}
           extension-id: ${{ secrets.EXTENSION_ID }}
           client-id: ${{ secrets.CLIENT_ID }}
           client-secret: ${{ secrets.CLIENT_SECRET }}
