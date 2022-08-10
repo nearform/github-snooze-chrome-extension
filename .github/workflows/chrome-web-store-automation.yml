@@ -3,18 +3,42 @@ name: Chrome Web Store Automation
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      artifact-url:
+        description: Release artifact URL
+        required: true
+        type: string
+      artifact-name:
+        description: Release artifact name
+        required: true
+        type: string
 
 jobs:
   chrome-web-store-automation:
     runs-on: ubuntu-latest
     name: Publish an update to the Chrome Web Store
     steps:
-      - name: Download release artifact
+      - name: On Release - download release artifact
+        if: ${{ github.event_name == 'release' }}
         run: curl -fLO ${{ github.event.release.assets[0].browser_download_url }}
-      - name: Publish to the Chrome Web Store
+      - name: On Workflow Dispatch - download release artifact
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: curl -fLO ${{ github.event.inputs.artifact-url }}
+      - name: On Release - publish to the Chrome Web Store
+        if: ${{ github.event_name == 'release' }}
         uses: mnao305/chrome-extension-upload@3.0.0
         with:
           file-path: ${{ github.event.release.assets[0].name }}
+          extension-id: ${{ secrets.EXTENSION_ID }}
+          client-id: ${{ secrets.CLIENT_ID }}
+          client-secret: ${{ secrets.CLIENT_SECRET }}
+          refresh-token: ${{ secrets.REFRESH_TOKEN }}
+      - name: On Workflow Dispatch - publish to the Chrome Web Store
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        uses: mnao305/chrome-extension-upload@3.0.0
+        with:
+          file-path: ${{ github.event.inputs.artifact-name }}
           extension-id: ${{ secrets.EXTENSION_ID }}
           client-id: ${{ secrets.CLIENT_ID }}
           client-secret: ${{ secrets.CLIENT_SECRET }}
