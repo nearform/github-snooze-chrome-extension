@@ -8,7 +8,7 @@ To use this extension you will need to [generate a GitHub Personal Access Token 
 - `read:user`: used for retrieving the current logged in user information _(GitHub ID and username)_
 
 ## Installation via the Chrome Web Store
-The [GitHub Snooze Extension](https://chrome.google.com/webstore/detail/github-snooze/jeecjllabmgondbmnnlogkkaafjcgbck) is available in the Chrome Web Store. You can install it as a regular extension.
+The [GitHub Snooze Extension](https://chrome.google.com/webstore/detail/github-snooze/pphnmnebnblgfepdjefofceimacpkcni) is available in the Chrome Web Store. You can install it as a regular extension.
 
 ## Usage instructions for the users
 In order to use this extension locally, you have to complete the following steps:
