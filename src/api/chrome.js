@@ -219,31 +219,21 @@ const getBadgeCounter = async (initialValue = 0) => {
   return badgeCounter
 }
 
-/**
- * Retrieves current tab url and validates it. Returns valid tab url otherwise undefined.
- * @returns the tab url or undefined
- */
-
 export const getCurrentTabUrlBackground = async () => {
-  let queryOptions = { active: true }
   const currWindow = await chrome.windows.getCurrent()
   // `tab` will either be a `tabs.Tab` instance or `undefined`.
   let [tab] = await chrome.tabs.query({
-    ...queryOptions,
+    active: true,
     windowId: currWindow.id
   })
 
-  if (!isValidUrl(tab.url, URL_MATCH)) {
-    return undefined
+  if (isValidUrl(tab.url, URL_MATCH)) {
+    return tab.url
   }
-  return tab.url
+
+  return undefined
 }
 
-/**
- * Sends a message with proper action to the background service and returns its response.
- * @returns the current tab url or undefined
- */
 export const getCurrentTabUrl = async () => {
-  const tabUrl = await sendMessage(ACTION_GET_CURRENT_TAB_URL)
-  return tabUrl
+  return sendMessage(ACTION_GET_CURRENT_TAB_URL)
 }
