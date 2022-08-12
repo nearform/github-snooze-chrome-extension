@@ -17,7 +17,7 @@
     "release": "cross-env NODE_ENV=production rollup -c",
     "start": "rollup -c -w",
     "update-manifest": "node ./scripts/updateManifest.js",
-    "test": "TZ=UTC jest"
+    "test": "cross-env TZ=UTC jest"
   },
   "dependencies": {
     "@emotion/react": "^11.10.0",
