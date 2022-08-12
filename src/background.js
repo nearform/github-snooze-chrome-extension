@@ -5,10 +5,12 @@ import {
   setSnoozeList,
   writeToLocalStorage,
   updateBadgeCounterUI,
-  sendBrowserNotification
+  sendBrowserNotification,
+  getCurrentTabUrlBackground
 } from './api/chrome'
 import { getEntity } from './api/github'
 import {
+  ACTION_GET_CURRENT_TAB_URL,
   ACTION_UPDATE_BADGE_COUNTER,
   SNOOZE_STATUS_DONE,
   SNOOZE_STATUS_PENDING,
@@ -19,12 +21,19 @@ import { isValidUrl } from './url'
 
 const CHECK_INTERVAL_TIMER = 60000
 
-chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   const { action, msg: badgeCounter } = message
   switch (action) {
     case ACTION_UPDATE_BADGE_COUNTER:
       updateBadgeCounterUI(badgeCounter)
       break
+    case ACTION_GET_CURRENT_TAB_URL: {
+      getCurrentTabUrlBackground().then(tabUrl => {
+        sendResponse(tabUrl)
+      })
+      // This is required when we want to call sendResponse callback asynchronously
+      return true
+    }
     default:
       break
   }

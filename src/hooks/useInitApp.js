@@ -2,7 +2,8 @@ import { useReducer, useEffect } from 'react'
 import {
   readFromLocalStorage,
   writeToLocalStorage,
-  getSnoozeList
+  getSnoozeList,
+  getCurrentTabUrl
 } from '../api/chrome'
 import { getUserByPat } from '../api/github'
 import {
@@ -45,9 +46,14 @@ function useInitApp() {
     const init = async () => {
       try {
         const storage = await readFromLocalStorage([SK_URL, SK_PAT, SK_USER])
-        const { pat, url } = storage
+        const { pat, url: urlFromStorage } = storage
+        let url = urlFromStorage
         if (!pat) {
           throw Error('PAT not available.')
+        }
+        if (!url) {
+          url = await getCurrentTabUrl()
+          await writeToLocalStorage({ url })
         }
         const userData = await getUserByPat(pat)
         const { login, id: userId } = userData
