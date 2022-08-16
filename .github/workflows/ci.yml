@@ -20,9 +20,9 @@ jobs:
           npm run lint
           npm test
       - uses: actions/upload-artifact@v3
-      with:
-        name: github-snooze-chrome-extension
-        path: dist
+        with:
+          name: github-snooze-chrome-extension
+          path: dist
 
   automerge:
     name: Merge dependabot's PRs
