@@ -14,7 +14,7 @@
     "lint": "eslint .",
     "prepare": "husky install",
     "build": "rollup -c",
-    "release": "cross-env NODE_ENV=production rollup -c",
+    "build:release": "cross-env NODE_ENV=production rollup -c",
     "start": "rollup -c -w",
     "update-manifest": "node ./scripts/updateManifest.js",
     "test": "cross-env TZ=UTC jest"
