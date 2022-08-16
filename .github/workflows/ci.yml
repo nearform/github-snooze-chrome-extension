@@ -21,7 +21,7 @@ jobs:
           npm run lint
           npm test
       - name: Build the artifact
-        run: npm build
+        run: npm run build
       - name: Upload the artifact
         uses: actions/upload-artifact@v3
         with:
