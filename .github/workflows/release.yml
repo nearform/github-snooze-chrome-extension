@@ -27,5 +27,5 @@ jobs:
           build-command: |
             npm ci
             npm run update-manifest
-            npm run build
+            npm run build:release
           artifact-path: dist

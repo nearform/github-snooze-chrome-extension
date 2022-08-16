@@ -1,8 +1,11 @@
 import {
   ACTION_UPDATE_BADGE_COUNTER,
   SK_BADGE_COUNTER,
-  COLOR_SECONDARY
+  COLOR_SECONDARY,
+  ACTION_GET_CURRENT_TAB_URL,
+  URL_MATCH
 } from '../constants'
+import { isValidUrl } from '../url'
 
 /**
  * Sends a message to the background service worker
@@ -214,4 +217,23 @@ const getBadgeCounter = async (initialValue = 0) => {
     return 0
   }
   return badgeCounter
+}
+
+export const getCurrentTabUrlBackground = async () => {
+  const currWindow = await chrome.windows.getCurrent()
+  // `tab` will either be a `tabs.Tab` instance or `undefined`.
+  const [tab] = await chrome.tabs.query({
+    active: true,
+    windowId: currWindow.id
+  })
+
+  if (isValidUrl(tab.url, URL_MATCH)) {
+    return tab.url
+  }
+
+  return undefined
+}
+
+export const getCurrentTabUrl = async () => {
+  return sendMessage(ACTION_GET_CURRENT_TAB_URL)
 }

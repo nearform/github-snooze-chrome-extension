@@ -1,9 +1,9 @@
 name: Continuous Integration
 
-on: 
+on:
   push:
-   branches:
-    - master
+    branches:
+      - master
   pull_request:
 
 jobs:
@@ -15,10 +15,18 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
-      - run: |
+      - name: Lint & test
+        run: |
           npm ci
           npm run lint
           npm test
+      - name: Build the artifact
+        run: npm run build:release
+      - name: Upload the artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: github-snooze-chrome-extension
+          path: dist
 
   automerge:
     name: Merge dependabot's PRs
