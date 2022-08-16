@@ -17,12 +17,7 @@
       "128": "images/128.png"
     }
   },
-  "permissions": [
-    "tabs",
-    "storage",
-    "background",
-    "notifications"
-  ],
+  "permissions": ["tabs", "alarms", "storage", "background", "notifications"],
   "icons": {
     "16": "images/16.png",
     "32": "images/32.png",
