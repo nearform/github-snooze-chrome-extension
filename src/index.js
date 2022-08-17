@@ -1,20 +1,9 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { MemoryRouter as Router } from 'react-router-dom'
-import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { ThemeProvider } from '@mui/material/styles'
+import { theme } from './theme'
 import App from './App'
-import { COLOR_PRIMARY, COLOR_SECONDARY } from './constants'
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: COLOR_PRIMARY
-    },
-    secondary: {
-      main: COLOR_SECONDARY
-    }
-  }
-})
 
 const root = createRoot(document.getElementById('root'))
 

@@ -21,7 +21,7 @@ const App = () => {
   }
   return (
     <div style={{ minWidth: '512px' }}>
-      <NavBar isAuthenticated={isAuthenticated} />
+      <NavBar user={user} isAuthenticated={isAuthenticated} />
       <Container sx={{ my: 2 }}>
         <Routes>
           <Route

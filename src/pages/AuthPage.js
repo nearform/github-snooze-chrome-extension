@@ -2,13 +2,13 @@ import React, { useReducer } from 'react'
 import {
   FormControl,
   InputLabel,
-  OutlinedInput,
   InputAdornment,
   IconButton,
   Box,
   Typography,
   Link,
-  Alert
+  Alert,
+  OutlinedInput
 } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
@@ -105,6 +105,7 @@ function AuthPage({ isAuthenticated, pat }) {
       <Box height={20} />
       <FormControl
         fullWidth
+        color="secondary"
         variant="outlined"
         error={formErrorMessage !== ''}
         disabled={isLoading}

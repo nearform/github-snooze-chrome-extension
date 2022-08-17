@@ -76,10 +76,6 @@ function DashboardPage({
 
   return (
     <>
-      <Typography variant="body1" component="p">
-        {`Hello ${user.login}`},
-      </Typography>
-      <Divider />
       {errorMessage && (
         <>
           <Box height={20} />
@@ -107,21 +103,15 @@ function DashboardPage({
       <Box height={20} />
       <Divider />
       <Box height={20} />
-      <Typography variant="body1" component="p">
-        Your Snoozes:
-      </Typography>
       {snoozeList.length === 0 && (
         <Typography variant="subtitle2" component="p">
           Snooze List is empty.
         </Typography>
       )}
       {snoozeList.map((snooze, index) => (
-        <SnoozeItem
-          key={snooze.id}
-          index={index}
-          snooze={snooze}
-          onDelete={setSnoozeList}
-        />
+        <Box key={snooze.id} sx={{ mb: 1.5 }}>
+          <SnoozeItem index={index} snooze={snooze} onDelete={setSnoozeList} />
+        </Box>
       ))}
     </>
   )

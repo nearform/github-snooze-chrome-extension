@@ -6,12 +6,37 @@ import {
   Toolbar,
   Button,
   IconButton,
-  Typography
+  Typography,
+  styled,
+  Divider
 } from '@mui/material'
-import { Login, ChevronLeft, Settings } from '@mui/icons-material'
+import {
+  Login,
+  ChevronLeft,
+  Settings,
+  GitHub as GitHubIcon
+} from '@mui/icons-material'
 import { getCurrentRoute, routes } from '../routes'
 
-function NavBar({ isAuthenticated }) {
+const mediaMinWidthKey = '@media (min-width:0px)'
+const mediaOrientationLandscapeKey = '@media (orientation: landscape)'
+const TOOLBAR_MIN_HEIGHT = 72
+
+const OurToolbar = styled(Toolbar)(({ theme }) => {
+  console.log(theme.mixins.toolbar)
+  return {
+    ...theme.mixins.toolbar,
+    [mediaMinWidthKey]: {
+      ...theme.mixins.toolbar[mediaMinWidthKey],
+      [mediaOrientationLandscapeKey]: {
+        ...theme.mixins.toolbar[mediaMinWidthKey][mediaOrientationLandscapeKey],
+        minHeight: `${TOOLBAR_MIN_HEIGHT}px`
+      }
+    }
+  }
+})
+
+function NavBar({ isAuthenticated, user, onCreateSnooze }) {
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -39,8 +64,8 @@ function NavBar({ isAuthenticated }) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar component="nav" position="fixed">
-        <Toolbar>
+      <AppBar elevation={0} component="nav" position="fixed">
+        <OurToolbar>
           {showBackButton ? (
             <>
               <IconButton color="secondary" onClick={handleNavigateBack}>
@@ -51,23 +76,52 @@ function NavBar({ isAuthenticated }) {
               </Typography>
             </>
           ) : (
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              GitHub Snooze
-            </Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                flexGrow: 1
+              }}
+            >
+              <GitHubIcon sx={{ fontSize: 48 }} />
+              <Box sx={{ ml: 1 }}>
+                <Typography fontWeight="bold" variant="h6" component="h1">
+                  Snooze
+                </Typography>
+              </Box>
+            </Box>
           )}
           {!showBackButton && (
-            <Button
-              color="secondary"
-              variant="contained"
-              endIcon={isAuthenticated ? <Settings /> : <Login />}
-              onClick={handleLogin}
-            >
-              {isAuthenticated ? 'Settings' : 'Login'}
-            </Button>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Box sx={{ mr: 1 }}>
+                <Button
+                  sx={{ p: 1 }}
+                  color="secondary"
+                  variant="outlined"
+                  onClick={() => {}}
+                >
+                  Create
+                </Button>
+              </Box>
+              <Button
+                sx={{
+                  textTransform: 'none',
+                  p: 1
+                }}
+                variant="contained"
+                color="secondary"
+                // endIcon={isAuthenticated ? <Settings /> : <Login />}
+                onClick={handleLogin}
+              >
+                {isAuthenticated ? `${user.login}` : 'Login'}
+              </Button>
+            </Box>
           )}
-        </Toolbar>
+        </OurToolbar>
+        <Divider />
       </AppBar>
-      <Toolbar />
+      <OurToolbar />
     </Box>
   )
 }
