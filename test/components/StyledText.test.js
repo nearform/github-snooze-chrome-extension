@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer'
 import StyledText from '../../src/components/StyledText'
 
 const props = {
-  text: 'text',
+  children: 'text',
   color: '#000000',
   backgroundColor: '#FFFFFF'
 }

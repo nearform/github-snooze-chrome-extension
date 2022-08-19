@@ -27,7 +27,7 @@ function AuthPage({ isAuthenticated, pat }) {
     (state, newState) => ({ ...state, ...newState }),
     {
       isLoading: false,
-      token: pat,
+      token: pat || '',
       showToken: false,
       formErrorMessage: ''
     }
@@ -50,6 +50,7 @@ function AuthPage({ isAuthenticated, pat }) {
       }
 
       const userData = await getUserByPat(token)
+
       if (!userData.id) {
         throw Error('The token is not valid.')
       }
@@ -74,12 +75,15 @@ function AuthPage({ isAuthenticated, pat }) {
     window.location.reload()
   }
 
-  const { formErrorMessage, isLoading, showToken, token } =
-    state
+  const { formErrorMessage, isLoading, showToken, token } = state
 
   return (
     <>
-      {formErrorMessage && <Alert severity="error">{formErrorMessage}</Alert>}
+      {formErrorMessage && (
+        <Alert sx={{ mb: 1 }} severity="error">
+          {formErrorMessage}
+        </Alert>
+      )}
       <Typography variant="body1" component="p">
         In order to use this Chrome Extension you have to generate a{' '}
         <Link href="https://github.com/settings/tokens/new" target="_blank">
@@ -89,17 +93,13 @@ function AuthPage({ isAuthenticated, pat }) {
       </Typography>
       <Typography variant="subtitle1" component="sub">
         Remember to add the{' '}
-        <StyledText
-          text="repo"
-          color={COLOR_PRIMARY}
-          backgroundColor={COLOR_SECONDARY}
-        />{' '}
+        <StyledText color={COLOR_PRIMARY} backgroundColor={COLOR_SECONDARY}>
+          repo
+        </StyledText>{' '}
         and{' '}
-        <StyledText
-          text="read:user"
-          color={COLOR_PRIMARY}
-          backgroundColor={COLOR_SECONDARY}
-        />{' '}
+        <StyledText color={COLOR_PRIMARY} backgroundColor={COLOR_SECONDARY}>
+          read:user
+        </StyledText>{' '}
         scopes to it.
       </Typography>
       <Box height={20} />

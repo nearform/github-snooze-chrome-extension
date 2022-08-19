@@ -77,7 +77,7 @@ chrome.alarms.onAlarm.addListener(async () => {
   const { user, pat } = localStorage
 
   if (!user || !pat) {
-    return console.error('user is not logged in')
+    return console.warn('user is not logged in')
   }
 
   const snoozesList = await getSnoozeList(user.id)

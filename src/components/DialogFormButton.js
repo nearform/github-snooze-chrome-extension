@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
+import * as chrono from 'chrono-node'
 import {
   Button,
   TextField,
@@ -6,8 +7,12 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle
+  DialogTitle,
+  Autocomplete,
+  Typography
 } from '@mui/material'
+
+const options = ['in 1 hour', 'tomorrow', 'next week', 'next month']
 
 export default function DialogFormButton({
   label,
@@ -18,24 +23,22 @@ export default function DialogFormButton({
   disabled
 }) {
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState()
 
-  const handleClickOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
+  const reset = useCallback(() => {
     setOpen(false)
-  }
+    setValue()
+  }, [])
+
+  const handleClickOpen = () => setOpen(true)
+  const handleClose = () => reset()
 
   const handleConfirm = () => {
     onConfirm(value)
-    setOpen(false)
+    reset()
   }
 
-  const handleChange = e => {
-    setValue(e.target.value)
-  }
+  const handleChange = (e, value) => setValue(chrono.parseDate(value))
 
   return (
     <div>
@@ -51,21 +54,26 @@ export default function DialogFormButton({
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
-          <DialogContentText>{description}</DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="text-input"
-            label={placeholder}
-            type="text"
-            fullWidth
-            variant="standard"
+          <DialogContentText sx={{ mb: 2 }}>{description}</DialogContentText>
+          <Autocomplete
+            options={options}
             onChange={handleChange}
+            freeSolo
+            renderInput={params => (
+              <TextField {...params} label={placeholder} />
+            )}
           />
+          {value && (
+            <Typography sx={{ mt: 1 }}>
+              You will be notified on {value.toLocaleString()}
+            </Typography>
+          )}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleConfirm}>Confirm</Button>
+          <Button disabled={!value} onClick={handleConfirm}>
+            Confirm
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
