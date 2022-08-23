@@ -1,8 +1,3 @@
-/**
- * Fetches the GitHub user details using the PAT provided.
- * @param {string} token Personal Access Token
- * @returns the GitHub user data
- */
 export const getUserByPat = async token => {
   const response = await fetch(
     `https://api.github.com/user`,
@@ -24,12 +19,6 @@ export const getUserByPat = async token => {
   }
 }
 
-/**
- * Fetches the GitHub entity (issue or pull request) information.
- * @param {object} entityInfo an object containing the repo's owner, repo name, the entity type (issue or pull), and the entity number
- * @param {string} token Personal Access Token
- * @returns the GitHub entity detailed information
- */
 export const getEntity = async (entityInfo, token) => {
   const { owner, repo, type, number } = entityInfo
   const effectiveType = type === 'pull' ? 'pulls' : type

@@ -4,7 +4,6 @@ import { Typography, Alert, Divider, Box } from '@mui/material'
 import DialogFormButton from '../components/DialogFormButton'
 import SnoozeItem from '../components/SnoozeItem'
 import { addSnooze, checkUrlAlreadySnoozed, getSnoozeList } from '../api/chrome'
-import { addHours } from '../date'
 import { getEntityInfo } from '../parser'
 import { SNOOZE_STATUS_PENDING } from '../constants'
 import { getEntity } from '../api/github'
@@ -20,6 +19,10 @@ function DashboardPage({
   const [snoozeList, setSnoozeList] = useState(snoozes)
 
   useEffect(() => {
+    if (!isAuthenticated) {
+      return
+    }
+
     const initList = async () => {
       const list = await getSnoozeList(user.id)
       setSnoozeList(list)
@@ -28,27 +31,22 @@ function DashboardPage({
     initList()
   }, [])
 
-  const handleAddSnooze = async hours => {
+  const handleAddSnooze = async notifyDate => {
     setErrorMessage('')
 
-    const numberOfHours = parseFloat(hours)
-    if (!numberOfHours || isNaN(numberOfHours)) {
-      return setErrorMessage(
-        'Snooze not added. Please, insert a valid number of hours.'
-      )
+    if (notifyDate < new Date()) {
+      return setErrorMessage('Please set a date in the future')
     }
 
     const urlAlreadyPresent = await checkUrlAlreadySnoozed(user.id, currentUrl)
+
     if (urlAlreadyPresent) {
       return setErrorMessage('This URL is already present in your Snooze list.')
     }
 
-    const now = new Date()
-    const notifyDate = addHours(now, numberOfHours)
-    const unixTimestamp = notifyDate.getTime()
-
     const entityInfo = getEntityInfo(currentUrl)
     const entity = await getEntity(entityInfo, pat)
+
     if (entity.message === 'Not Found') {
       return setErrorMessage(
         'The provided URL is not valid. Unable to fetch entity information from GitHub.'
@@ -59,7 +57,7 @@ function DashboardPage({
     const snooze = {
       id: uuid.v4(),
       url: currentUrl,
-      notifyAt: unixTimestamp,
+      notifyAt: notifyDate.getTime(),
       entityInfo: { ...entityInfo, updatedAt },
       status: SNOOZE_STATUS_PENDING
     }
@@ -75,6 +73,7 @@ function DashboardPage({
       </Typography>
     )
   }
+
   return (
     <>
       <Typography variant="body1" component="p">
@@ -99,9 +98,9 @@ function DashboardPage({
       <Box height={20} />
       <DialogFormButton
         label="Add Snooze"
-        title="In how many hours do you want to be notified for this item?"
+        title="When do you want to be notified?"
         description={currentUrl}
-        placeholder="Number of hours"
+        placeholder="Select or type your own value"
         onConfirm={handleAddSnooze}
         disabled={!currentUrl}
       />

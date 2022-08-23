@@ -25,14 +25,7 @@ Array [
     Remember to add the
      
     <span
-      style={
-        Object {
-          "backgroundColor": "#FB7A9C",
-          "borderRadius": "25px",
-          "color": "#140048",
-          "padding": "3px",
-        }
-      }
+      className="MuiTypography-root MuiTypography-body1 css-cl3hq-MuiTypography-root"
     >
       repo
     </span>
@@ -40,14 +33,7 @@ Array [
     and
      
     <span
-      style={
-        Object {
-          "backgroundColor": "#FB7A9C",
-          "borderRadius": "25px",
-          "color": "#140048",
-          "padding": "3px",
-        }
-      }
+      className="MuiTypography-root MuiTypography-body1 css-cl3hq-MuiTypography-root"
     >
       read:user
     </span>
@@ -248,14 +234,7 @@ Array [
     Remember to add the
      
     <span
-      style={
-        Object {
-          "backgroundColor": "#FB7A9C",
-          "borderRadius": "25px",
-          "color": "#140048",
-          "padding": "3px",
-        }
-      }
+      className="MuiTypography-root MuiTypography-body1 css-cl3hq-MuiTypography-root"
     >
       repo
     </span>
@@ -263,14 +242,7 @@ Array [
     and
      
     <span
-      style={
-        Object {
-          "backgroundColor": "#FB7A9C",
-          "borderRadius": "25px",
-          "color": "#140048",
-          "padding": "3px",
-        }
-      }
+      className="MuiTypography-root MuiTypography-body1 css-cl3hq-MuiTypography-root"
     >
       read:user
     </span>

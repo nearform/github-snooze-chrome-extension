@@ -49,3 +49,10 @@ export const SK_PAT = 'pat'
 export const SET_LOADING = 'SET_LOADING'
 export const SET_AUTHENTICATED = 'SET_AUTHENTICATED'
 export const SET_APP_STATE = 'SET_APP_STATE'
+
+export const SNOOZE_OPTIONS = [
+  'in 1 hour',
+  'tomorrow',
+  'next week',
+  'next month'
+]

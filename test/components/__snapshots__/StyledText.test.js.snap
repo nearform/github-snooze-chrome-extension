@@ -2,14 +2,7 @@
 
 exports[`StyledText.js shows the proper StyledText 1`] = `
 <span
-  style={
-    Object {
-      "backgroundColor": "#FFFFFF",
-      "borderRadius": "25px",
-      "color": "#000000",
-      "padding": "3px",
-    }
-  }
+  className="MuiTypography-root MuiTypography-body1 css-uocwv0-MuiTypography-root"
 >
   text
 </span>

@@ -1,12 +1,14 @@
 import React from 'react'
+import { Typography } from '@mui/material'
 
-function StyledText({ text, color, backgroundColor }) {
+function StyledText({ children, color, backgroundColor }) {
   return (
-    <span
-      style={{ color, backgroundColor, padding: '3px', borderRadius: '25px' }}
+    <Typography
+      component="span"
+      sx={{ color, backgroundColor, padding: '5px', borderRadius: '25px' }}
     >
-      {text}
-    </span>
+      {children}
+    </Typography>
   )
 }
 
