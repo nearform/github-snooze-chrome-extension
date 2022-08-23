@@ -11,8 +11,7 @@ import {
   Autocomplete,
   Typography
 } from '@mui/material'
-
-const options = ['in 1 hour', 'tomorrow', 'next week', 'next month']
+import { SNOOZE_OPTIONS } from '../constants'
 
 export default function DialogFormButton({
   label,
@@ -33,10 +32,10 @@ export default function DialogFormButton({
   const handleClickOpen = () => setOpen(true)
   const handleClose = () => reset()
 
-  const handleConfirm = () => {
+  const handleConfirm = useCallback(() => {
     onConfirm(value)
     reset()
-  }
+  }, [onConfirm, reset, value])
 
   const handleChange = (e, value) => setValue(chrono.parseDate(value))
 
@@ -56,7 +55,7 @@ export default function DialogFormButton({
         <DialogContent>
           <DialogContentText sx={{ mb: 2 }}>{description}</DialogContentText>
           <Autocomplete
-            options={options}
+            options={SNOOZE_OPTIONS}
             onChange={handleChange}
             freeSolo
             renderInput={params => (
