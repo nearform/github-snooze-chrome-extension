@@ -4,15 +4,21 @@ import {
   COLOR_LIGHT_SECONDARY,
   COLOR_PRIMARY,
   COLOR_SECONDARY,
+  COLOR_SUCCESS,
   COLOR_WARNING
 } from './constants'
 export const theme = createTheme({
   typography: {
-    allVariants: COLOR_PRIMARY
+    allVariants: {
+      color: COLOR_SECONDARY
+    }
   },
   palette: {
     warning: {
       main: COLOR_WARNING
+    },
+    success: {
+      main: COLOR_SUCCESS
     },
     primary: {
       main: COLOR_PRIMARY

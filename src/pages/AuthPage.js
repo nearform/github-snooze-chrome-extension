@@ -20,7 +20,6 @@ import {
 } from '../api/chrome'
 import DialogButton from '../components/DialogButton'
 import StyledText from '../components/StyledText'
-import { COLOR_PRIMARY, COLOR_SECONDARY } from '../constants'
 
 function AuthPage({ isAuthenticated, pat }) {
   const [state, setState] = useReducer(

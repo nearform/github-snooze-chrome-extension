@@ -78,13 +78,11 @@ function DashboardPage({
     <>
       {errorMessage && (
         <>
-          <Box height={20} />
           <Alert severity="error">{errorMessage}</Alert>
         </>
       )}
       {!currentUrl && (
         <>
-          <Box height={20} />
           <Alert severity="warning">
             The URL you are navigating on is not a valid URL for adding a GitHub
             Snooze

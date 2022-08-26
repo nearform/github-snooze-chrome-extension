@@ -22,7 +22,7 @@ const App = () => {
   return (
     <div style={{ minWidth: '512px' }}>
       <NavBar user={user} isAuthenticated={isAuthenticated} />
-      <Container sx={{ my: 2 }}>
+      <Container sx={{ py: 2 }}>
         <Routes>
           <Route
             path={routes.dashboard.url}

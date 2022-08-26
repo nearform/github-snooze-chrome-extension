@@ -7,9 +7,9 @@ import {
   Button,
   IconButton,
   Typography,
-  styled,
   Divider
 } from '@mui/material'
+import { styled } from '@mui/system'
 import {
   Login,
   ChevronLeft,
@@ -28,6 +28,7 @@ const OurToolbar = styled(Toolbar)(({ theme }) => {
     ...theme.mixins.toolbar,
     [mediaMinWidthKey]: {
       ...theme.mixins.toolbar[mediaMinWidthKey],
+      minHeight: `${TOOLBAR_MIN_HEIGHT}px`,
       [mediaOrientationLandscapeKey]: {
         ...theme.mixins.toolbar[mediaMinWidthKey][mediaOrientationLandscapeKey],
         minHeight: `${TOOLBAR_MIN_HEIGHT}px`

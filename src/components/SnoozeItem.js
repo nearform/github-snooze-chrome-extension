@@ -13,20 +13,16 @@ import {
 import { Check, Delete, Language as LanguageIcon } from '@mui/icons-material'
 import DialogButton from './DialogButton'
 import { getFormattedDate } from '../date'
-import {
-  COLOR_SUCCESS,
-  COLOR_SECONDARY,
-  SK_USER,
-  SNOOZE_STATUS_DONE,
-  COLOR_PRIMARY
-} from '../constants'
+import { SK_USER, SNOOZE_STATUS_DONE } from '../constants'
 import { readFromLocalStorage, removeSnooze } from '../api/chrome'
 import { styled } from '@mui/system'
 
 const SnoozeCard = styled(Card)(({ theme, status }) => {
   return {
     borderLeft: `4px solid ${
-      status === SNOOZE_STATUS_DONE ? COLOR_SUCCESS : theme.palette.warning.main
+      status === SNOOZE_STATUS_DONE
+        ? theme.palette.success.main
+        : theme.palette.warning.main
     }`
   }
 })
@@ -101,7 +97,12 @@ function SnoozeItem({ index, snooze, onDelete }) {
           }
         }}
       >
-        <Link color={COLOR_SECONDARY} href={url} variant="h6" target="_blank">
+        <Link
+          color={theme.palette.secondary.main}
+          href={url}
+          variant="h6"
+          target="_blank"
+        >
           Express middleware borking out #78
         </Link>
         <Typography
