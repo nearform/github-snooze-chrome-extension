@@ -33,7 +33,11 @@ export default function DialogButton({
 
   const renderButton = () => {
     if (icon) {
-      return <IconButton onClick={handleClickOpen}>{icon}</IconButton>
+      return (
+        <IconButton color="secondary" onClick={handleClickOpen}>
+          {icon}
+        </IconButton>
+      )
     }
     return (
       <Button
@@ -63,8 +67,10 @@ export default function DialogButton({
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleConfirm} autoFocus>
+          <Button color="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button color="secondary" onClick={handleConfirm} autoFocus>
             Confirm
           </Button>
         </DialogActions>

@@ -10,13 +10,9 @@ import {
   Divider
 } from '@mui/material'
 import { styled } from '@mui/system'
-import {
-  Login,
-  ChevronLeft,
-  Settings,
-  GitHub as GitHubIcon
-} from '@mui/icons-material'
+import { Login, ChevronLeft, GitHub as GitHubIcon } from '@mui/icons-material'
 import { getCurrentRoute, routes } from '../routes'
+import DialogFormButton from './DialogFormButton'
 
 const mediaMinWidthKey = '@media (min-width:0px)'
 const mediaOrientationLandscapeKey = '@media (orientation: landscape)'
@@ -37,7 +33,7 @@ const OurToolbar = styled(Toolbar)(({ theme }) => {
   }
 })
 
-function NavBar({ isAuthenticated, user, onCreateSnooze }) {
+function NavBar({ isAuthenticated, user, onCreateSnooze, currentUrl }) {
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -45,13 +41,12 @@ function NavBar({ isAuthenticated, user, onCreateSnooze }) {
   const [currentRoute, setCurrentRoute] = useState(routes.dashboard)
 
   useEffect(() => {
-    const { pathname } = location
-    if (pathname !== routes.dashboard.url) {
+    if (location.pathname !== routes.dashboard.url) {
       setShowBackButton(true)
-      setCurrentRoute(getCurrentRoute(pathname))
+      setCurrentRoute(getCurrentRoute(location.pathname))
     } else {
       setShowBackButton(false)
-      setCurrentRoute(getCurrentRoute(pathname))
+      setCurrentRoute(getCurrentRoute(location.pathname))
     }
   }, [location.pathname])
 
@@ -96,26 +91,27 @@ function NavBar({ isAuthenticated, user, onCreateSnooze }) {
           {!showBackButton && (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Box sx={{ mr: 1 }}>
-                <Button
-                  sx={{ p: 1 }}
-                  color="secondary"
-                  variant="outlined"
-                  onClick={() => {}}
-                >
-                  Create
-                </Button>
+                <DialogFormButton
+                  label="Create"
+                  title="When do you want to be notified?"
+                  description={currentUrl}
+                  placeholder="Select or type your own value"
+                  onConfirm={onCreateSnooze}
+                  disabled={!currentUrl}
+                />
               </Box>
               <Button
                 sx={{
                   textTransform: 'none',
-                  p: 1
+                  py: 1,
+                  px: !isAuthenticated ? 1.5 : 1
                 }}
                 variant="contained"
                 color="secondary"
-                // endIcon={isAuthenticated ? <Settings /> : <Login />}
+                endIcon={!isAuthenticated ? <Login /> : null}
                 onClick={handleLogin}
               >
-                {isAuthenticated ? `${user.login}` : 'Login'}
+                {isAuthenticated ? `${user.login}` : 'LOGIN'}
               </Button>
             </Box>
           )}

@@ -42,10 +42,10 @@ export default function DialogFormButton({
   return (
     <div>
       <Button
-        fullWidth
+        sx={{ p: 1 }}
         disabled={disabled}
         color="secondary"
-        variant="contained"
+        variant="outlined"
         onClick={handleClickOpen}
       >
         {label}
@@ -69,8 +69,10 @@ export default function DialogFormButton({
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button disabled={!value} onClick={handleConfirm}>
+          <Button color="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button color="secondary" disabled={!value} onClick={handleConfirm}>
             Confirm
           </Button>
         </DialogActions>

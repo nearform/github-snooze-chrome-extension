@@ -5,12 +5,15 @@ import {
   Link,
   Box,
   CircularProgress,
-  IconButton,
   CardContent,
   Typography,
-  useTheme
+  useTheme,
+  IconButton
 } from '@mui/material'
-import { Check, Delete, Language as LanguageIcon } from '@mui/icons-material'
+import {
+  Language as LanguageIcon,
+  Cancel as CancelIcon
+} from '@mui/icons-material'
 import DialogButton from './DialogButton'
 import { getFormattedDate } from '../date'
 import { SK_USER, SNOOZE_STATUS_DONE } from '../constants'
@@ -27,7 +30,7 @@ const SnoozeCard = styled(Card)(({ theme, status }) => {
   }
 })
 
-function SnoozeItem({ index, snooze, onDelete }) {
+function SnoozeItem({ snooze, onDelete }) {
   const [isLoading, setIsLoading] = useState(false)
   const [userId, setUserId] = useState()
   const theme = useTheme()
@@ -52,11 +55,7 @@ function SnoozeItem({ index, snooze, onDelete }) {
     return <CircularProgress color="secondary" />
   }
   return (
-    <SnoozeCard
-      elevation={0}
-      sx={{ py: 0.5 }}
-      status={index % 2 === 1 ? status : SNOOZE_STATUS_DONE}
-    >
+    <SnoozeCard elevation={0} sx={{ py: 0.5 }} status={status}>
       <CardHeader
         sx={{ py: 0.5 }}
         subheader={
@@ -69,25 +68,11 @@ function SnoozeItem({ index, snooze, onDelete }) {
                 variant="subtitle1"
                 color={theme.palette.secondaryLightest.main}
               >
-                NearForm
+                Org name
               </Typography>
             </Box>
           </Box>
         }
-        // action={
-        //   status === SNOOZE_STATUS_DONE ? (
-        //     <IconButton onClick={handleDelete}>
-        //       <Check />
-        //     </IconButton>
-        //   ) : (
-        //     <DialogButton
-        //       icon={<Delete />}
-        //       title="Attention"
-        //       description="Do you want to delete this snooze?"
-        //       onConfirm={handleDelete}
-        //     />
-        //   )
-        // }
       />
       <CardContent
         sx={{
@@ -97,14 +82,35 @@ function SnoozeItem({ index, snooze, onDelete }) {
           }
         }}
       >
-        <Link
-          color={theme.palette.secondary.main}
-          href={url}
-          variant="h6"
-          target="_blank"
+        <Box
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center'
+          }}
         >
-          Express middleware borking out #78
-        </Link>
+          <Link
+            color={theme.palette.secondary.main}
+            href={url}
+            variant="h6"
+            target="_blank"
+          >
+            {url}
+          </Link>
+
+          {status === SNOOZE_STATUS_DONE ? (
+            <IconButton color="secondary" onClick={handleDelete}>
+              <CancelIcon />
+            </IconButton>
+          ) : (
+            <DialogButton
+              icon={<CancelIcon />}
+              title="Attention"
+              description="Do you want to delete this snooze?"
+              onConfirm={handleDelete}
+            />
+          )}
+        </Box>
         <Typography
           color={theme.palette.secondaryLight.main}
           variant="subtitle1"

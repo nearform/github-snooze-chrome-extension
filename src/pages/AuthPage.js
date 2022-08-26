@@ -85,21 +85,18 @@ function AuthPage({ isAuthenticated, pat }) {
       )}
       <Typography variant="body1" component="p">
         In order to use this Chrome Extension you have to generate a{' '}
-        <Link href="https://github.com/settings/tokens/new" target="_blank">
+        <Link
+          color="secondary"
+          href="https://github.com/settings/tokens/new"
+          target="_blank"
+        >
           GitHub Personal Access Token (PAT)
         </Link>{' '}
         and insert it into the box below.
       </Typography>
       <Typography variant="subtitle1" component="sub">
-        Remember to add the{' '}
-        <StyledText color={COLOR_PRIMARY} backgroundColor={COLOR_SECONDARY}>
-          repo
-        </StyledText>{' '}
-        and{' '}
-        <StyledText color={COLOR_PRIMARY} backgroundColor={COLOR_SECONDARY}>
-          read:user
-        </StyledText>{' '}
-        scopes to it.
+        Remember to add the <StyledText as="span">repo</StyledText> and{' '}
+        <StyledText as="span">read:user</StyledText> scopes to it.
       </Typography>
       <Box height={20} />
       <FormControl
