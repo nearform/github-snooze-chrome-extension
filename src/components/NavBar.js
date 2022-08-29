@@ -3,15 +3,22 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import {
   AppBar,
   Box,
-  Toolbar,
   Button,
   IconButton,
-  Typography
+  Typography,
+  Divider
 } from '@mui/material'
-import { Login, ChevronLeft, Settings } from '@mui/icons-material'
+import { Login, ChevronLeft, GitHub as GitHubIcon } from '@mui/icons-material'
 import { getCurrentRoute, routes } from '../routes'
+import DialogFormButton from './DialogFormButton'
+import StyledToolbar from './StyledToolbar'
 
-function NavBar({ isAuthenticated }) {
+export default function NavBar({
+  isAuthenticated,
+  user,
+  onCreateSnooze,
+  currentUrl
+}) {
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -19,13 +26,12 @@ function NavBar({ isAuthenticated }) {
   const [currentRoute, setCurrentRoute] = useState(routes.dashboard)
 
   useEffect(() => {
-    const { pathname } = location
-    if (pathname !== routes.dashboard.url) {
+    if (location.pathname !== routes.dashboard.url) {
       setShowBackButton(true)
-      setCurrentRoute(getCurrentRoute(pathname))
+      setCurrentRoute(getCurrentRoute(location.pathname))
     } else {
       setShowBackButton(false)
-      setCurrentRoute(getCurrentRoute(pathname))
+      setCurrentRoute(getCurrentRoute(location.pathname))
     }
   }, [location.pathname])
 
@@ -39,8 +45,8 @@ function NavBar({ isAuthenticated }) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar component="nav" position="fixed">
-        <Toolbar>
+      <AppBar elevation={0} component="nav" position="fixed">
+        <StyledToolbar>
           {showBackButton ? (
             <>
               <IconButton color="secondary" onClick={handleNavigateBack}>
@@ -51,25 +57,53 @@ function NavBar({ isAuthenticated }) {
               </Typography>
             </>
           ) : (
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              GitHub Snooze
-            </Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                flexGrow: 1
+              }}
+            >
+              <GitHubIcon sx={{ fontSize: 48 }} />
+              <Box sx={{ ml: 1 }}>
+                <Typography fontWeight="bold" variant="h6" component="h1">
+                  Snooze
+                </Typography>
+              </Box>
+            </Box>
           )}
           {!showBackButton && (
-            <Button
-              color="secondary"
-              variant="contained"
-              endIcon={isAuthenticated ? <Settings /> : <Login />}
-              onClick={handleLogin}
-            >
-              {isAuthenticated ? 'Settings' : 'Login'}
-            </Button>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Box sx={{ mr: 1 }}>
+                <DialogFormButton
+                  label="Create"
+                  title="When do you want to be notified?"
+                  description={currentUrl}
+                  placeholder="Select or type your own value"
+                  onConfirm={onCreateSnooze}
+                  disabled={!currentUrl}
+                  size="small"
+                />
+              </Box>
+              <Button
+                sx={{
+                  textTransform: 'none'
+                }}
+                variant="contained"
+                color="secondary"
+                endIcon={!isAuthenticated ? <Login /> : null}
+                onClick={handleLogin}
+                size="small"
+              >
+                {isAuthenticated ? `${user.login}` : 'LOGIN'}
+              </Button>
+            </Box>
           )}
-        </Toolbar>
+        </StyledToolbar>
+        <Divider />
       </AppBar>
-      <Toolbar />
+      <StyledToolbar />
     </Box>
   )
 }
-
-export default NavBar

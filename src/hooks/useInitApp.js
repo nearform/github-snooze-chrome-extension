@@ -18,7 +18,7 @@ import {
 const initialState = {
   isLoading: true,
   isAuthenticated: false,
-  user: null,
+  user: {},
   pat: null,
   currentUrl: null,
   snoozeList: []

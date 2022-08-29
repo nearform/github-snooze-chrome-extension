@@ -2,13 +2,13 @@ import React, { useReducer } from 'react'
 import {
   FormControl,
   InputLabel,
-  OutlinedInput,
   InputAdornment,
   IconButton,
   Box,
   Typography,
   Link,
-  Alert
+  Alert,
+  OutlinedInput
 } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
@@ -20,7 +20,6 @@ import {
 } from '../api/chrome'
 import DialogButton from '../components/DialogButton'
 import StyledText from '../components/StyledText'
-import { COLOR_PRIMARY, COLOR_SECONDARY } from '../constants'
 
 function AuthPage({ isAuthenticated, pat }) {
   const [state, setState] = useReducer(
@@ -86,25 +85,23 @@ function AuthPage({ isAuthenticated, pat }) {
       )}
       <Typography variant="body1" component="p">
         In order to use this Chrome Extension you have to generate a{' '}
-        <Link href="https://github.com/settings/tokens/new" target="_blank">
+        <Link
+          color="secondary"
+          href="https://github.com/settings/tokens/new"
+          target="_blank"
+        >
           GitHub Personal Access Token (PAT)
         </Link>{' '}
         and insert it into the box below.
       </Typography>
       <Typography variant="subtitle1" component="sub">
-        Remember to add the{' '}
-        <StyledText color={COLOR_PRIMARY} backgroundColor={COLOR_SECONDARY}>
-          repo
-        </StyledText>{' '}
-        and{' '}
-        <StyledText color={COLOR_PRIMARY} backgroundColor={COLOR_SECONDARY}>
-          read:user
-        </StyledText>{' '}
-        scopes to it.
+        Remember to add the <StyledText as="span">repo</StyledText> and{' '}
+        <StyledText as="span">read:user</StyledText> scopes to it.
       </Typography>
       <Box height={20} />
       <FormControl
         fullWidth
+        color="secondary"
         variant="outlined"
         error={formErrorMessage !== ''}
         disabled={isLoading}

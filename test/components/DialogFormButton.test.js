@@ -1,5 +1,5 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '../renderer'
 import DialogFormButton from '../../src/components/DialogFormButton'
 
 const props = {
@@ -13,16 +13,16 @@ const props = {
 
 describe('DialogFormButton.js', () => {
   test('shows the proper enabled DialogFormButton', () => {
-    const tree = renderer.create(<DialogFormButton {...props} />)
+    const { asFragment } = render(<DialogFormButton {...props} />)
 
-    expect(tree.toJSON()).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 
   test('shows the proper disabled DialogFormButton', () => {
-    const tree = renderer.create(
+    const { asFragment } = render(
       <DialogFormButton {...props} disabled={true} />
     )
 
-    expect(tree.toJSON()).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 })

@@ -30,10 +30,12 @@ export const URL_MATCH = 'https://github.com/'
 /**
  * Colors
  */
-export const COLOR_PRIMARY = '#140048'
-export const COLOR_SECONDARY = '#FB7A9C'
-export const COLOR_SUCCESS = '#E3FBE3'
-export const COLOR_WHITE = '#FFFFFF'
+export const COLOR_SECONDARY = '#292525'
+export const COLOR_LIGHT_SECONDARY = 'rgba(41, 37,37, 0.8)'
+export const COLOR_LIGHTEST_SECONDARY = '#485569'
+export const COLOR_PRIMARY = '#FFFFFF'
+export const COLOR_SUCCESS = '#259767'
+export const COLOR_WARNING = '#D47709'
 
 /**
  * Storage Keys

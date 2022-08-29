@@ -1,3 +1,7 @@
+import { ThemeProvider } from '@mui/material'
+import { MemoryRouter as Router } from 'react-router-dom'
+import { theme } from '../src/theme'
+
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
@@ -7,3 +11,13 @@ export const parameters = {
     }
   }
 }
+
+export const decorators = [
+  Story => (
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Story />
+      </Router>
+    </ThemeProvider>
+  )
+]

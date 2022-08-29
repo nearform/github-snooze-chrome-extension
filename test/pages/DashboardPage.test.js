@@ -1,5 +1,5 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '../renderer'
 import DashboardPage from '../../src/pages/DashboardPage'
 
 const props = {
@@ -14,26 +14,19 @@ const props = {
 }
 
 describe('DashboardPage.js', () => {
-  afterEach(() => {
-    jest.clearAllMocks()
-  })
-
   test('if not authenticated renders please login', () => {
-    const tree = renderer.create(<DashboardPage {...props} />)
+    const { asFragment } = render(<DashboardPage {...props} />)
 
-    expect(tree.toJSON()).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 
   test('if authenticated renders the proper page', async () => {
     chrome.storage.sync.get = jest.fn(() => ({ 123: [] }))
 
-    let tree
-    await renderer.act(async () => {
-      tree = renderer.create(
-        <DashboardPage {...props} isAuthenticated={true} />
-      )
-    })
+    const { asFragment } = render(
+      <DashboardPage {...props} isAuthenticated={true} />
+    )
 
-    expect(tree.toJSON()).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 })

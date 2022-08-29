@@ -33,7 +33,11 @@ export default function DialogButton({
 
   const renderButton = () => {
     if (icon) {
-      return <IconButton onClick={handleClickOpen}>{icon}</IconButton>
+      return (
+        <IconButton color="secondary" onClick={handleClickOpen}>
+          {icon}
+        </IconButton>
+      )
     }
     return (
       <Button
@@ -50,21 +54,16 @@ export default function DialogButton({
   return (
     <div>
       {renderButton()}
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>{title}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            {description}
-          </DialogContentText>
+          <DialogContentText>{description}</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleConfirm} autoFocus>
+          <Button color="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button color="secondary" onClick={handleConfirm} autoFocus>
             Confirm
           </Button>
         </DialogActions>

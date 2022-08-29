@@ -1,5 +1,5 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '../renderer'
 import AuthPage from '../../src/pages/AuthPage'
 
 const props = {
@@ -9,14 +9,16 @@ const props = {
 
 describe('AuthPage.js', () => {
   test('renders the Auth Page for unauthenticated users', () => {
-    const tree = renderer.create(<AuthPage {...props} />)
+    const { asFragment } = render(<AuthPage {...props} />)
 
-    expect(tree.toJSON()).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 
   test('renders the Auth Page for authenticated users', () => {
-    const tree = renderer.create(<AuthPage {...props} isAuthenticated={true} />)
+    const { asFragment } = render(
+      <AuthPage {...props} isAuthenticated={true} />
+    )
 
-    expect(tree.toJSON()).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 })
