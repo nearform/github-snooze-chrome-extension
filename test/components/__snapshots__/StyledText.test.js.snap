@@ -3,7 +3,7 @@
 exports[`StyledText.js shows the proper StyledText 1`] = `
 <DocumentFragment>
   <p
-    class="MuiTypography-root MuiTypography-body1 css-131yw0r-MuiTypography-root"
+    class="MuiTypography-root MuiTypography-body1 css-1w94e69-MuiTypography-root"
   >
     text
   </p>

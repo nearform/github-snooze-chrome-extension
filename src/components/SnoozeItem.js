@@ -1,63 +1,50 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {
   CardHeader,
   Link,
   Box,
-  CircularProgress,
   CardContent,
   Typography,
   useTheme,
   IconButton
 } from '@mui/material'
 import {
-  Language as LanguageIcon,
+  Business as BusinessIcon,
   Cancel as CancelIcon
 } from '@mui/icons-material'
 import DialogButton from './DialogButton'
 import { getFormattedDate } from '../date'
-import { SK_USER, SNOOZE_STATUS_DONE } from '../constants'
-import { readFromLocalStorage, removeSnooze } from '../api/chrome'
+import { SNOOZE_STATUS_DONE } from '../constants'
+import { removeSnooze } from '../api/chrome'
 import SnoozeCard from './SnoozeCard'
+import { getEntityInfo } from '../parser'
 
-function SnoozeItem({ snooze, onDelete }) {
-  const [isLoading, setIsLoading] = useState(false)
-  const [userId, setUserId] = useState()
+function SnoozeItem({ user, snooze, onDelete }) {
   const theme = useTheme()
 
   const { url, notifyAt, status } = snooze
-
-  useEffect(() => {
-    setIsLoading(true)
-    readFromLocalStorage([SK_USER]).then(response => {
-      const { user } = response
-      setUserId(user.id)
-      setIsLoading(false)
-    })
-  }, [])
+  const { owner } = getEntityInfo(url)
 
   const handleDelete = async () => {
-    const updatedSnoozeList = await removeSnooze(userId, snooze)
+    const updatedSnoozeList = await removeSnooze(user.id, snooze)
     onDelete(updatedSnoozeList)
   }
 
-  if (isLoading) {
-    return <CircularProgress aria-label="loading" color="secondary" />
-  }
   return (
-    <SnoozeCard elevation={0} sx={{ py: 0.5 }} status={status}>
+    <SnoozeCard square elevation={0} sx={{ py: 0.5 }} status={status}>
       <CardHeader
-        sx={{ py: 0.5 }}
+        sx={{ py: 0 }}
         subheader={
           <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-            <LanguageIcon />
+            <BusinessIcon />
             <Box sx={{ ml: 0.5 }}>
               <Typography
-                sx={{ lineHeight: 1.5 }}
+                // sx={{ lineHeight: 1.5 }}
                 fontWeight="bold"
                 variant="subtitle1"
                 color={theme.palette.secondaryLightest.main}
               >
-                Org name
+                {owner}
               </Typography>
             </Box>
           </Box>
@@ -72,21 +59,20 @@ function SnoozeItem({ snooze, onDelete }) {
         }}
       >
         <Box
-          style={{
+          sx={{
             display: 'flex',
-            flexDirection: 'row',
+            justifyContent: 'space-between',
             alignItems: 'center'
           }}
         >
           <Link
             color={theme.palette.secondary.main}
             href={url}
-            variant="h6"
+            variant="body1"
             target="_blank"
           >
             {url}
           </Link>
-
           {status === SNOOZE_STATUS_DONE ? (
             <IconButton color="secondary" onClick={handleDelete}>
               <CancelIcon />
@@ -104,7 +90,7 @@ function SnoozeItem({ snooze, onDelete }) {
           color={theme.palette.secondaryLight.main}
           variant="subtitle1"
         >
-          Scheduled at {getFormattedDate(notifyAt)}
+          Scheduled for {getFormattedDate(notifyAt)}
         </Typography>
       </CardContent>
     </SnoozeCard>

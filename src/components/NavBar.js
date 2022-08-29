@@ -83,18 +83,18 @@ export default function NavBar({
                   placeholder="Select or type your own value"
                   onConfirm={onCreateSnooze}
                   disabled={!currentUrl}
+                  size="small"
                 />
               </Box>
               <Button
                 sx={{
-                  textTransform: 'none',
-                  py: 1,
-                  px: !isAuthenticated ? 1.5 : 1
+                  textTransform: 'none'
                 }}
                 variant="contained"
                 color="secondary"
                 endIcon={!isAuthenticated ? <Login /> : null}
                 onClick={handleLogin}
+                size="small"
               >
                 {isAuthenticated ? `${user.login}` : 'LOGIN'}
               </Button>

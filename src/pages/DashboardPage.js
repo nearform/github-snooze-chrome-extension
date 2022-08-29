@@ -7,7 +7,8 @@ function DashboardPage({
   isAuthenticated,
   currentUrl,
   setSnoozeList,
-  snoozeList
+  snoozeList,
+  user
 }) {
   if (!isAuthenticated) {
     return (
@@ -43,7 +44,7 @@ function DashboardPage({
       )}
       {snoozeList.map(snooze => (
         <Box key={snooze.id} sx={{ mb: 1.5 }}>
-          <SnoozeItem snooze={snooze} onDelete={setSnoozeList} />
+          <SnoozeItem user={user} snooze={snooze} onDelete={setSnoozeList} />
         </Box>
       ))}
     </>

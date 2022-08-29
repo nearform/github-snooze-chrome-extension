@@ -33,5 +33,17 @@ export const theme = createTheme({
     secondaryLightest: {
       main: COLOR_LIGHTEST_SECONDARY
     }
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        outlined: {
+          borderWidth: 2,
+          '&:hover': {
+            borderWidth: 2
+          }
+        }
+      }
+    }
   }
 })

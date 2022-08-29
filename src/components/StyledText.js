@@ -5,7 +5,7 @@ const StyledText = styled(Typography)(({ theme }) => {
   return {
     color: theme.palette.primary.main,
     backgroundColor: theme.palette.secondary.main,
-    padding: '3px',
+    padding: '5px',
     borderRadius: '25px'
   }
 })

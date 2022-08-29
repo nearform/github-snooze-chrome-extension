@@ -19,7 +19,8 @@ export default function DialogFormButton({
   description,
   placeholder,
   onConfirm,
-  disabled
+  disabled,
+  ...props
 }) {
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState()
@@ -42,11 +43,11 @@ export default function DialogFormButton({
   return (
     <div>
       <Button
-        sx={{ p: 1 }}
         disabled={disabled}
         color="secondary"
         variant="outlined"
         onClick={handleClickOpen}
+        {...props}
       >
         {label}
       </Button>
@@ -69,10 +70,16 @@ export default function DialogFormButton({
           )}
         </DialogContent>
         <DialogActions>
-          <Button color="secondary" onClick={handleClose}>
+          <Button color="secondary" size="small" onClick={handleClose}>
             Cancel
           </Button>
-          <Button color="secondary" disabled={!value} onClick={handleConfirm}>
+          <Button
+            variant="contained"
+            color="secondary"
+            size="small"
+            disabled={!value}
+            onClick={handleConfirm}
+          >
             Confirm
           </Button>
         </DialogActions>
