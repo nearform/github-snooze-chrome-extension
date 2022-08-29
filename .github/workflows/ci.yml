@@ -8,13 +8,14 @@ on:
 
 jobs:
   test:
-    name: Lint
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
+          cache: 'npm'
       - name: Lint & test
         run: |
           npm ci

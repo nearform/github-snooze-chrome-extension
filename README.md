@@ -13,6 +13,10 @@ To use this extension you will need to [generate a GitHub Personal Access Token 
 
 The [GitHub Snooze Extension](https://chrome.google.com/webstore/detail/github-snooze/pphnmnebnblgfepdjefofceimacpkcni) is available in the Chrome Web Store. You can install it as a regular extension.
 
+## Storybook
+
+A hosted Storybook is running [here](https://nearform.github.io/github-snooze-chrome-extension).
+
 ## Usage instructions for the users
 
 In order to use this extension locally, you have to complete the following steps:
