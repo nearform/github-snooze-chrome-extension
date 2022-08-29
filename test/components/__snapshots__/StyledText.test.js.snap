@@ -1,9 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StyledText.js shows the proper StyledText 1`] = `
-<span
-  className="MuiTypography-root MuiTypography-body1 css-uocwv0-MuiTypography-root"
->
-  text
-</span>
+<DocumentFragment>
+  <p
+    class="MuiTypography-root MuiTypography-body1 css-131yw0r-MuiTypography-root"
+  >
+    text
+  </p>
+</DocumentFragment>
 `;

@@ -1,5 +1,5 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render, act } from '../renderer'
 import SnoozeItem from '../../src/components/SnoozeItem'
 import { SNOOZE_STATUS_PENDING } from '../../src/constants'
 
@@ -16,10 +16,6 @@ const props = {
 }
 
 describe('SnoozeItem.js', () => {
-  afterEach(() => {
-    jest.clearAllMocks()
-  })
-
   test('shows the proper SnoozeItem', async () => {
     chrome.storage.local.get = jest.fn(() => ({
       user: {
@@ -27,11 +23,13 @@ describe('SnoozeItem.js', () => {
       }
     }))
 
-    let tree
-    await renderer.act(async () => {
-      tree = renderer.create(<SnoozeItem {...props} />)
+    let asFragment
+
+    await act(async () => {
+      const result = render(<SnoozeItem {...props} />)
+      asFragment = result.asFragment
     })
 
-    expect(tree.toJSON()).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 })

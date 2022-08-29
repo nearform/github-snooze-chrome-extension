@@ -1,5 +1,5 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '../renderer'
 import StyledText from '../../src/components/StyledText'
 
 const props = {
@@ -10,8 +10,8 @@ const props = {
 
 describe('StyledText.js', () => {
   test('shows the proper StyledText', () => {
-    const tree = renderer.create(<StyledText {...props} />)
+    const { asFragment } = render(<StyledText {...props} />)
 
-    expect(tree.toJSON()).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 })

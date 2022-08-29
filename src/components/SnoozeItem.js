@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import {
-  Card,
   CardHeader,
   Link,
   Box,
@@ -18,17 +17,7 @@ import DialogButton from './DialogButton'
 import { getFormattedDate } from '../date'
 import { SK_USER, SNOOZE_STATUS_DONE } from '../constants'
 import { readFromLocalStorage, removeSnooze } from '../api/chrome'
-import { styled } from '@mui/system'
-
-const SnoozeCard = styled(Card)(({ theme, status }) => {
-  return {
-    borderLeft: `4px solid ${
-      status === SNOOZE_STATUS_DONE
-        ? theme.palette.success.main
-        : theme.palette.warning.main
-    }`
-  }
-})
+import SnoozeCard from './SnoozeCard'
 
 function SnoozeItem({ snooze, onDelete }) {
   const [isLoading, setIsLoading] = useState(false)
@@ -52,7 +41,7 @@ function SnoozeItem({ snooze, onDelete }) {
   }
 
   if (isLoading) {
-    return <CircularProgress color="secondary" />
+    return <CircularProgress aria-label="loading" color="secondary" />
   }
   return (
     <SnoozeCard elevation={0} sx={{ py: 0.5 }} status={status}>

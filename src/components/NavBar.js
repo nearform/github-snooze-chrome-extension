@@ -3,37 +3,22 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import {
   AppBar,
   Box,
-  Toolbar,
   Button,
   IconButton,
   Typography,
   Divider
 } from '@mui/material'
-import { styled } from '@mui/system'
 import { Login, ChevronLeft, GitHub as GitHubIcon } from '@mui/icons-material'
 import { getCurrentRoute, routes } from '../routes'
 import DialogFormButton from './DialogFormButton'
+import StyledToolbar from './StyledToolbar'
 
-const mediaMinWidthKey = '@media (min-width:0px)'
-const mediaOrientationLandscapeKey = '@media (orientation: landscape)'
-const TOOLBAR_MIN_HEIGHT = 72
-
-const OurToolbar = styled(Toolbar)(({ theme }) => {
-  console.log(theme.mixins.toolbar)
-  return {
-    ...theme.mixins.toolbar,
-    [mediaMinWidthKey]: {
-      ...theme.mixins.toolbar[mediaMinWidthKey],
-      minHeight: `${TOOLBAR_MIN_HEIGHT}px`,
-      [mediaOrientationLandscapeKey]: {
-        ...theme.mixins.toolbar[mediaMinWidthKey][mediaOrientationLandscapeKey],
-        minHeight: `${TOOLBAR_MIN_HEIGHT}px`
-      }
-    }
-  }
-})
-
-function NavBar({ isAuthenticated, user, onCreateSnooze, currentUrl }) {
+export default function NavBar({
+  isAuthenticated,
+  user,
+  onCreateSnooze,
+  currentUrl
+}) {
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -61,7 +46,7 @@ function NavBar({ isAuthenticated, user, onCreateSnooze, currentUrl }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar elevation={0} component="nav" position="fixed">
-        <OurToolbar>
+        <StyledToolbar>
           {showBackButton ? (
             <>
               <IconButton color="secondary" onClick={handleNavigateBack}>
@@ -115,12 +100,10 @@ function NavBar({ isAuthenticated, user, onCreateSnooze, currentUrl }) {
               </Button>
             </Box>
           )}
-        </OurToolbar>
+        </StyledToolbar>
         <Divider />
       </AppBar>
-      <OurToolbar />
+      <StyledToolbar />
     </Box>
   )
 }
-
-export default NavBar

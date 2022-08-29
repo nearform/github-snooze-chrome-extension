@@ -6,7 +6,9 @@ const cleanup = () => {
   jest.restoreAllMocks()
   jest.resetModules()
 }
+
 let sendResponseSpy
+
 beforeEach(() => {
   cleanup()
   const originalImpl = global.chrome.runtime.onMessage.addListener // prevent infinite-loop

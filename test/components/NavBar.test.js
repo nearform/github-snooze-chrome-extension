@@ -1,5 +1,5 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '../renderer'
 import NavBar from '../../src/components/NavBar'
 
 jest.mock('react-router-dom', () => ({
@@ -9,25 +9,17 @@ jest.mock('react-router-dom', () => ({
 }))
 
 describe('NavBar.js', () => {
-  afterEach(() => {
-    jest.clearAllMocks()
-  })
-
   test('shows the proper NavBar for unauthenticated users', async () => {
-    let tree
-    await renderer.act(async () => {
-      tree = renderer.create(<NavBar isAuthenticated={false} />)
-    })
+    const { asFragment } = render(<NavBar isAuthenticated={false} />)
 
-    expect(tree.toJSON()).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 
   test('shows the proper NavBar for authenticated users', async () => {
-    let tree
-    await renderer.act(async () => {
-      tree = renderer.create(<NavBar isAuthenticated={true} />)
-    })
+    const { asFragment } = render(
+      <NavBar isAuthenticated={true} user={{ login: 'john' }} />
+    )
 
-    expect(tree.toJSON()).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 })

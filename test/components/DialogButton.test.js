@@ -1,5 +1,5 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '../renderer'
 import DialogButton from '../../src/components/DialogButton'
 import { Check } from '@mui/icons-material'
 
@@ -12,14 +12,14 @@ const props = {
 
 describe('DialogButton.js', () => {
   test('shows the proper DialogButton', async () => {
-    const tree = renderer.create(<DialogButton {...props} />)
+    const { asFragment } = render(<DialogButton {...props} />)
 
-    expect(tree.toJSON()).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 
   test('shows the proper DialogButton with icon', async () => {
-    const tree = renderer.create(<DialogButton {...props} icon={<Check />} />)
+    const { asFragment } = render(<DialogButton {...props} icon={<Check />} />)
 
-    expect(tree.toJSON()).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 })

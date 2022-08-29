@@ -1,71 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DashboardPage.js if authenticated renders the proper page 1`] = `
-Array [
-  <p
-    className="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
-  >
-    Hello User
-    ,
-  </p>,
-  <hr
-    className="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
-  />,
+<DocumentFragment>
   <div
-    className="MuiBox-root css-1pg8bi"
-  />,
-  <div>
-    <button
-      className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth css-mrzqee-MuiButtonBase-root-MuiButton-root"
-      disabled={false}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onContextMenu={[Function]}
-      onDragLeave={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseLeave={[Function]}
-      onMouseUp={[Function]}
-      onTouchEnd={[Function]}
-      onTouchMove={[Function]}
-      onTouchStart={[Function]}
-      tabIndex={0}
-      type="button"
-    >
-      Add Snooze
-      <span
-        className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-      />
-    </button>
-  </div>,
-  <div
-    className="MuiBox-root css-1pg8bi"
-  />,
-  <hr
-    className="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
-  />,
-  <div
-    className="MuiBox-root css-1pg8bi"
-  />,
+    class="MuiBox-root css-1pg8bi"
+  />
   <p
-    className="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
-  >
-    Your Snoozes:
-  </p>,
-  <p
-    className="MuiTypography-root MuiTypography-subtitle2 css-ati914-MuiTypography-root"
+    class="MuiTypography-root MuiTypography-subtitle2 css-1ob7xgl-MuiTypography-root"
   >
     Snooze List is empty.
-  </p>,
-]
+  </p>
+</DocumentFragment>
 `;
 
 exports[`DashboardPage.js if not authenticated renders please login 1`] = `
-<p
-  className="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
->
-  Please LOGIN to use this Chrome Extension.
-</p>
+<DocumentFragment>
+  <p
+    class="MuiTypography-root MuiTypography-body1 css-14sfki5-MuiTypography-root"
+  >
+    Please LOGIN to use this Chrome Extension.
+  </p>
+</DocumentFragment>
 `;

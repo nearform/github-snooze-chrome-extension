@@ -7,6 +7,7 @@ import {
   COLOR_SUCCESS,
   COLOR_WARNING
 } from './constants'
+
 export const theme = createTheme({
   typography: {
     allVariants: {
