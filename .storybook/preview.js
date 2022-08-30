@@ -1,5 +1,7 @@
 import { ThemeProvider } from '@mui/material'
 import { MemoryRouter as Router } from 'react-router-dom'
+import { withScreenshot } from 'storycap'
+
 import { theme } from '../src/theme'
 
 export const parameters = {
@@ -13,6 +15,7 @@ export const parameters = {
 }
 
 export const decorators = [
+  withScreenshot,
   Story => (
     <ThemeProvider theme={theme}>
       <Router>

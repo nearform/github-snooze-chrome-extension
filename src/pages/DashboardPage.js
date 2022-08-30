@@ -1,8 +1,11 @@
 import React from 'react'
 import { Typography, Alert, Divider, Box } from '@mui/material'
+import T from 'prop-types'
 import SnoozeItem from '../components/SnoozeItem'
+import Gap from '../components/Gap'
+import { SnoozeShape } from '../shapes'
 
-function DashboardPage({
+export default function DashboardPage({
   errorMessage,
   isAuthenticated,
   currentUrl,
@@ -20,24 +23,20 @@ function DashboardPage({
 
   return (
     <>
-      {errorMessage && (
-        <>
-          <Alert severity="error">{errorMessage}</Alert>
-        </>
-      )}
+      {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
       {!currentUrl && (
         <>
           <Alert severity="warning">
             The URL you are navigating on is not a valid URL for adding a GitHub
             Snooze
           </Alert>
-          <Box height={20} />
+          <Gap />
           <Divider />
         </>
       )}
 
-      <Box height={20} />
-      {snoozeList.length === 0 && (
+      <Gap />
+      {!snoozeList.length && (
         <Typography variant="subtitle2" component="p">
           Snooze List is empty.
         </Typography>
@@ -51,4 +50,6 @@ function DashboardPage({
   )
 }
 
-export default DashboardPage
+DashboardPage.propTypes = {
+  snoozeList: T.arrayOf(SnoozeShape).isRequired
+}

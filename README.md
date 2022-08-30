@@ -67,7 +67,7 @@ In order to use this extension locally from a compressed archive:
 - Enable Developer Mode by clicking the toggle switch next to **Developer mode**
 - Click the **Load unpacked** button and select the extension directory, in this case the previously extracted folder
 
-### Development
+## Development
 
 In order to use this extension during the development:
 
@@ -75,3 +75,15 @@ In order to use this extension during the development:
 - Open the **Extension Management** page by navigating to: `chrome://extensions`
 - Enable Developer Mode by clicking the toggle switch next to **Developer mode**
 - Click the **Load unpacked** button and select the extension directory, in this case the `dist` folder
+
+### Chrome Store listing
+
+The extension is published automatically to the Chrome Store whenever a new release is made in the repository.
+
+To publish a new release, use the standard release workflow from the Actions tab of the repository.
+
+### Screenshots
+
+Screenshots to be included in the store listing can be generated with storycap running the command `npm run storycap`.
+
+It uses Storybook to generate stories for the screenshots.

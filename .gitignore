@@ -1,6 +1,9 @@
 # Chrome extension release zip files
 releases
 
+# Screenshots
+__screenshots__
+
 # Logs
 logs
 *.log
