@@ -20,7 +20,9 @@
     "test": "cross-env TZ=UTC jest",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "deploy-storybook": "storybook-to-ghpages"
+    "deploy-storybook": "storybook-to-ghpages",
+    "storycap:standalone": "npx storycap http://localhost:6006 --serverTimeout 120000 -V 1280x800",
+    "storycap": "run-p storybook storycap:standalone"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
@@ -72,11 +74,14 @@
     "jest-chrome": "^0.7.0",
     "jest-environment-jsdom": "^29.0.1",
     "lint-staged": "^13.0.3",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.2.1",
+    "prop-types": "^15.8.1",
     "rollup": "^2.78.1",
     "rollup-plugin-chrome-extension": "^3.5.6",
     "rollup-plugin-empty-dir": "^1.0.4",
     "rollup-plugin-zip": "^1.0.1",
+    "storycap": "^3.1.9",
     "styled-jsx": "^5.0.4"
   },
   "lint-staged": {

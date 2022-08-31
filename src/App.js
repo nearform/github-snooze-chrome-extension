@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { MemoryRouter as Router } from 'react-router-dom'
+import { ThemeProvider } from '@mui/material/styles'
+import { theme } from './theme'
 import * as uuid from 'uuid'
-import NavBar from './components/NavBar'
-import Container from '@mui/material/Container'
-import { CircularProgress } from '@mui/material'
-import { routes } from './routes'
-import DashboardPage from './pages/DashboardPage'
-import AuthPage from './pages/AuthPage'
+import { Box, CircularProgress } from '@mui/material'
 import useInitApp from './hooks/useInitApp'
 import { addSnooze, checkUrlAlreadySnoozed, getSnoozeList } from './api/chrome'
 import { getEntityInfo } from './parser'
 import { getEntity } from './api/github'
 import { SNOOZE_STATUS_PENDING } from './constants'
+import HomePage from './pages/HomePage'
 
 const App = () => {
   const {
@@ -24,6 +22,7 @@ const App = () => {
   } = useInitApp()
   const [errorMessage, setErrorMessage] = useState('')
   const [snoozeList, setSnoozeList] = useState(snoozes)
+
   const handleAddSnooze = async notifyDate => {
     setErrorMessage('')
 
@@ -72,51 +71,34 @@ const App = () => {
     initList()
   }, [isAuthenticated, user.id])
 
-  if (isLoading) {
-    return (
-      <div
-        style={{
-          minWidth: '512px',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-      >
-        <CircularProgress color="secondary" />
-      </div>
-    )
-  }
   return (
-    <div style={{ minWidth: '512px' }}>
-      <NavBar
-        user={user}
-        isAuthenticated={isAuthenticated}
-        onCreateSnooze={handleAddSnooze}
-        currentUrl={currentUrl}
-      />
-      <Container sx={{ py: 2 }}>
-        <Routes>
-          <Route
-            path={routes.dashboard.url}
-            element={
-              <DashboardPage
-                errorMessage={errorMessage}
-                isAuthenticated={isAuthenticated}
-                pat={pat}
-                user={user}
-                currentUrl={currentUrl}
-                snoozeList={snoozeList}
-                setSnoozeList={setSnoozeList}
-              />
-            }
+    <ThemeProvider theme={theme}>
+      <Router>
+        {isLoading ? (
+          <Box
+            sx={{
+              minWidth: '512px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <CircularProgress color="secondary" />
+          </Box>
+        ) : (
+          <HomePage
+            user={user}
+            isAuthenticated={isAuthenticated}
+            handleAddSnooze={handleAddSnooze}
+            currentUrl={currentUrl}
+            errorMessage={errorMessage}
+            pat={pat}
+            snoozeList={snoozeList}
+            setSnoozeList={setSnoozeList}
           />
-          <Route
-            path={routes.auth.url}
-            element={<AuthPage isAuthenticated={isAuthenticated} pat={pat} />}
-          />
-        </Routes>
-      </Container>
-    </div>
+        )}
+      </Router>
+    </ThemeProvider>
   )
 }
 

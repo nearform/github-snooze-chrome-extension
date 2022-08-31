@@ -18,6 +18,7 @@ import { SNOOZE_STATUS_DONE } from '../constants'
 import { removeSnooze } from '../api/chrome'
 import SnoozeCard from './SnoozeCard'
 import { getEntityInfo } from '../parser'
+import { SnoozeShape } from '../shapes'
 
 function SnoozeItem({ user, snooze, onDelete }) {
   const theme = useTheme()
@@ -95,6 +96,10 @@ function SnoozeItem({ user, snooze, onDelete }) {
       </CardContent>
     </SnoozeCard>
   )
+}
+
+SnoozeItem.propTypes = {
+  snooze: SnoozeShape.isRequired
 }
 
 export default SnoozeItem

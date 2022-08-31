@@ -4,7 +4,6 @@ import {
   InputLabel,
   InputAdornment,
   IconButton,
-  Box,
   Typography,
   Link,
   Alert,
@@ -20,6 +19,7 @@ import {
 } from '../api/chrome'
 import DialogButton from '../components/DialogButton'
 import StyledText from '../components/StyledText'
+import Gap from '../components/Gap'
 
 function AuthPage({ isAuthenticated, pat }) {
   const [state, setState] = useReducer(
@@ -98,7 +98,7 @@ function AuthPage({ isAuthenticated, pat }) {
         Remember to add the <StyledText as="span">repo</StyledText> and{' '}
         <StyledText as="span">read:user</StyledText> scopes to it.
       </Typography>
-      <Box height={20} />
+      <Gap />
       <FormControl
         fullWidth
         color="secondary"
@@ -125,7 +125,7 @@ function AuthPage({ isAuthenticated, pat }) {
           }
           label="PAT"
         />
-        <Box height={20} />
+        <Gap />
         <LoadingButton
           fullWidth
           color="secondary"
@@ -138,14 +138,14 @@ function AuthPage({ isAuthenticated, pat }) {
         </LoadingButton>
         {isAuthenticated && (
           <>
-            <Box height={20} />
+            <Gap />
             <DialogButton
               label="Logout"
               title="Do you want to logout?"
               description="All your local data will be canceled and you won't be able to use the extension anymore until you log in again."
               onConfirm={handleLogout}
             />
-            <Box height={20} />
+            <Gap />
             <DialogButton
               label="Clear Sync Storage"
               title="Do you want to clear the sync storage?"
