@@ -82,7 +82,7 @@
     "rollup-plugin-empty-dir": "^1.0.4",
     "rollup-plugin-zip": "^1.0.1",
     "storycap": "^3.1.9",
-    "styled-jsx": "^5.0.4"
+    "styled-jsx": "^5.0.5"
   },
   "lint-staged": {
     "*.{js,jsx}": "eslint --cache --fix"
