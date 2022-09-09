@@ -1,11 +1,9 @@
 name: Continuous Integration
-
 on:
   push:
     branches:
       - master
-  pull_request:
-
+  pull_request: null
 jobs:
   test:
     name: Test
@@ -14,8 +12,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version-file: '.nvmrc'
-          cache: 'npm'
+          node-version-file: .nvmrc
+          cache: npm
       - name: Lint & test
         run: |
           npm ci
@@ -32,7 +30,6 @@ jobs:
         run: npm run deploy-storybook -- --ci
         env:
           GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
-
   automerge:
     name: Merge dependabot's PRs
     needs: test
@@ -42,5 +39,3 @@ jobs:
       contents: write
     steps:
       - uses: fastify/github-action-merge-dependabot@v3
-        with:
-          github-token: ${{ secrets.github_token }}
