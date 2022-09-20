@@ -59,7 +59,7 @@
     "@storybook/storybook-deployer": "^2.8.12",
     "@storybook/testing-library": "^0.0.13",
     "@testing-library/react": "^13.4.0",
-    "@types/chrome": "^0.0.196",
+    "@types/chrome": "^0.0.197",
     "@types/firefox-webext-browser": "^94.0.1",
     "@types/jest": "^29.0.3",
     "@types/react": "^18.0.20",
