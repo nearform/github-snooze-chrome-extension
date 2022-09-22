@@ -62,7 +62,7 @@
     "@types/chrome": "^0.0.197",
     "@types/firefox-webext-browser": "^94.0.1",
     "@types/jest": "^29.0.3",
-    "@types/react": "^18.0.20",
+    "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "babel-loader": "^8.2.5",
     "cross-env": "^7.0.3",
