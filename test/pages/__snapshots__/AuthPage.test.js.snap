@@ -85,7 +85,7 @@ exports[`AuthPage.js renders the Auth Page for authenticated users 1`] = `
         class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
       >
         <legend
-          class="css-1in441m"
+          class="css-14lo706"
         >
           <span>
             PAT
@@ -224,7 +224,7 @@ exports[`AuthPage.js renders the Auth Page for unauthenticated users 1`] = `
         class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
       >
         <legend
-          class="css-1in441m"
+          class="css-14lo706"
         >
           <span>
             PAT
