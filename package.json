@@ -29,7 +29,7 @@
     "@emotion/styled": "^11.10.4",
     "@mui/icons-material": "^5.10.6",
     "@mui/lab": "^5.0.0-alpha.101",
-    "@mui/material": "^5.10.6",
+    "@mui/material": "^5.10.7",
     "chrono-node": "^2.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
