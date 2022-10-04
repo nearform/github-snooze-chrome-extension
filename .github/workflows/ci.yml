@@ -14,7 +14,7 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
-      - name: Lint & test
+      - name: Lint & test 
         run: |
           npm ci
           npm run lint
@@ -38,4 +38,5 @@ jobs:
       pull-requests: write
       contents: write
     steps:
-      - uses: guilhermelimak/github-action-merge-dependabot@feat/use-fetch-metadata-action
+      - uses: fastify/github-action-merge-dependabot@v3
+      
