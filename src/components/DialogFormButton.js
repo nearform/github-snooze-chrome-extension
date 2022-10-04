@@ -58,6 +58,7 @@ export default function DialogFormButton({
           <Autocomplete
             options={SNOOZE_OPTIONS}
             onChange={handleChange}
+            onInputChange={handleChange}
             freeSolo
             renderInput={params => (
               <TextField {...params} label={placeholder} />
