@@ -19,8 +19,6 @@ import {
 import { dateHasPassed } from './date'
 import { isValidUrl } from './url'
 
-export const INITIAL_CHECK_INTERVAL_TIMER_MINUTES = 1
-
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   const { action, msg: badgeCounter } = message
   switch (action) {
@@ -66,8 +64,7 @@ chrome.tabs.onActivated.addListener(async activeInfo => {
   await writeToLocalStorage({ url })
 })
 
-export const createChromeAlarm = async checkIntervalTimerMinutes => {
-  await chrome.alarms.clearAll()
+export const createChromeAlarm = checkIntervalTimerMinutes => {
   chrome.alarms.create({
     periodInMinutes: Number(checkIntervalTimerMinutes),
     when: Date.now() + 1
@@ -76,8 +73,12 @@ export const createChromeAlarm = async checkIntervalTimerMinutes => {
 
 const createInitialChromeAlarm = async () => {
   const localStorage = await readAllFromLocalStorage()
-  const { checkIntervalTimer } = localStorage || {}
-  createChromeAlarm(checkIntervalTimer || INITIAL_CHECK_INTERVAL_TIMER_MINUTES)
+  const { checkIntervalTimer = 1 } = localStorage || {}
+  await writeToLocalStorage({
+    checkIntervalTimer
+  })
+
+  createChromeAlarm(checkIntervalTimer)
 }
 
 createInitialChromeAlarm()

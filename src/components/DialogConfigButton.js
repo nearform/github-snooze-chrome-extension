@@ -10,10 +10,8 @@ import {
 } from '@mui/material'
 import SettingsIcon from '@mui/icons-material/Settings'
 import React, { useState } from 'react'
-import {
-  createChromeAlarm,
-  INITIAL_CHECK_INTERVAL_TIMER_MINUTES
-} from '../background'
+import T from 'prop-types'
+import { createChromeAlarm } from '../background'
 import { useChromeLocalStorage } from '../hooks/useChromeLocalStorage'
 
 const SETTINGS_LABELS = {
@@ -39,34 +37,29 @@ const ConfigurationField = ({ renderField }) => {
   return <Box sx={{ maxWidth: '20%' }}>{renderField()}</Box>
 }
 
-export default function DialogConfigButton({ title, disabled, ...props }) {
+export default function DialogConfigButton({ title, disabled }) {
   const [open, setOpen] = useState(false)
   const {
     setData: setCheckIntervalTimer,
     localData: localCheckIntervalTimer,
-    setLocalData: setLocalCheckIntervalTimer,
-    hasError,
-    setHasError
-  } = useChromeLocalStorage(
-    'checkIntervalTimer',
-    INITIAL_CHECK_INTERVAL_TIMER_MINUTES
-  )
+    setLocalData: setLocalCheckIntervalTimer
+  } = useChromeLocalStorage('checkIntervalTimer')
 
   const handleClickOpen = () => setOpen(true)
   const handleDialogClose = () => setOpen(false)
 
-  const handleCheckIntervalTimerValidation = value => {
-    setLocalCheckIntervalTimer(value.trim())
-    if (!Number.isInteger(Number(value))) {
-      setHasError(true)
-      return
-    }
-    setHasError(false)
+  if (!localCheckIntervalTimer) {
+    return
   }
 
-  const handleApplyChanges = async () => {
+  const handleCheckIntervalTimerValidation = event => {
+    const { value } = event.target
+    setLocalCheckIntervalTimer(value)
+  }
+
+  const handleApplyChanges = () => {
     setCheckIntervalTimer(localCheckIntervalTimer)
-    await createChromeAlarm(localCheckIntervalTimer)
+    createChromeAlarm(Number(localCheckIntervalTimer))
     handleDialogClose()
   }
 
@@ -79,7 +72,6 @@ export default function DialogConfigButton({ title, disabled, ...props }) {
         data-testid={'open-settings-dialog'}
         onClick={handleClickOpen}
         disabled={disabled}
-        {...props}
       >
         <SettingsIcon />
       </Button>
@@ -91,14 +83,14 @@ export default function DialogConfigButton({ title, disabled, ...props }) {
             <ConfigurationField
               renderField={() => (
                 <TextField
+                  type="number"
+                  inputProps={{
+                    min: 1
+                  }}
                   value={localCheckIntervalTimer}
-                  onChange={e =>
-                    handleCheckIntervalTimerValidation(e.target.value)
-                  }
+                  onChange={handleCheckIntervalTimerValidation}
                   size="small"
-                  variant="filled"
-                  label={hasError ? 'Invalid' : ''}
-                  error={hasError}
+                  variant="outlined"
                 />
               )}
             />
@@ -113,7 +105,6 @@ export default function DialogConfigButton({ title, disabled, ...props }) {
             color="secondary"
             size="small"
             onClick={handleApplyChanges}
-            disabled={hasError}
           >
             Apply
           </Button>
@@ -121,4 +112,10 @@ export default function DialogConfigButton({ title, disabled, ...props }) {
       </Dialog>
     </div>
   )
+}
+
+DialogConfigButton.propTypes = {
+  title: T.string.isRequired,
+  size: T.string.isRequired,
+  disabled: T.bool.isRequired
 }

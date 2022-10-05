@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
 import { writeToLocalStorage, readFromLocalStorage } from '../api/chrome'
 
-export function useChromeLocalStorage(key, initialValue) {
-  const [data, setData] = useState(initialValue)
+export function useChromeLocalStorage(key) {
+  const [data, setData] = useState()
   const [localData, setLocalData] = useState(data)
-  const [hasError, setHasError] = useState(false)
 
   useEffect(() => {
     if (data) {
@@ -19,11 +18,10 @@ export function useChromeLocalStorage(key, initialValue) {
         setData(value[key])
       } catch (error) {
         console.error('readFromLocalStorage error:', error)
-        setData(initialValue)
       }
     }
     readLocalStorage()
-  }, [key, initialValue])
+  }, [key])
 
   const setNewData = async value => {
     try {
@@ -31,7 +29,6 @@ export function useChromeLocalStorage(key, initialValue) {
       setData(value)
     } catch (error) {
       console.error('writeToLocalStorage error:', error)
-      setData(initialValue)
     }
   }
 
@@ -39,8 +36,6 @@ export function useChromeLocalStorage(key, initialValue) {
     data,
     setData: setNewData,
     localData,
-    setLocalData,
-    hasError,
-    setHasError
+    setLocalData
   }
 }
