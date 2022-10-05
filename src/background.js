@@ -66,7 +66,7 @@ chrome.tabs.onActivated.addListener(async activeInfo => {
 
 export const createChromeAlarm = checkIntervalTimerMinutes => {
   chrome.alarms.create({
-    periodInMinutes: Number(checkIntervalTimerMinutes),
+    periodInMinutes: checkIntervalTimerMinutes,
     when: Date.now() + 1
   })
 }

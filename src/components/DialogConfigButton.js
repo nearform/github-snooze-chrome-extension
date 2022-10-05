@@ -1,3 +1,5 @@
+import React, { useState } from 'react'
+import T from 'prop-types'
 import {
   Button,
   Dialog,
@@ -9,8 +11,6 @@ import {
   Box
 } from '@mui/material'
 import SettingsIcon from '@mui/icons-material/Settings'
-import React, { useState } from 'react'
-import T from 'prop-types'
 import { createChromeAlarm } from '../background'
 import { useChromeLocalStorage } from '../hooks/useChromeLocalStorage'
 
@@ -85,7 +85,8 @@ export default function DialogConfigButton({ title, disabled }) {
                 <TextField
                   type="number"
                   inputProps={{
-                    min: 1
+                    min: 1,
+                    'data-testid': 'input-check-interval-timer'
                   }}
                   value={localCheckIntervalTimer}
                   onChange={handleCheckIntervalTimerValidation}
@@ -116,6 +117,5 @@ export default function DialogConfigButton({ title, disabled }) {
 
 DialogConfigButton.propTypes = {
   title: T.string.isRequired,
-  size: T.string.isRequired,
   disabled: T.bool.isRequired
 }

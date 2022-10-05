@@ -8,6 +8,14 @@ jest.mock('react-router-dom', () => ({
   useLocation: () => ({ pathname: '/' })
 }))
 
+jest.mock('../../src/hooks/useChromeLocalStorage.js', () => ({
+  useChromeLocalStorage: function () {
+    return {
+      localData: 1
+    }
+  }
+}))
+
 describe('NavBar.js', () => {
   test('shows the proper NavBar for unauthenticated users', async () => {
     const { asFragment } = render(<NavBar isAuthenticated={false} />)

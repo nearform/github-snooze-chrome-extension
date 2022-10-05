@@ -90,7 +90,6 @@ export default function NavBar({
               <Box sx={{ mr: 1 }}>
                 <DialogConfigButton
                   title="Settings"
-                  size="small"
                   disabled={!isAuthenticated}
                 />
               </Box>
