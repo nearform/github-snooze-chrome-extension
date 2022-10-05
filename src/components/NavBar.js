@@ -12,6 +12,7 @@ import { Login, ChevronLeft, GitHub as GitHubIcon } from '@mui/icons-material'
 import { getCurrentRoute, routes } from '../routes'
 import DialogFormButton from './DialogFormButton'
 import StyledToolbar from './StyledToolbar'
+import DialogConfigButton from './DialogConfigButton'
 
 export default function NavBar({
   isAuthenticated,
@@ -84,6 +85,13 @@ export default function NavBar({
                   onConfirm={onCreateSnooze}
                   disabled={!currentUrl}
                   size="small"
+                />
+              </Box>
+              <Box sx={{ mr: 1 }}>
+                <DialogConfigButton
+                  title="Settings"
+                  size="small"
+                  disabled={!isAuthenticated}
                 />
               </Box>
               <Button
