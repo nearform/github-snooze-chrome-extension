@@ -23,9 +23,9 @@ jest.mock('../../src/api/chrome', () => {
 })
 
 describe('DialogConfigButton.js', () => {
-  test('shows the proper disabled DialogFormButton', async () => {
+  test('shows the proper enabled DialogFormButton', async () => {
     const { asFragment, getByTestId } = render(
-      <DialogConfigButton {...props} disabled={true} />
+      <DialogConfigButton {...props} />
     )
 
     await waitFor(() => {
@@ -35,9 +35,9 @@ describe('DialogConfigButton.js', () => {
     expect(asFragment()).toMatchSnapshot()
   })
 
-  test('shows the proper enabled DialogFormButton', async () => {
+  test('shows the proper disabled DialogFormButton', async () => {
     const { asFragment, getByTestId } = render(
-      <DialogConfigButton {...props} />
+      <DialogConfigButton {...props} disabled={true} />
     )
 
     await waitFor(() => {

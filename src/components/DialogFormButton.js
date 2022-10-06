@@ -65,7 +65,7 @@ export default function DialogFormButton({
             )}
           />
           {value && (
-            <Typography sx={{ mt: 1 }}>
+            <Typography sx={{ mt: 1 }} data-testid="notification-time-message">
               You will be notified on {value.toLocaleString()}
             </Typography>
           )}
