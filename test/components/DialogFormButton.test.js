@@ -1,5 +1,7 @@
 import React from 'react'
+import { fireEvent, waitFor } from '@testing-library/react'
 import { render } from '../renderer'
+import { parseDate } from 'chrono-node'
 import DialogFormButton from '../../src/components/DialogFormButton'
 
 const props = {
@@ -10,6 +12,8 @@ const props = {
   placeholder: 'placeholder',
   disabled: false
 }
+
+const DATA_TEST_ID_NOTIFICATION_TIME = 'notification-time-message'
 
 describe('DialogFormButton.js', () => {
   test('shows the proper enabled DialogFormButton', () => {
@@ -24,5 +28,35 @@ describe('DialogFormButton.js', () => {
     )
 
     expect(asFragment()).toMatchSnapshot()
+  })
+
+  test('autocomplete component to support custom snooze intervals', async () => {
+    const { findByText, getByRole, findByTestId } = render(
+      <DialogFormButton {...props} />
+    )
+
+    const openDialogButton = await findByText(props.label)
+    fireEvent.click(openDialogButton)
+
+    const snoozeMinutes = 27
+    const chronoInput = `in ${snoozeMinutes} minutes`
+    const input = await getByRole('combobox')
+    fireEvent.change(input, {
+      target: { value: chronoInput }
+    })
+
+    await waitFor(async () => {
+      await findByTestId(DATA_TEST_ID_NOTIFICATION_TIME)
+    })
+
+    const expectedScheduleMessage = `You will be notified on ${parseDate(
+      chronoInput
+    ).toLocaleString()}`
+
+    expect(
+      await (
+        await findByTestId(DATA_TEST_ID_NOTIFICATION_TIME)
+      ).innerHTML
+    ).toBe(expectedScheduleMessage)
   })
 })
