@@ -58,7 +58,7 @@ export default function DialogConfigButton({ title, disabled }) {
   }
 
   const handleApplyChanges = () => {
-    setCheckIntervalTimer(localCheckIntervalTimer)
+    setCheckIntervalTimer(Number(localCheckIntervalTimer))
     createChromeAlarm(Number(localCheckIntervalTimer))
     handleDialogClose()
   }

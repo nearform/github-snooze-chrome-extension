@@ -1,48 +1,59 @@
 import React from 'react'
-import { fireEvent } from '@testing-library/react'
+import { fireEvent, waitFor } from '@testing-library/react'
 import { render } from '../renderer'
 import DialogConfigButton from '../../src/components/DialogConfigButton'
+import { writeToLocalStorage } from '../../src/api/chrome'
 
 const props = {
   title: 'title',
   disabled: false
 }
 
-const mockSetData = jest.fn()
+const DATA_TEST_ID_OPEN_SETINGS_DIALOG = 'open-settings-dialog'
 
-jest.mock('../../src/hooks/useChromeLocalStorage.js', () => ({
-  useChromeLocalStorage: function () {
-    return {
-      data: 1,
-      setData: mockSetData,
-      localData: 1,
-      setLocalData: () => {}
-    }
+jest.mock('../../src/api/chrome', () => {
+  let chromeLocalStorage = {}
+  return {
+    readFromLocalStorage: key => ({ [key]: chromeLocalStorage[key] }),
+    writeToLocalStorage: jest.fn(item => {
+      chromeLocalStorage = { ...chromeLocalStorage, ...item }
+    }),
+    readAllFromLocalStorage: () => chromeLocalStorage
   }
-}))
+})
 
 describe('DialogConfigButton.js', () => {
-  test('shows the proper enabled DialogFormButton', () => {
-    const { asFragment } = render(<DialogConfigButton {...props} />)
+  test('shows the proper disabled DialogFormButton', async () => {
+    const { asFragment, getByTestId } = render(
+      <DialogConfigButton {...props} disabled={true} />
+    )
+
+    await waitFor(() => {
+      getByTestId(DATA_TEST_ID_OPEN_SETINGS_DIALOG)
+    })
 
     expect(asFragment()).toMatchSnapshot()
   })
 
-  test('shows the proper disabled DialogFormButton', () => {
-    const { asFragment } = render(
-      <DialogConfigButton {...props} disabled={true} />
+  test('shows the proper enabled DialogFormButton', async () => {
+    const { asFragment, getByTestId } = render(
+      <DialogConfigButton {...props} />
     )
+
+    await waitFor(() => {
+      getByTestId(DATA_TEST_ID_OPEN_SETINGS_DIALOG)
+    })
 
     expect(asFragment()).toMatchSnapshot()
   })
 
   test('should apply change in settings - check interval timer', async () => {
-    const { getByRole, getByTestId, getByText } = render(
-      <DialogConfigButton {...props} />
-    )
+    const { getByTestId, getByText } = render(<DialogConfigButton {...props} />)
 
-    const settingsButton = getByRole('button')
-    fireEvent.click(settingsButton)
+    await waitFor(() => {
+      const settingsButton = getByTestId(DATA_TEST_ID_OPEN_SETINGS_DIALOG)
+      fireEvent.click(settingsButton)
+    })
 
     const checkIntervalTimerInput = getByTestId('input-check-interval-timer')
     const newTimerValue = +checkIntervalTimerInput.value + 1
@@ -54,6 +65,8 @@ describe('DialogConfigButton.js', () => {
     const applyButton = getByText('Apply')
     fireEvent.click(applyButton)
 
-    expect(mockSetData).toHaveBeenCalled()
+    expect(writeToLocalStorage).toHaveBeenLastCalledWith({
+      checkIntervalTimer: newTimerValue
+    })
   })
 })
