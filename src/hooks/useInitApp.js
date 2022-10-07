@@ -7,7 +7,6 @@ import {
 } from '../api/chrome'
 import { getUserByPat } from '../api/github'
 import {
-  SK_URL,
   SK_PAT,
   SK_USER,
   SET_LOADING,
@@ -45,16 +44,12 @@ function useInitApp() {
     dispatch({ type: SET_LOADING, payload: true })
     const init = async () => {
       try {
-        const storage = await readFromLocalStorage([SK_URL, SK_PAT, SK_USER])
-        const { pat, url: urlFromStorage } = storage
-        let url = urlFromStorage
+        const { pat } = await readFromLocalStorage([SK_PAT, SK_USER])
         if (!pat) {
           throw Error('PAT not available.')
         }
-        if (!url) {
-          url = await getCurrentTabUrl()
-          await writeToLocalStorage({ url })
-        }
+        const url = await getCurrentTabUrl()
+
         const userData = await getUserByPat(pat)
         const { login, id: userId } = userData
         if (!login) {

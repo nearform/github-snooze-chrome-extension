@@ -13,11 +13,9 @@ import {
   ACTION_GET_CURRENT_TAB_URL,
   ACTION_UPDATE_BADGE_COUNTER,
   SNOOZE_STATUS_DONE,
-  SNOOZE_STATUS_PENDING,
-  URL_MATCH
+  SNOOZE_STATUS_PENDING
 } from './constants'
 import { dateHasPassed } from './date'
-import { isValidUrl } from './url'
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   const { action, msg: badgeCounter } = message
@@ -37,31 +35,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 
   sendResponse()
-})
-
-chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
-  let url = ''
-
-  if (changeInfo.url === undefined) {
-    url = tab.url
-  } else {
-    url = changeInfo.url
-  }
-
-  if (!isValidUrl(url, URL_MATCH)) {
-    url = null
-  }
-
-  await writeToLocalStorage({ url })
-})
-
-chrome.tabs.onActivated.addListener(async activeInfo => {
-  const tab = await chrome.tabs.get(activeInfo.tabId)
-  let { url } = tab
-  if (!url || !isValidUrl(url, URL_MATCH)) {
-    url = null
-  }
-  await writeToLocalStorage({ url })
 })
 
 export const createChromeAlarm = checkIntervalTimerMinutes => {
