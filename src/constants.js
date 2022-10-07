@@ -41,7 +41,6 @@ export const COLOR_WARNING = '#D47709'
  * Storage Keys
  */
 export const SK_BADGE_COUNTER = 'badgeCounter'
-export const SK_URL = 'url'
 export const SK_USER = 'user'
 export const SK_PAT = 'pat'
 
