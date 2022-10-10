@@ -1,5 +1,5 @@
 import React from 'react'
-import { fireEvent, waitFor } from '@testing-library/react'
+import { fireEvent } from '@testing-library/react'
 import { render } from '../renderer'
 import { parseDate } from 'chrono-node'
 import DialogFormButton from '../../src/components/DialogFormButton'
@@ -45,18 +45,19 @@ describe('DialogFormButton.js', () => {
       target: { value: chronoInput }
     })
 
-    await waitFor(async () => {
-      await findByTestId(DATA_TEST_ID_NOTIFICATION_TIME)
-    })
+    await findByTestId(DATA_TEST_ID_NOTIFICATION_TIME)
 
     const expectedScheduleMessage = `You will be notified on ${parseDate(
       chronoInput
-    ).toLocaleString()}`
+    )
+      .toLocaleString()
+      // Remove seconds of the date as they might differ slighly, becoming flaky
+      .slice(0, -2)}`
 
     expect(
       await (
         await findByTestId(DATA_TEST_ID_NOTIFICATION_TIME)
       ).innerHTML
-    ).toBe(expectedScheduleMessage)
+    ).toContain(expectedScheduleMessage)
   })
 })
