@@ -43,6 +43,7 @@ export const COLOR_WARNING = '#D47709'
 export const SK_BADGE_COUNTER = 'badgeCounter'
 export const SK_USER = 'user'
 export const SK_PAT = 'pat'
+export const SK_CHECK_INTERVAL_TIMER = 'checkIntervalTimer'
 
 /**
  * Reducer Action Types

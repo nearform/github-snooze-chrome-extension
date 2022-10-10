@@ -13,6 +13,7 @@ import {
 import SettingsIcon from '@mui/icons-material/Settings'
 import { createChromeAlarm } from '../background'
 import { useChromeLocalStorage } from '../hooks/useChromeLocalStorage'
+import { SK_CHECK_INTERVAL_TIMER } from '../constants'
 
 const SETTINGS_LABELS = {
   checkIntervalTimer: 'Check Interval Timer (minutes)'
@@ -43,7 +44,7 @@ export default function DialogConfigButton({ title, disabled }) {
     setData: setCheckIntervalTimer,
     localData: localCheckIntervalTimer,
     setLocalData: setLocalCheckIntervalTimer
-  } = useChromeLocalStorage('checkIntervalTimer')
+  } = useChromeLocalStorage(SK_CHECK_INTERVAL_TIMER)
 
   const handleClickOpen = () => setOpen(true)
   const handleDialogClose = () => setOpen(false)
@@ -69,7 +70,7 @@ export default function DialogConfigButton({ title, disabled }) {
         color="secondary"
         variant="outlined"
         size="small"
-        data-testid={'open-settings-dialog'}
+        data-testid="open-settings-dialog"
         onClick={handleClickOpen}
         disabled={disabled}
       >
