@@ -14,11 +14,15 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
-      - name: Lint & test 
+      - name: Lint & test
         run: |
           npm ci
           npm run lint
           npm test
+      - name: Test & Build Storybook
+        run: |
+          npx playwright install --with-deps
+          npm run test-storybook:ci
       - name: Build the artifact
         run: npm run build:release
       - name: Upload the artifact
@@ -39,4 +43,3 @@ jobs:
       contents: write
     steps:
       - uses: fastify/github-action-merge-dependabot@v3
-      
