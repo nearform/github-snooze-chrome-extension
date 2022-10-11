@@ -6,3 +6,8 @@ export const SnoozeShape = T.shape({
   notifyAt: T.oneOfType([T.object, T.number]).isRequired,
   status: T.oneOf([SNOOZE_STATUS_PENDING, SNOOZE_STATUS_DONE]).isRequired
 })
+
+export const UserShape = T.shape({
+  id: T.number,
+  login: T.string
+})
