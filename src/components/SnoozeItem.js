@@ -13,12 +13,12 @@ import {
   Cancel as CancelIcon
 } from '@mui/icons-material'
 import DialogButton from './DialogButton'
-import { dateHasPassed, getFormattedDate } from '../date'
 import { SNOOZE_STATUS_DONE } from '../constants'
 import { removeSnooze } from '../api/chrome'
 import SnoozeCard from './SnoozeCard'
 import { getEntityInfo } from '../parser'
 import { SnoozeShape } from '../shapes'
+import SnoozeItemText from './SnoozeItemText'
 
 function SnoozeItem({ user, snooze, onDelete }) {
   const theme = useTheme()
@@ -30,9 +30,6 @@ function SnoozeItem({ user, snooze, onDelete }) {
     const updatedSnoozeList = await removeSnooze(user.id, snooze)
     onDelete(updatedSnoozeList)
   }
-
-  const hasPassed = dateHasPassed(notifyAt, new Date().getTime())
-  const notifyLabel = hasPassed ? 'Notified at': 'Scheduled for'
 
   return (
     <SnoozeCard square elevation={0} sx={{ py: 0.5 }} status={status}>
@@ -94,7 +91,7 @@ function SnoozeItem({ user, snooze, onDelete }) {
           color={theme.palette.secondaryLight.main}
           variant="subtitle1"
         >
-          {notifyLabel} {getFormattedDate(notifyAt)}
+          <SnoozeItemText notifyAt={notifyAt} />
         </Typography>
       </CardContent>
     </SnoozeCard>
