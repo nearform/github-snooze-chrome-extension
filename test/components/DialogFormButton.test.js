@@ -12,6 +12,8 @@ const props = {
   placeholder: 'placeholder',
   disabled: false
 }
+const removeSeconds = dateLocaleString =>
+  dateLocaleString.split(':').slice(0, -1).join(':')
 
 const DATA_TEST_ID_NOTIFICATION_TIME = 'notification-time-message'
 
@@ -47,12 +49,9 @@ describe('DialogFormButton.js', () => {
 
     await findByTestId(DATA_TEST_ID_NOTIFICATION_TIME)
 
-    const expectedScheduleMessage = `You will be notified on ${parseDate(
-      chronoInput
-    )
-      .toLocaleString()
-      // Remove seconds of the date as they might differ slighly, becoming flaky
-      .slice(0, -2)}`
+    const expectedScheduleMessage = `You will be notified on ${removeSeconds(
+      parseDate(chronoInput).toLocaleString()
+    )}`
 
     expect(
       await (
