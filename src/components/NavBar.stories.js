@@ -17,3 +17,9 @@ export const Authenticated = {
     currentUrl: 'whatever'
   }
 }
+
+export const Unauthenticated = {
+  args: {
+    isAuthenticated: false
+  }
+}
