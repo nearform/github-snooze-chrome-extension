@@ -9,7 +9,7 @@ import { addSnooze, checkUrlAlreadySnoozed, getSnoozeList } from './api/chrome'
 import { getEntityInfo } from './parser'
 import { getEntity } from './api/github'
 import { SNOOZE_STATUS_PENDING } from './constants'
-import HomePage from './pages/HomePage'
+import RoutesWrapper from './components/RoutesWrapper'
 
 const App = () => {
   const {
@@ -86,7 +86,7 @@ const App = () => {
             <CircularProgress color="secondary" />
           </Box>
         ) : (
-          <HomePage
+          <RoutesWrapper
             user={user}
             isAuthenticated={isAuthenticated}
             handleAddSnooze={handleAddSnooze}

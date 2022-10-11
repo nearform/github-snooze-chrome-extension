@@ -1,13 +1,15 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Container from '@mui/material/Container'
+import T from 'prop-types'
 
-import NavBar from '../components/NavBar'
+import NavBar from './NavBar'
 import { routes } from '../routes'
-import DashboardPage from './DashboardPage'
-import AuthPage from './AuthPage'
+import DashboardPage from '../pages/DashboardPage'
+import AuthPage from '../pages/AuthPage'
+import { UserShape, SnoozeShape } from '../shapes'
 
-export default function HomePage({
+export default function RoutesWrapper({
   user,
   isAuthenticated,
   handleAddSnooze,
@@ -49,4 +51,15 @@ export default function HomePage({
       </Container>
     </div>
   )
+}
+
+RoutesWrapper.propTypes = {
+  user: UserShape,
+  isAuthenticated: T.bool.isRequired,
+  currentUrl: T.string,
+  errorMessage: T.string,
+  handleAddSnooze: T.func,
+  pat: T.string,
+  snoozeList: T.arrayOf(SnoozeShape).isRequired,
+  setSnoozeList: T.func
 }
