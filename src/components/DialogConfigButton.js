@@ -11,7 +11,7 @@ import {
   Box
 } from '@mui/material'
 import SettingsIcon from '@mui/icons-material/Settings'
-import { createChromeAlarm } from '../background'
+import { createChromeAlarm, DEFAULT_CHECK_INTERVAL_TIMER } from '../background'
 import { useChromeLocalStorage } from '../hooks/useChromeLocalStorage'
 import { SK_CHECK_INTERVAL_TIMER } from '../constants'
 
@@ -44,14 +44,13 @@ export default function DialogConfigButton({ title, disabled }) {
     setData: setCheckIntervalTimer,
     localData: localCheckIntervalTimer,
     setLocalData: setLocalCheckIntervalTimer
-  } = useChromeLocalStorage(SK_CHECK_INTERVAL_TIMER)
+  } = useChromeLocalStorage(
+    SK_CHECK_INTERVAL_TIMER,
+    DEFAULT_CHECK_INTERVAL_TIMER
+  )
 
   const handleClickOpen = () => setOpen(true)
   const handleDialogClose = () => setOpen(false)
-
-  if (!localCheckIntervalTimer) {
-    return
-  }
 
   const handleCheckIntervalTimerValidation = event => {
     const { value } = event.target
