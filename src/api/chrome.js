@@ -34,7 +34,7 @@ export const writeToLocalStorage = async item => {
  * @returns the required keys from the local storage with the values
  */
 export const readFromLocalStorage = async keys => {
-  const storage = await chrome.storage.local.get(keys)
+  const storage = (await chrome.storage.local.get(keys)) ?? {}
   return storage
 }
 

@@ -3,6 +3,9 @@ import { MemoryRouter as Router } from 'react-router-dom'
 import { withScreenshot } from 'storycap'
 
 import { theme } from '../src/theme'
+import mockChrome from './mockChrome'
+
+window.chrome = mockChrome
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
