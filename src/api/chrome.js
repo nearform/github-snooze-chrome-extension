@@ -25,7 +25,7 @@ export const sendMessage = async (action, message) => {
  * @param {object} item an object with keys and values to store
  */
 export const writeToLocalStorage = async item => {
-  chrome.storage ? await chrome.storage.local.set(item) : null
+  await chrome.storage.local.set(item)
 }
 
 /**
@@ -34,7 +34,7 @@ export const writeToLocalStorage = async item => {
  * @returns the required keys from the local storage with the values
  */
 export const readFromLocalStorage = async keys => {
-  const storage = chrome.storage ? await chrome.storage.local.get(keys) : {}
+  const storage = await chrome.storage.local.get(keys)
   return storage
 }
 

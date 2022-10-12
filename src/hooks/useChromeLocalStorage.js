@@ -15,7 +15,10 @@ export function useChromeLocalStorage(key, defaultValue) {
     const readLocalStorage = async () => {
       try {
         const value = await readFromLocalStorage(key)
-        if (JSON.stringify(value[key]) !== JSON.stringify(defaultValue)) {
+        if (
+          value[key] &&
+          JSON.stringify(value[key]) !== JSON.stringify(defaultValue)
+        ) {
           setData(value[key])
         }
       } catch (error) {
