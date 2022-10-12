@@ -53,7 +53,7 @@ const SnoozeItemControls = ({ user, snooze, onDelete, onUpdateSnooze }) => {
 SnoozeItemControls.propTypes = {
   snooze: SnoozeShape.isRequired,
   onDelete: T.func.isRequired,
-  onUpdateSnooze: T.func.isRequired
+  onUpdateSnooze: T.func
 }
 
 export default SnoozeItemControls
