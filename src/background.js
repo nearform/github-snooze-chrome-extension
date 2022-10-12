@@ -18,35 +18,31 @@ import {
 } from './constants'
 import { dateHasPassed } from './date'
 
-chrome.runtime
-  ? chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-      const { action, msg: badgeCounter } = message
-      switch (action) {
-        case ACTION_UPDATE_BADGE_COUNTER:
-          updateBadgeCounterUI(badgeCounter)
-          break
-        case ACTION_GET_CURRENT_TAB_URL: {
-          getCurrentTabUrlBackground().then(tabUrl => {
-            sendResponse(tabUrl)
-          })
-          // This is required when we want to call sendResponse callback asynchronously
-          return true
-        }
-        default:
-          break
-      }
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  const { action, msg: badgeCounter } = message
+  switch (action) {
+    case ACTION_UPDATE_BADGE_COUNTER:
+      updateBadgeCounterUI(badgeCounter)
+      break
+    case ACTION_GET_CURRENT_TAB_URL: {
+      getCurrentTabUrlBackground().then(tabUrl => {
+        sendResponse(tabUrl)
+      })
+      // This is required when we want to call sendResponse callback asynchronously
+      return true
+    }
+    default:
+      break
+  }
 
-      sendResponse()
-    })
-  : null
+  sendResponse()
+})
 
 export const createChromeAlarm = checkIntervalTimerMinutes => {
-  chrome.alarms
-    ? chrome.alarms.create({
-        periodInMinutes: checkIntervalTimerMinutes,
-        when: Date.now() + 1
-      })
-    : null
+  chrome.alarms.create({
+    periodInMinutes: checkIntervalTimerMinutes,
+    when: Date.now() + 1
+  })
 }
 export const DEFAULT_CHECK_INTERVAL_TIMER = 1
 
@@ -58,36 +54,33 @@ export const createInitialChromeAlarm = async () => {
 }
 
 createInitialChromeAlarm()
+chrome.alarms.onAlarm.addListener(async () => {
+  const now = new Date()
 
-chrome.alarms
-  ? chrome.alarms.onAlarm.addListener(async () => {
-      const now = new Date()
+  const localStorage = await readAllFromLocalStorage()
+  const { user, pat } = localStorage
 
-      const localStorage = await readAllFromLocalStorage()
-      const { user, pat } = localStorage
+  if (!user || !pat) {
+    return console.warn('user is not logged in')
+  }
 
-      if (!user || !pat) {
-        return console.warn('user is not logged in')
-      }
+  const snoozesList = await getSnoozeList(user.id)
 
-      const snoozesList = await getSnoozeList(user.id)
+  const updatedSnoozeList = []
+  for (const snooze of snoozesList) {
+    const hasPassed = dateHasPassed(snooze.notifyAt, now.getTime())
+    if (hasPassed && snooze.status === SNOOZE_STATUS_PENDING) {
+      const updatedSnooze = await notify(snooze, pat)
+      updatedSnoozeList.push(updatedSnooze)
+    } else {
+      updatedSnoozeList.push(snooze)
+    }
+  }
 
-      const updatedSnoozeList = []
-      for (const snooze of snoozesList) {
-        const hasPassed = dateHasPassed(snooze.notifyAt, now.getTime())
-        if (hasPassed && snooze.status === SNOOZE_STATUS_PENDING) {
-          const updatedSnooze = await notify(snooze, pat)
-          updatedSnoozeList.push(updatedSnooze)
-        } else {
-          updatedSnoozeList.push(snooze)
-        }
-      }
+  await updateBadgeCounterUI()
 
-      await updateBadgeCounterUI()
-
-      await setSnoozeList(user.id, updatedSnoozeList)
-    })
-  : null
+  await setSnoozeList(user.id, updatedSnoozeList)
+})
 
 const notify = async (snooze, pat) => {
   const { entityInfo } = snooze
