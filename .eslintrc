@@ -14,7 +14,8 @@
     "browser": true,
     "es2021": true,
     "node": true,
-    "webextensions": true
+    "webextensions": true,
+    "jest": true
   },
   "parserOptions": {
     "ecmaFeatures": {
