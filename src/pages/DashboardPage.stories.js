@@ -28,12 +28,12 @@ export const WithSnoozes = {
     snoozeList: [
       {
         url: 'http://whatever.com',
-        notifyAt: +new Date(),
+        notifyAt: Date.now(),
         status: SNOOZE_STATUS_PENDING
       },
       {
         url: 'http://whatever.com',
-        notifyAt: +new Date(),
+        notifyAt: Date.now(),
         status: SNOOZE_STATUS_DONE
       }
     ]

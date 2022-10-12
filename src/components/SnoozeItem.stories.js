@@ -18,7 +18,7 @@ export const Default = {
     },
     snooze: {
       url: pkg.bugs.url,
-      notifyAt: +new Date(),
+      notifyAt: Date.now(),
       status: SNOOZE_STATUS_DONE
     }
   }
