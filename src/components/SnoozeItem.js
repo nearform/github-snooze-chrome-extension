@@ -13,12 +13,12 @@ import {
   Cancel as CancelIcon
 } from '@mui/icons-material'
 import DialogButton from './DialogButton'
-import { getFormattedDate } from '../date'
 import { SNOOZE_STATUS_DONE } from '../constants'
 import { removeSnooze } from '../api/chrome'
 import SnoozeCard from './SnoozeCard'
 import { getEntityInfo } from '../parser'
 import { SnoozeShape } from '../shapes'
+import SnoozeItemText from './SnoozeItemText'
 
 function SnoozeItem({ user, snooze, onDelete }) {
   const theme = useTheme()
@@ -91,7 +91,7 @@ function SnoozeItem({ user, snooze, onDelete }) {
           color={theme.palette.secondaryLight.main}
           variant="subtitle1"
         >
-          Scheduled for {getFormattedDate(notifyAt)}
+          <SnoozeItemText notifyAt={notifyAt} />
         </Typography>
       </CardContent>
     </SnoozeCard>
