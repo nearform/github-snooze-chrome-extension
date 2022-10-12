@@ -143,13 +143,10 @@ export const removeSnooze = async (userId, snooze) => {
  * @param {object} snooze object
  * @returns the list of snoozes after the update
  */
- export const updateSnooze = async (userId, snooze) => {
+ export const updateSnooze = async (userId, wantedSnooze) => {
   const snoozeList = await getSnoozeList(userId)
-  const updatedList = snoozeList.map(s => {
-    if (s.id === snooze.id) {
-      return snooze
-    }
-    return s
+  const updatedList = snoozeList.map(currentSnooze => {
+    return currentSnooze.id === wantedSnooze.id ? wantedSnooze : currentSnooze
   })
 
   await setSnoozeList(userId, updatedList)
