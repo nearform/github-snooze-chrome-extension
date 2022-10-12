@@ -6,11 +6,13 @@ import zipPack from "vite-plugin-zip-pack";
 import manifest from './manifest.json'
 import pkg from './package.json'
 
+const zipPlugin = process.env.NODE_ENV === 'production' ? [zipPack({outDir: 'releases', outFileName: `${pkg.name}-${pkg.version}.zip`})] : []
+
 export default defineConfig({
   plugins: [
     react(),
     crx({ manifest }),
-    ...(process.env.NODE_ENV === 'production' ? [zipPack({outDir: 'releases', outFileName: `${pkg.name}-${pkg.version}.zip`})] : [])
+    ...zipPlugin
   ],
   define: {
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
