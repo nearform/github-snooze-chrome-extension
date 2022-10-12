@@ -1,5 +1,5 @@
 import React from 'react'
-import { fireEvent, waitFor } from '@testing-library/react'
+import { fireEvent } from '@testing-library/react'
 import { render } from '../renderer'
 import { parseDate } from 'chrono-node'
 import DialogFormButton from '../../src/components/DialogFormButton'
@@ -12,6 +12,8 @@ const props = {
   placeholder: 'placeholder',
   disabled: false
 }
+const removeSeconds = dateLocaleString =>
+  dateLocaleString.split(':').slice(0, -1).join(':')
 
 const DATA_TEST_ID_NOTIFICATION_TIME = 'notification-time-message'
 
@@ -45,18 +47,16 @@ describe('DialogFormButton.js', () => {
       target: { value: chronoInput }
     })
 
-    await waitFor(async () => {
-      await findByTestId(DATA_TEST_ID_NOTIFICATION_TIME)
-    })
+    await findByTestId(DATA_TEST_ID_NOTIFICATION_TIME)
 
-    const expectedScheduleMessage = `You will be notified on ${parseDate(
-      chronoInput
-    ).toLocaleString()}`
+    const expectedScheduleMessage = `You will be notified on ${removeSeconds(
+      parseDate(chronoInput).toLocaleString()
+    )}`
 
     expect(
       await (
         await findByTestId(DATA_TEST_ID_NOTIFICATION_TIME)
       ).innerHTML
-    ).toBe(expectedScheduleMessage)
+    ).toContain(expectedScheduleMessage)
   })
 })

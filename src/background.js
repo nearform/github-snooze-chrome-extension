@@ -3,15 +3,16 @@ import {
   incrementBadgeCounter,
   readAllFromLocalStorage,
   setSnoozeList,
-  writeToLocalStorage,
   updateBadgeCounterUI,
   sendBrowserNotification,
-  getCurrentTabUrlBackground
+  getCurrentTabUrlBackground,
+  readFromLocalStorage
 } from './api/chrome'
 import { getEntity } from './api/github'
 import {
   ACTION_GET_CURRENT_TAB_URL,
   ACTION_UPDATE_BADGE_COUNTER,
+  SK_CHECK_INTERVAL_TIMER,
   SNOOZE_STATUS_DONE,
   SNOOZE_STATUS_PENDING
 } from './constants'
@@ -43,19 +44,16 @@ export const createChromeAlarm = checkIntervalTimerMinutes => {
     when: Date.now() + 1
   })
 }
+export const DEFAULT_CHECK_INTERVAL_TIMER = 1
 
-const createInitialChromeAlarm = async () => {
-  const localStorage = await readAllFromLocalStorage()
-  const { checkIntervalTimer = 1 } = localStorage || {}
-  await writeToLocalStorage({
-    checkIntervalTimer
-  })
+export const createInitialChromeAlarm = async () => {
+  const { checkIntervalTimer = DEFAULT_CHECK_INTERVAL_TIMER } =
+    (await readFromLocalStorage(SK_CHECK_INTERVAL_TIMER)) || {}
 
   createChromeAlarm(checkIntervalTimer)
 }
 
 createInitialChromeAlarm()
-
 chrome.alarms.onAlarm.addListener(async () => {
   const now = new Date()
 
