@@ -77,7 +77,8 @@
     "prop-types": "^15.8.1",
     "storycap": "^3.1.9",
     "styled-jsx": "^5.0.7",
-    "vite": "^3.1.7"
+    "vite": "^3.1.7",
+    "vite-plugin-zip-pack": "^1.0.4"
   },
   "lint-staged": {
     "*.{js,jsx}": "eslint --cache --fix"
