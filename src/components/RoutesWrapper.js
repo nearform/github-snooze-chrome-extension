@@ -13,6 +13,7 @@ export default function RoutesWrapper({
   user,
   isAuthenticated,
   handleAddSnooze,
+  handleUpdateSnooze,
   currentUrl,
   errorMessage,
   pat,
@@ -40,6 +41,7 @@ export default function RoutesWrapper({
                 currentUrl={currentUrl}
                 snoozeList={snoozeList}
                 setSnoozeList={setSnoozeList}
+                onUpdateSnooze={handleUpdateSnooze}
               />
             }
           />

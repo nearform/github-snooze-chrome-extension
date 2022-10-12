@@ -10,9 +10,11 @@ import {
 } from '@mui/material'
 import {
   Business as BusinessIcon,
-  Cancel as CancelIcon
+  Cancel as CancelIcon,
+  Edit as EditIcon
 } from '@mui/icons-material'
 import DialogButton from './DialogButton'
+import DialogFormButton from './DialogFormButton'
 import { SNOOZE_STATUS_DONE } from '../constants'
 import { removeSnooze } from '../api/chrome'
 import SnoozeCard from './SnoozeCard'
@@ -20,7 +22,7 @@ import { getEntityInfo } from '../parser'
 import { SnoozeShape } from '../shapes'
 import SnoozeItemText from './SnoozeItemText'
 
-function SnoozeItem({ user, snooze, onDelete }) {
+function SnoozeItem({ user, snooze, onDelete, onUpdateSnooze }) {
   const theme = useTheme()
 
   const { url, notifyAt, status } = snooze
@@ -74,18 +76,30 @@ function SnoozeItem({ user, snooze, onDelete }) {
           >
             {url}
           </Link>
-          {status === SNOOZE_STATUS_DONE ? (
-            <IconButton color="secondary" onClick={handleDelete}>
-              <CancelIcon />
-            </IconButton>
-          ) : (
-            <DialogButton
-              icon={<CancelIcon />}
-              title="Attention"
-              description="Do you want to delete this snooze?"
-              onConfirm={handleDelete}
-            />
-          )}
+          <Box sx={{ marginLeft: 1, display: 'flex' }}>
+            {status === SNOOZE_STATUS_DONE &&
+              <DialogFormButton
+                title="When do you want to be notified?"
+                description={url}
+                placeholder="Select or type your own value"
+                onConfirm={(notifyDate) => onUpdateSnooze({ notifyDate, snooze })}
+                size="small"
+                iconButtonComponent={<EditIcon />}
+              />
+            }
+            {status === SNOOZE_STATUS_DONE ? (
+              <IconButton color="secondary" onClick={handleDelete}>
+                <CancelIcon />
+              </IconButton>
+            ) : (
+              <DialogButton
+                icon={<CancelIcon />}
+                title="Attention"
+                description="Do you want to delete this snooze?"
+                onConfirm={handleDelete}
+              />
+            )}
+          </Box>
         </Box>
         <Typography
           color={theme.palette.secondaryLight.main}
