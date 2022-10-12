@@ -59,8 +59,6 @@ const App = () => {
   }
 
   const handleUpdateSnooze = async ({ notifyDate, snooze }) => {
-    setErrorMessage('')
-
     if (notifyDate < new Date()) {
       return setErrorMessage('Please set a date in the future')
     }
@@ -85,6 +83,8 @@ const App = () => {
 
     const updatedSnoozeList = await updateSnooze(user.id, updatedSnooze)
     setSnoozeList(updatedSnoozeList)
+
+    setErrorMessage('')
   }
 
   useEffect(() => {
