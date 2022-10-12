@@ -11,7 +11,7 @@ const SnoozeItemText = ({ notifyAt }) => {
 }
 
 SnoozeItemText.propTypes = {
-  notifyAt: T.object.isRequired
+  notifyAt: T.oneOfType([T.object, T.number]).isRequired
 }
 
 export default SnoozeItemText
