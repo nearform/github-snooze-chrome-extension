@@ -4,6 +4,10 @@ import { withScreenshot } from 'storycap'
 
 import { theme } from '../src/theme'
 
+import mockChrome from './mocks/chrome'
+
+window.chrome = mockChrome
+
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {

@@ -111,3 +111,6 @@ dist
 
 #MAC OSX
 .DS_Store
+
+# Build Storybook
+storybook-static
