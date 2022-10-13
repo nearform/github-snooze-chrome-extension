@@ -11,7 +11,8 @@ export default function DashboardPage({
   currentUrl,
   setSnoozeList,
   snoozeList,
-  user
+  user,
+  onUpdateSnooze
 }) {
   if (!isAuthenticated) {
     return (
@@ -43,7 +44,7 @@ export default function DashboardPage({
       )}
       {snoozeList.map(snooze => (
         <Box key={snooze.id} sx={{ mb: 1.5 }}>
-          <SnoozeItem user={user} snooze={snooze} onDelete={setSnoozeList} />
+          <SnoozeItem user={user} snooze={snooze} onDelete={setSnoozeList} onUpdateSnooze={onUpdateSnooze}/>
         </Box>
       ))}
     </>

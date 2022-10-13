@@ -138,6 +138,23 @@ export const removeSnooze = async (userId, snooze) => {
 }
 
 /**
+ * Updates a snooze object and returns the list of snoozes after the update
+ * @param {string} userId user id
+ * @param {object} snooze object
+ * @returns the list of snoozes after the update
+ */
+ export const updateSnooze = async (userId, wantedSnooze) => {
+  const snoozeList = await getSnoozeList(userId)
+  const updatedList = snoozeList.map(currentSnooze => {
+    return currentSnooze.id === wantedSnooze.id ? wantedSnooze : currentSnooze
+  })
+
+  await setSnoozeList(userId, updatedList)
+
+  return await getSnoozeList(userId)
+}
+
+/**
  * Checks if the provided URL is already present in the Snooze list.
  * @param {string} userId user id
  * @param {string} url url to snooze
