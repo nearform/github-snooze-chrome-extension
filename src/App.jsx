@@ -5,7 +5,7 @@ import { theme } from './theme'
 import * as uuid from 'uuid'
 import { Box, CircularProgress } from '@mui/material'
 import useInitApp from './hooks/useInitApp'
-import { addSnooze, checkUrlAlreadySnoozed, getSnoozeList } from './api/chrome'
+import { addSnooze, checkUrlAlreadySnoozed, getSnoozeList, updateSnooze } from './api/chrome'
 import { getEntityInfo } from './parser'
 import { getEntity } from './api/github'
 import { SNOOZE_STATUS_PENDING } from './constants'
@@ -58,6 +58,35 @@ const App = () => {
     setSnoozeList(updatedSnoozeList)
   }
 
+  const handleUpdateSnooze = async ({ notifyDate, snooze }) => {
+    if (notifyDate < new Date()) {
+      return setErrorMessage('Please set a date in the future')
+    }
+
+    const entityInfo = getEntityInfo(snooze.url)
+    const entity = await getEntity(entityInfo, pat)
+
+    if (entity.message === 'Not Found') {
+      return setErrorMessage(
+        'The provided URL is not valid. Unable to fetch entity information from GitHub.'
+      )
+    }
+    const { updated_at: updatedAt } = entity
+
+    const updatedSnooze = {
+      id: snooze.id,
+      url: snooze.url,
+      notifyAt: notifyDate.getTime(),
+      entityInfo: { ...entityInfo, updatedAt },
+      status: SNOOZE_STATUS_PENDING
+    }
+
+    const updatedSnoozeList = await updateSnooze(user.id, updatedSnooze)
+    setSnoozeList(updatedSnoozeList)
+
+    setErrorMessage('')
+  }
+
   useEffect(() => {
     if (!isAuthenticated) {
       return
@@ -90,6 +119,7 @@ const App = () => {
             user={user}
             isAuthenticated={isAuthenticated}
             handleAddSnooze={handleAddSnooze}
+            handleUpdateSnooze={handleUpdateSnooze}
             currentUrl={currentUrl}
             errorMessage={errorMessage}
             pat={pat}

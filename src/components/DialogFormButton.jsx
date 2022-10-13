@@ -9,7 +9,8 @@ import {
   DialogContentText,
   DialogTitle,
   Autocomplete,
-  Typography
+  Typography,
+  IconButton
 } from '@mui/material'
 import { SNOOZE_OPTIONS } from '../constants'
 
@@ -20,6 +21,7 @@ export default function DialogFormButton({
   placeholder,
   onConfirm,
   disabled,
+  iconButtonComponent,
   ...props
 }) {
   const [open, setOpen] = useState(false)
@@ -42,15 +44,20 @@ export default function DialogFormButton({
 
   return (
     <div>
-      <Button
-        disabled={disabled}
-        color="secondary"
-        variant="outlined"
-        onClick={handleClickOpen}
-        {...props}
-      >
-        {label}
-      </Button>
+      {iconButtonComponent ?
+        <IconButton color="secondary" onClick={handleClickOpen} {...props}>
+          {iconButtonComponent}
+        </IconButton> : 
+        <Button
+          disabled={disabled}
+          color="secondary"
+          variant="outlined"
+          onClick={handleClickOpen}
+          {...props}
+        >
+          {label}
+        </Button>
+      }
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>

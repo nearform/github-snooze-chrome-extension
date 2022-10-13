@@ -1,11 +1,11 @@
 import pkg from '../../package.json'
 import { SNOOZE_STATUS_DONE, SNOOZE_STATUS_PENDING } from '../constants'
 
-import SnoozeItem from './SnoozeItem'
+import SnoozeItemControls from './SnoozeItemControls'
 
 export default {
-  title: 'components/SnoozeItem',
-  component: SnoozeItem,
+  title: 'components/SnoozeItemControls',
+  component: SnoozeItemControls,
   argTypes: {
     onDelete: { action: 'onDelete' },
     onUpdateSnooze: { action: 'onUpdateSnooze' }
@@ -19,7 +19,7 @@ export const PastNotification = {
     },
     snooze: {
       url: pkg.bugs.url,
-      notifyAt: Date.now(),
+      notifyAt: new Date(),
       status: SNOOZE_STATUS_DONE
     }
   }
