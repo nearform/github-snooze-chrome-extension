@@ -57,7 +57,7 @@
     "@storybook/manager-webpack4": "^6.5.10",
     "@storybook/react": "^6.5.12",
     "@storybook/storybook-deployer": "^2.8.12",
-    "@storybook/test-runner": "^0.8.0",
+    "@storybook/test-runner": "^0.9.0",
     "@storybook/testing-library": "^0.0.13",
     "@testing-library/react": "^13.4.0",
     "@types/chrome": "^0.0.197",
