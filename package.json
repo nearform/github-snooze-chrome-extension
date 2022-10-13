@@ -13,9 +13,9 @@
   "scripts": {
     "lint": "eslint .",
     "prepare": "husky install",
-    "build": "rollup -c",
-    "build:release": "cross-env NODE_ENV=production rollup -c",
-    "start": "rollup -c -w",
+    "build": "vite build",
+    "build:release": "cross-env NODE_ENV=production vite build",
+    "start": "vite",
     "update-manifest": "node ./scripts/updateManifest.js",
     "test": "cross-env TZ=UTC jest",
     "storybook": "start-storybook -p 6006",
@@ -32,6 +32,7 @@
     "@mui/icons-material": "^5.10.9",
     "@mui/lab": "^5.0.0-alpha.103",
     "@mui/material": "^5.10.9",
+    "@vitejs/plugin-react": "^2.1.0",
     "chrono-node": "^2.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -46,10 +47,7 @@
     "@babel/preset-react": "^7.12.10",
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
-    "@rollup/plugin-babel": "^6.0.0",
-    "@rollup/plugin-commonjs": "^23.0.0",
-    "@rollup/plugin-node-resolve": "^15.0.0",
-    "@rollup/plugin-replace": "^5.0.0",
+    "@crxjs/vite-plugin": "^1.0.14",
     "@storybook/addon-actions": "^6.5.10",
     "@storybook/addon-essentials": "^6.5.12",
     "@storybook/addon-interactions": "^6.5.12",
@@ -82,12 +80,10 @@
     "playwright": "^1.27.1",
     "prettier": "^2.2.1",
     "prop-types": "^15.8.1",
-    "rollup": "2.79.1",
-    "rollup-plugin-chrome-extension": "^3.5.6",
-    "rollup-plugin-empty-dir": "^1.0.4",
-    "rollup-plugin-zip": "^1.0.1",
     "storycap": "^3.1.9",
-    "styled-jsx": "^5.0.7"
+    "styled-jsx": "^5.0.7",
+    "vite": "^3.1.7",
+    "vite-plugin-zip-pack": "^1.0.4"
   },
   "lint-staged": {
     "*.{js,jsx}": "eslint --cache --fix"
