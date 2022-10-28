@@ -82,7 +82,7 @@
     "prop-types": "^15.8.1",
     "storycap": "^3.1.9",
     "styled-jsx": "^5.1.0",
-    "vite": "^3.1.8",
+    "vite": "^3.2.1",
     "vite-plugin-zip-pack": "^1.0.4"
   },
   "lint-staged": {
