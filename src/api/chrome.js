@@ -237,14 +237,13 @@ const getBadgeCounter = async (initialValue = 0) => {
 }
 
 export const getCurrentTabUrlBackground = async () => {
-  const currWindow = await chrome.windows.getCurrent()
   // `tab` will either be a `tabs.Tab` instance or `undefined`.
   const [tab] = await chrome.tabs.query({
     active: true,
-    windowId: currWindow.id
+    lastFocusedWindow: true
   })
 
-  if (isValidUrl(tab.url, URL_MATCH)) {
+  if (tab && isValidUrl(tab.url, URL_MATCH)) {
     return tab.url
   }
 
