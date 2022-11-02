@@ -87,7 +87,7 @@ function AuthPage({ isAuthenticated, pat }) {
         In order to use this Chrome Extension you have to generate a{' '}
         <Link
           color="secondary"
-          href="https://github.com/settings/tokens/new"
+          href="https://github.com/settings/personal-access-tokens/new"
           target="_blank"
         >
           GitHub Personal Access Token (PAT)
@@ -95,8 +95,15 @@ function AuthPage({ isAuthenticated, pat }) {
         and insert it into the box below.
       </Typography>
       <Typography variant="subtitle1" component="sub">
-        Remember to add the <StyledText as="span">repo</StyledText> and{' '}
-        <StyledText as="span">read:user</StyledText> scopes to it.
+        In the Repository access section, select <StyledText as="span">All repositories</StyledText>.
+      </Typography>
+      <Typography component="p">
+        Add the <StyledText as="span">Read-only</StyledText>{' '}
+        permission to the following Repository permissions:
+      </Typography>
+      <Typography variant="subtitle1" component="sub">
+        <StyledText as="span">Issues</StyledText> and{' '}
+        <StyledText as="span">Pull requests</StyledText>
       </Typography>
       <Gap />
       <FormControl

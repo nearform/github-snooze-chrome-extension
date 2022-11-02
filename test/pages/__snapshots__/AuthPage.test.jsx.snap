@@ -8,7 +8,7 @@ exports[`AuthPage.js renders the Auth Page for authenticated users 1`] = `
     In order to use this Chrome Extension you have to generate a 
     <a
       class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-3xhuak-MuiTypography-root-MuiLink-root"
-      href="https://github.com/settings/tokens/new"
+      href="https://github.com/settings/personal-access-tokens/new"
       target="_blank"
     >
       GitHub Personal Access Token (PAT)
@@ -18,19 +18,39 @@ exports[`AuthPage.js renders the Auth Page for authenticated users 1`] = `
   <sub
     class="MuiTypography-root MuiTypography-subtitle1 css-azse9t-MuiTypography-root"
   >
-    Remember to add the 
+    In the Repository access section, select 
     <span
       class="css-jqunji"
     >
-      repo
+      All repositories
+    </span>
+    .
+  </sub>
+  <p
+    class="MuiTypography-root MuiTypography-body1 css-14sfki5-MuiTypography-root"
+  >
+    Add the 
+    <span
+      class="css-jqunji"
+    >
+      Read-only
+    </span>
+     permission to the following Repository permissions:
+  </p>
+  <sub
+    class="MuiTypography-root MuiTypography-subtitle1 css-azse9t-MuiTypography-root"
+  >
+    <span
+      class="css-jqunji"
+    >
+      Issues
     </span>
      and 
     <span
       class="css-jqunji"
     >
-      read:user
+      Pull requests
     </span>
-     scopes to it.
   </sub>
   <div
     class="MuiBox-root css-1pg8bi"
@@ -147,7 +167,7 @@ exports[`AuthPage.js renders the Auth Page for unauthenticated users 1`] = `
     In order to use this Chrome Extension you have to generate a 
     <a
       class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-3xhuak-MuiTypography-root-MuiLink-root"
-      href="https://github.com/settings/tokens/new"
+      href="https://github.com/settings/personal-access-tokens/new"
       target="_blank"
     >
       GitHub Personal Access Token (PAT)
@@ -157,19 +177,39 @@ exports[`AuthPage.js renders the Auth Page for unauthenticated users 1`] = `
   <sub
     class="MuiTypography-root MuiTypography-subtitle1 css-azse9t-MuiTypography-root"
   >
-    Remember to add the 
+    In the Repository access section, select 
     <span
       class="css-jqunji"
     >
-      repo
+      All repositories
+    </span>
+    .
+  </sub>
+  <p
+    class="MuiTypography-root MuiTypography-body1 css-14sfki5-MuiTypography-root"
+  >
+    Add the 
+    <span
+      class="css-jqunji"
+    >
+      Read-only
+    </span>
+     permission to the following Repository permissions:
+  </p>
+  <sub
+    class="MuiTypography-root MuiTypography-subtitle1 css-azse9t-MuiTypography-root"
+  >
+    <span
+      class="css-jqunji"
+    >
+      Issues
     </span>
      and 
     <span
       class="css-jqunji"
     >
-      read:user
+      Pull requests
     </span>
-     scopes to it.
   </sub>
   <div
     class="MuiBox-root css-1pg8bi"

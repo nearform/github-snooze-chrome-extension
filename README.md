@@ -18,10 +18,15 @@ The [GitHub Snooze Extension](https://chrome.google.com/webstore/detail/github-s
 
 ## Setup
 
-You will need to generate a [GitHub Personal Access Token (PAT)](https://github.com/settings/tokens/new), with these permissions:
+You will need to generate a [GitHub Personal Access Token (PAT)](https://github.com/settings/personal-access-tokens/new). You will need to:
 
-- `repo`: used for getting the repository information, such as last update date time on issues and pull requests
-- `read:user`: used for retrieving the current logged in user information _(GitHub ID and username)_
+- in the `Repository access` section, select `All repositories`
+- set `Read-only` permission to the following `Repository permissions`:
+    - `Issues`
+    - `Pull requests`
+    - `Metadata` (should be set automatically when you set it for `Issues` or `Pull requests`)
+
+This is a fine-grained personal access token. It has an expiration date.
 
 ## Security
 
