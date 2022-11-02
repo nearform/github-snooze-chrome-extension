@@ -18,7 +18,7 @@
     "start": "vite",
     "update-manifest": "node ./scripts/updateManifest.js",
     "test": "cross-env TZ=UTC jest",
-    "storybook": "node --openssl-legacy-provider ./node_modules/.bin/start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006",
     "test-storybook": "node --openssl-legacy-provider ./node_modules/.bin/test-storybook --url http://127.0.0.1:6006",
     "test-storybook:ci": "node ./storybook-test-runner.js",
     "build-storybook": "node --openssl-legacy-provider ./node_modules/.bin/build-storybook --quiet",
