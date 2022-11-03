@@ -1,13 +1,16 @@
 import React, { useReducer } from 'react'
 import {
-  FormControl,
-  InputLabel,
-  InputAdornment,
-  IconButton,
-  Typography,
-  Link,
   Alert,
-  OutlinedInput
+  FormControl,
+  FormControlLabel,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  Link,
+  OutlinedInput,
+  Radio,
+  RadioGroup,
+  Typography
 } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
@@ -20,6 +23,7 @@ import {
 import DialogButton from '../components/DialogButton'
 import StyledText from '../components/StyledText'
 import Gap from '../components/Gap'
+import { TOKEN_TYPES } from '../constants'
 
 function AuthPage({ isAuthenticated, pat }) {
   const [state, setState] = useReducer(
@@ -31,6 +35,8 @@ function AuthPage({ isAuthenticated, pat }) {
       formErrorMessage: ''
     }
   )
+
+  const [tokenType, setTokenType] = React.useState(TOKEN_TYPES.FINE_GRAINED)
 
   const handleChange = e => {
     const { value } = e.target
@@ -76,6 +82,10 @@ function AuthPage({ isAuthenticated, pat }) {
 
   const { formErrorMessage, isLoading, showToken, token } = state
 
+  const onTokenTypeChange = (value) => {
+    setTokenType(value)
+  }
+
   return (
     <>
       {formErrorMessage && (
@@ -84,27 +94,62 @@ function AuthPage({ isAuthenticated, pat }) {
         </Alert>
       )}
       <Typography variant="body1" component="p">
-        In order to use this Chrome Extension you have to generate a{' '}
-        <Link
-          color="secondary"
-          href="https://github.com/settings/personal-access-tokens/new"
-          target="_blank"
-        >
-          GitHub Personal Access Token (PAT)
-        </Link>{' '}
+        In order to use this Chrome Extension you have to generate a Github Personal Access Token (PAT){' '}
         and insert it into the box below.
       </Typography>
-      <Typography variant="subtitle1" component="sub">
-        In the Repository access section, select <StyledText as="span">All repositories</StyledText>.
+      <Typography variant="body1" component="div">
+        This can be done by generating one of the following PATs
+        <RadioGroup
+          row
+          aria-labelledby="demo-row-radio-buttons-group-label"
+          name="row-radio-buttons-group"
+          value={tokenType}
+          onChange={(event) => onTokenTypeChange(event.target.value)}
+        >
+          <FormControlLabel value={TOKEN_TYPES.FINE_GRAINED} control={<Radio color="default"/>} label="Fine-grained PAT" />
+          <FormControlLabel value={TOKEN_TYPES.CLASSIC} control={<Radio color="default"/>} label="Classic PAT" />
+        </RadioGroup>
       </Typography>
-      <Typography component="p">
-        Add the <StyledText as="span">Read-only</StyledText>{' '}
-        permission to the following Repository permissions:
+
+      <Typography fontWeight="bold" variant="body1" component="p">
+        {tokenType === TOKEN_TYPES.FINE_GRAINED && <Link
+              color="secondary"
+              href="https://github.com/settings/personal-access-tokens/new"
+              target="_blank"
+            >
+              Fine-grained PAT
+          </Link>
+        }
+        {tokenType === TOKEN_TYPES.CLASSIC && <Link
+              color="secondary"
+              href="https://github.com/settings/tokens/new"
+              target="_blank"
+            >
+              Classic PAT
+          </Link>
+        }
       </Typography>
-      <Typography variant="subtitle1" component="sub">
-        <StyledText as="span">Issues</StyledText> and{' '}
-        <StyledText as="span">Pull requests</StyledText>
-      </Typography>
+      {tokenType === TOKEN_TYPES.FINE_GRAINED && <>
+          <Typography variant="subtitle1" component="sub">
+            In the Repository access section, select <StyledText as="span">All repositories</StyledText>.
+          </Typography>
+          <Typography component="p">
+            Add the <StyledText as="span">Read-only</StyledText>{' '}
+            permission to the following Repository permissions:
+          </Typography>
+          <Typography variant="subtitle1" component="sub">
+            <StyledText as="span">Issues</StyledText> and{' '}
+            <StyledText as="span">Pull requests</StyledText>
+          </Typography>
+        </>
+      }
+      {tokenType === TOKEN_TYPES.CLASSIC && <>
+          <Typography variant="subtitle1" component="sub">
+            Set the following scopes: <StyledText as="span">repo</StyledText> and{' '}
+            <StyledText as="span">read:user</StyledText>.
+          </Typography>
+        </>
+      }
       <Gap />
       <FormControl
         fullWidth

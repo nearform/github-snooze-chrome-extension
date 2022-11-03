@@ -58,3 +58,8 @@ export const SNOOZE_OPTIONS = [
   'next week',
   'next month'
 ]
+
+export const TOKEN_TYPES = {
+  FINE_GRAINED: 'FINE_GRAINED',
+  CLASSIC: 'CLASSIC'
+}

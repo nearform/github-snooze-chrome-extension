@@ -5,15 +5,396 @@ exports[`AuthPage.js renders the Auth Page for authenticated users 1`] = `
   <p
     class="MuiTypography-root MuiTypography-body1 css-14sfki5-MuiTypography-root"
   >
-    In order to use this Chrome Extension you have to generate a 
+    In order to use this Chrome Extension you have to generate a Github Personal Access Token (PAT) and insert it into the box below.
+  </p>
+  <div
+    class="MuiTypography-root MuiTypography-body1 css-14sfki5-MuiTypography-root"
+  >
+    This can be done by generating one of the following PATs
+    <div
+      aria-labelledby="demo-row-radio-buttons-group-label"
+      class="MuiFormGroup-root MuiFormGroup-row css-qfz70r-MuiFormGroup-root"
+      role="radiogroup"
+    >
+      <label
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
+      >
+        <span
+          class="MuiButtonBase-root MuiRadio-root MuiRadio-colorDefault PrivateSwitchBase-root MuiRadio-root MuiRadio-colorDefault Mui-checked MuiRadio-root MuiRadio-colorDefault css-1gu2tss-MuiButtonBase-root-MuiRadio-root"
+        >
+          <input
+            checked=""
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            name="row-radio-buttons-group"
+            type="radio"
+            value="FINE_GRAINED"
+          />
+          <span
+            class="css-hyxlzm"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1hbvpl3-MuiSvgIcon-root"
+              data-testid="RadioButtonUncheckedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+              />
+            </svg>
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-11zohuh-MuiSvgIcon-root"
+              data-testid="RadioButtonCheckedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M8.465 8.465C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.535 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.465 8.465Z"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </span>
+        <span
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-14sfki5-MuiTypography-root"
+        >
+          Fine-grained PAT
+        </span>
+      </label>
+      <label
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
+      >
+        <span
+          class="MuiButtonBase-root MuiRadio-root MuiRadio-colorDefault PrivateSwitchBase-root MuiRadio-root MuiRadio-colorDefault MuiRadio-root MuiRadio-colorDefault css-1gu2tss-MuiButtonBase-root-MuiRadio-root"
+        >
+          <input
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            name="row-radio-buttons-group"
+            type="radio"
+            value="CLASSIC"
+          />
+          <span
+            class="css-hyxlzm"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1hbvpl3-MuiSvgIcon-root"
+              data-testid="RadioButtonUncheckedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+              />
+            </svg>
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1hhw7if-MuiSvgIcon-root"
+              data-testid="RadioButtonCheckedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M8.465 8.465C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.535 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.465 8.465Z"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </span>
+        <span
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-14sfki5-MuiTypography-root"
+        >
+          Classic PAT
+        </span>
+      </label>
+    </div>
+  </div>
+  <p
+    class="MuiTypography-root MuiTypography-body1 css-1jbn652-MuiTypography-root"
+  >
     <a
       class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-3xhuak-MuiTypography-root-MuiLink-root"
       href="https://github.com/settings/personal-access-tokens/new"
       target="_blank"
     >
-      GitHub Personal Access Token (PAT)
+      Fine-grained PAT
     </a>
-     and insert it into the box below.
+  </p>
+  <sub
+    class="MuiTypography-root MuiTypography-subtitle1 css-azse9t-MuiTypography-root"
+  >
+    In the Repository access section, select 
+    <span
+      class="css-jqunji"
+    >
+      All repositories
+    </span>
+    .
+  </sub>
+  <p
+    class="MuiTypography-root MuiTypography-body1 css-14sfki5-MuiTypography-root"
+  >
+    Add the 
+    <span
+      class="css-jqunji"
+    >
+      Read-only
+    </span>
+     permission to the following Repository permissions:
+  </p>
+  <sub
+    class="MuiTypography-root MuiTypography-subtitle1 css-azse9t-MuiTypography-root"
+  >
+    <span
+      class="css-jqunji"
+    >
+      Issues
+    </span>
+     and 
+    <span
+      class="css-jqunji"
+    >
+      Pull requests
+    </span>
+  </sub>
+  <div
+    class="MuiBox-root css-1pg8bi"
+  />
+  <div
+    class="MuiFormControl-root MuiFormControl-fullWidth css-q8hpuo-MuiFormControl-root"
+  >
+    <label
+      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorSecondary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-1ulxl2v-MuiFormLabel-root-MuiInputLabel-root"
+      data-shrink="true"
+      for="personal-access-token"
+    >
+      PAT
+    </label>
+    <div
+      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorSecondary MuiInputBase-formControl MuiInputBase-adornedEnd css-2be506-MuiInputBase-root-MuiOutlinedInput-root"
+    >
+      <input
+        aria-invalid="false"
+        class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-nxo287-MuiInputBase-input-MuiOutlinedInput-input"
+        id="personal-access-token"
+        type="password"
+        value="123"
+      />
+      <div
+        class="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+      >
+        <button
+          aria-label="toggle token visibility"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root"
+          tabindex="0"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="VisibilityIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+            />
+          </svg>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </div>
+      <fieldset
+        aria-hidden="true"
+        class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+      >
+        <legend
+          class="css-14lo706"
+        >
+          <span>
+            PAT
+          </span>
+        </legend>
+      </fieldset>
+    </div>
+    <div
+      class="MuiBox-root css-1pg8bi"
+    />
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth Mui-disabled MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth css-1hty053-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
+      disabled=""
+      id=":r3:"
+      tabindex="-1"
+      type="button"
+    >
+      Save
+    </button>
+    <div
+      class="MuiBox-root css-1pg8bi"
+    />
+    <div>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-fullWidth MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-fullWidth css-tjgork-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        Logout
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <div
+      class="MuiBox-root css-1pg8bi"
+    />
+    <div>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-fullWidth MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-fullWidth css-tjgork-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        Clear Sync Storage
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`AuthPage.js renders the Auth Page for unauthenticated users 1`] = `
+<DocumentFragment>
+  <p
+    class="MuiTypography-root MuiTypography-body1 css-14sfki5-MuiTypography-root"
+  >
+    In order to use this Chrome Extension you have to generate a Github Personal Access Token (PAT) and insert it into the box below.
+  </p>
+  <div
+    class="MuiTypography-root MuiTypography-body1 css-14sfki5-MuiTypography-root"
+  >
+    This can be done by generating one of the following PATs
+    <div
+      aria-labelledby="demo-row-radio-buttons-group-label"
+      class="MuiFormGroup-root MuiFormGroup-row css-qfz70r-MuiFormGroup-root"
+      role="radiogroup"
+    >
+      <label
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
+      >
+        <span
+          class="MuiButtonBase-root MuiRadio-root MuiRadio-colorDefault PrivateSwitchBase-root MuiRadio-root MuiRadio-colorDefault Mui-checked MuiRadio-root MuiRadio-colorDefault css-1gu2tss-MuiButtonBase-root-MuiRadio-root"
+        >
+          <input
+            checked=""
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            name="row-radio-buttons-group"
+            type="radio"
+            value="FINE_GRAINED"
+          />
+          <span
+            class="css-hyxlzm"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1hbvpl3-MuiSvgIcon-root"
+              data-testid="RadioButtonUncheckedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+              />
+            </svg>
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-11zohuh-MuiSvgIcon-root"
+              data-testid="RadioButtonCheckedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M8.465 8.465C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.535 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.465 8.465Z"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </span>
+        <span
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-14sfki5-MuiTypography-root"
+        >
+          Fine-grained PAT
+        </span>
+      </label>
+      <label
+        class="MuiFormControlLabel-root MuiFormControlLabel-labelPlacementEnd css-j204z7-MuiFormControlLabel-root"
+      >
+        <span
+          class="MuiButtonBase-root MuiRadio-root MuiRadio-colorDefault PrivateSwitchBase-root MuiRadio-root MuiRadio-colorDefault MuiRadio-root MuiRadio-colorDefault css-1gu2tss-MuiButtonBase-root-MuiRadio-root"
+        >
+          <input
+            class="PrivateSwitchBase-input css-1m9pwf3"
+            name="row-radio-buttons-group"
+            type="radio"
+            value="CLASSIC"
+          />
+          <span
+            class="css-hyxlzm"
+          >
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1hbvpl3-MuiSvgIcon-root"
+              data-testid="RadioButtonUncheckedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+              />
+            </svg>
+            <svg
+              aria-hidden="true"
+              class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1hhw7if-MuiSvgIcon-root"
+              data-testid="RadioButtonCheckedIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M8.465 8.465C9.37 7.56 10.62 7 12 7C14.76 7 17 9.24 17 12C17 13.38 16.44 14.63 15.535 15.535C14.63 16.44 13.38 17 12 17C9.24 17 7 14.76 7 12C7 10.62 7.56 9.37 8.465 8.465Z"
+              />
+            </svg>
+          </span>
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </span>
+        <span
+          class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label css-14sfki5-MuiTypography-root"
+        >
+          Classic PAT
+        </span>
+      </label>
+    </div>
+  </div>
+  <p
+    class="MuiTypography-root MuiTypography-body1 css-1jbn652-MuiTypography-root"
+  >
+    <a
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-3xhuak-MuiTypography-root-MuiLink-root"
+      href="https://github.com/settings/personal-access-tokens/new"
+      target="_blank"
+    >
+      Fine-grained PAT
+    </a>
   </p>
   <sub
     class="MuiTypography-root MuiTypography-subtitle1 css-azse9t-MuiTypography-root"
@@ -120,165 +501,6 @@ exports[`AuthPage.js renders the Auth Page for authenticated users 1`] = `
       class="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth Mui-disabled MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth css-1hty053-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
       disabled=""
       id=":r1:"
-      tabindex="-1"
-      type="button"
-    >
-      Save
-    </button>
-    <div
-      class="MuiBox-root css-1pg8bi"
-    />
-    <div>
-      <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-fullWidth MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-fullWidth css-tjgork-MuiButtonBase-root-MuiButton-root"
-        tabindex="0"
-        type="button"
-      >
-        Logout
-        <span
-          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-        />
-      </button>
-    </div>
-    <div
-      class="MuiBox-root css-1pg8bi"
-    />
-    <div>
-      <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-fullWidth MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-fullWidth css-tjgork-MuiButtonBase-root-MuiButton-root"
-        tabindex="0"
-        type="button"
-      >
-        Clear Sync Storage
-        <span
-          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-        />
-      </button>
-    </div>
-  </div>
-</DocumentFragment>
-`;
-
-exports[`AuthPage.js renders the Auth Page for unauthenticated users 1`] = `
-<DocumentFragment>
-  <p
-    class="MuiTypography-root MuiTypography-body1 css-14sfki5-MuiTypography-root"
-  >
-    In order to use this Chrome Extension you have to generate a 
-    <a
-      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-3xhuak-MuiTypography-root-MuiLink-root"
-      href="https://github.com/settings/personal-access-tokens/new"
-      target="_blank"
-    >
-      GitHub Personal Access Token (PAT)
-    </a>
-     and insert it into the box below.
-  </p>
-  <sub
-    class="MuiTypography-root MuiTypography-subtitle1 css-azse9t-MuiTypography-root"
-  >
-    In the Repository access section, select 
-    <span
-      class="css-jqunji"
-    >
-      All repositories
-    </span>
-    .
-  </sub>
-  <p
-    class="MuiTypography-root MuiTypography-body1 css-14sfki5-MuiTypography-root"
-  >
-    Add the 
-    <span
-      class="css-jqunji"
-    >
-      Read-only
-    </span>
-     permission to the following Repository permissions:
-  </p>
-  <sub
-    class="MuiTypography-root MuiTypography-subtitle1 css-azse9t-MuiTypography-root"
-  >
-    <span
-      class="css-jqunji"
-    >
-      Issues
-    </span>
-     and 
-    <span
-      class="css-jqunji"
-    >
-      Pull requests
-    </span>
-  </sub>
-  <div
-    class="MuiBox-root css-1pg8bi"
-  />
-  <div
-    class="MuiFormControl-root MuiFormControl-fullWidth css-q8hpuo-MuiFormControl-root"
-  >
-    <label
-      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-colorSecondary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined css-1ulxl2v-MuiFormLabel-root-MuiInputLabel-root"
-      data-shrink="true"
-      for="personal-access-token"
-    >
-      PAT
-    </label>
-    <div
-      class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorSecondary MuiInputBase-formControl MuiInputBase-adornedEnd css-2be506-MuiInputBase-root-MuiOutlinedInput-root"
-    >
-      <input
-        aria-invalid="false"
-        class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-nxo287-MuiInputBase-input-MuiOutlinedInput-input"
-        id="personal-access-token"
-        type="password"
-        value="123"
-      />
-      <div
-        class="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
-      >
-        <button
-          aria-label="toggle token visibility"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-edgeEnd MuiIconButton-sizeMedium css-1yq5fb3-MuiButtonBase-root-MuiIconButton-root"
-          tabindex="0"
-          type="button"
-        >
-          <svg
-            aria-hidden="true"
-            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
-            data-testid="VisibilityIcon"
-            focusable="false"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
-            />
-          </svg>
-          <span
-            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-          />
-        </button>
-      </div>
-      <fieldset
-        aria-hidden="true"
-        class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-      >
-        <legend
-          class="css-14lo706"
-        >
-          <span>
-            PAT
-          </span>
-        </legend>
-      </fieldset>
-    </div>
-    <div
-      class="MuiBox-root css-1pg8bi"
-    />
-    <button
-      class="MuiButtonBase-root MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth Mui-disabled MuiButton-root MuiLoadingButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-fullWidth css-1hty053-MuiButtonBase-root-MuiButton-root-MuiLoadingButton-root"
-      disabled=""
-      id=":r0:"
       tabindex="-1"
       type="button"
     >
