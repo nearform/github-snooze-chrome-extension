@@ -18,10 +18,25 @@ The [GitHub Snooze Extension](https://chrome.google.com/webstore/detail/github-s
 
 ## Setup
 
-You will need to generate a [GitHub Personal Access Token (PAT)](https://github.com/settings/tokens/new), with these permissions:
+You will need to generate a GitHub Personal Access Token (PAT)
+This can be done by generating either a [Fine-grained PAT](https://github.com/settings/personal-access-tokens/new) or a [Classic PAT](https://github.com/settings/tokens/new). 
 
-- `repo`: used for getting the repository information, such as last update date time on issues and pull requests
-- `read:user`: used for retrieving the current logged in user information _(GitHub ID and username)_
+#### Generating a Fine-grained PAT
+You will need to:
+- [open the Fine-grained PAT generation page](https://github.com/settings/personal-access-tokens/new)
+- in the `Repository access` section, select `All repositories`
+- set `Read-only` permission to the following `Repository permissions`:
+    - `Issues`
+    - `Pull requests`
+    - `Metadata` (should be set automatically when you set it for `Issues` or `Pull requests`)
+
+#### Generating a Classic PAT
+You will need to:
+- [open the Classic PAT generation page](https://github.com/settings/tokens/new)
+- select the following scopes:
+    - `repo`: used for getting the repository information, such as last update date time on issues and pull requests
+    - `read:user`: used for retrieving the current logged in user information _(GitHub ID and username)_
+
 
 ## Security
 
