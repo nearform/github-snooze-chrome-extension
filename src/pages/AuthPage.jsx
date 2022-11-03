@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useState } from 'react'
 import {
   Alert,
   FormControl,
@@ -36,7 +36,7 @@ function AuthPage({ isAuthenticated, pat }) {
     }
   )
 
-  const [tokenType, setTokenType] = React.useState(TOKEN_TYPES.FINE_GRAINED)
+  const [tokenType, setTokenType] = useState(TOKEN_TYPES.FINE_GRAINED)
 
   const handleChange = e => {
     const { value } = e.target
@@ -82,10 +82,6 @@ function AuthPage({ isAuthenticated, pat }) {
 
   const { formErrorMessage, isLoading, showToken, token } = state
 
-  const onTokenTypeChange = (value) => {
-    setTokenType(value)
-  }
-
   return (
     <>
       {formErrorMessage && (
@@ -104,7 +100,7 @@ function AuthPage({ isAuthenticated, pat }) {
           aria-labelledby="demo-row-radio-buttons-group-label"
           name="row-radio-buttons-group"
           value={tokenType}
-          onChange={(event) => onTokenTypeChange(event.target.value)}
+          onChange={(event) => setTokenType(event.target.value)}
         >
           <FormControlLabel value={TOKEN_TYPES.FINE_GRAINED} control={<Radio color="default"/>} label="Fine-grained PAT" />
           <FormControlLabel value={TOKEN_TYPES.CLASSIC} control={<Radio color="default"/>} label="Classic PAT" />
