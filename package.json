@@ -48,7 +48,7 @@
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
     "@crxjs/vite-plugin": "^1.0.14",
-    "@storybook/addon-actions": "^6.5.10",
+    "@storybook/addon-actions": "^6.5.14",
     "@storybook/addon-essentials": "^6.5.13",
     "@storybook/addon-interactions": "^6.5.14",
     "@storybook/addon-links": "^6.5.14",
