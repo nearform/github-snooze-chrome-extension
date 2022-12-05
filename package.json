@@ -55,7 +55,7 @@
     "@storybook/builder-webpack4": "^6.5.10",
     "@storybook/jest": "^0.0.10",
     "@storybook/manager-webpack4": "^6.5.10",
-    "@storybook/react": "^6.5.13",
+    "@storybook/react": "^6.5.14",
     "@storybook/storybook-deployer": "^2.8.16",
     "@storybook/test-runner": "^0.9.1",
     "@storybook/testing-library": "^0.0.13",
