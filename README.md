@@ -1,3 +1,6 @@
+[![Continuous Integration](https://github.com/nearform/github-snooze-chrome-extension/actions/workflows/ci.yml/badge.svg)](https://github.com/nearform/github-snooze-chrome-extension/actions/workflows/ci.yml)
+[![Chrome Web Store Automation](https://github.com/nearform/github-snooze-chrome-extension/actions/workflows/chrome-web-store-automation.yml/badge.svg)](https://github.com/nearform/github-snooze-chrome-extension/actions/workflows/chrome-web-store-automation.yml)
+
 # Github Snooze Chrome Extension
 
 This Chrome Extension adds a Snooze feature to GitHub issues and pull requests.
