@@ -22,7 +22,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish to the Chrome Web Store
-        uses: mnao305/chrome-extension-upload@v4.0.0
+        uses: mnao305/chrome-extension-upload@v4.0.1
         with:
           file-path: dist.zip
           extension-id: ${{ secrets.EXTENSION_ID }}
