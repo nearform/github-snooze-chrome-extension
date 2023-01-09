@@ -3,7 +3,8 @@ import {
   SK_BADGE_COUNTER,
   COLOR_SECONDARY,
   ACTION_GET_CURRENT_TAB_URL,
-  URL_MATCH
+  URL_MATCH,
+  SNOOZE_STATUS_DONE
 } from '../constants'
 import { isValidUrl } from '../url'
 
@@ -143,13 +144,21 @@ export const removeSnooze = async (userId, snooze) => {
  * @param {object} snooze object
  * @returns the list of snoozes after the update
  */
- export const updateSnooze = async (userId, wantedSnooze) => {
+ export const updateSnooze = async ({ userId, updatedSnooze, oldSnooze }) => {
   const snoozeList = await getSnoozeList(userId)
   const updatedList = snoozeList.map(currentSnooze => {
-    return currentSnooze.id === wantedSnooze.id ? wantedSnooze : currentSnooze
+    return currentSnooze.id === updatedSnooze.id ? updatedSnooze : currentSnooze
   })
 
   await setSnoozeList(userId, updatedList)
+  const badgeCounter = await getBadgeCounter(userId)
+
+  if (badgeCounter > 0 && oldSnooze.status === SNOOZE_STATUS_DONE && oldSnooze.status !== updatedSnooze.status) {
+    // the snooze has been "reopened"
+    // in this case, we need to decrement the badge counter
+    await incrementBadgeCounter(-1)
+    await sendMessage(ACTION_UPDATE_BADGE_COUNTER, badgeCounter)
+  }
 
   return await getSnoozeList(userId)
 }

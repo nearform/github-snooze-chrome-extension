@@ -81,7 +81,7 @@ const App = () => {
       status: SNOOZE_STATUS_PENDING
     }
 
-    const updatedSnoozeList = await updateSnooze(user.id, updatedSnooze)
+    const updatedSnoozeList = await updateSnooze({ userId: user.id, updatedSnooze, oldSnooze: snooze })
     setSnoozeList(updatedSnoozeList)
 
     setErrorMessage('')
