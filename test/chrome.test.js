@@ -42,13 +42,14 @@ beforeEach(() => {
   storageSyncGetSpy = jest.fn()
   storageSyncSetSpy = jest.fn()
 
-  const mockChromeStorage = {
-    sync: {
-      get: storageSyncGetSpy,
-      set: storageSyncSetSpy,
-    }
+  const mockSyncStorage = {
+    get: storageSyncGetSpy,
+    set: storageSyncSetSpy,
   }
-  chrome.storage = mockChromeStorage
+  chrome.storage = {
+    ...chrome.storage,
+    sync: mockSyncStorage,
+  }
 
   chrome.action = {
     setBadgeBackgroundColor: jest.fn().mockResolvedValue(null),
