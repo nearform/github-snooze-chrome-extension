@@ -1,4 +1,5 @@
-import { getCurrentTabUrl } from '../src/api/chrome'
+import { getCurrentTabUrl, updateSnooze } from '../src/api/chrome'
+import { ACTION_UPDATE_BADGE_COUNTER, SK_BADGE_COUNTER, SNOOZE_STATUS_DONE, SNOOZE_STATUS_PENDING } from '../src/constants'
 
 const cleanup = () => {
   chrome.runtime.onMessage.clearListeners()
@@ -7,7 +8,8 @@ const cleanup = () => {
   jest.resetModules()
 }
 
-let sendResponseSpy
+let sendResponseSpy, storageSyncGetSpy, storageSyncSetSpy
+
 
 beforeEach(() => {
   cleanup()
@@ -36,6 +38,22 @@ beforeEach(() => {
       chrome.runtime.onMessage.callListeners(action, {}, sendResponseSpy)
     })
   })
+
+  storageSyncGetSpy = jest.fn()
+  storageSyncSetSpy = jest.fn()
+
+  const mockChromeStorage = {
+    sync: {
+      get: storageSyncGetSpy,
+      set: storageSyncSetSpy,
+    }
+  }
+  chrome.storage = mockChromeStorage
+
+  chrome.action = {
+    setBadgeBackgroundColor: jest.fn().mockResolvedValue(null),
+    setBadgeText: jest.fn().mockResolvedValue(null),
+  }
 })
 
 afterEach(cleanup)
@@ -61,4 +79,33 @@ test('retrieves properly invalid current tab url', async () => {
   const tabUrl = await getCurrentTabUrl()
 
   expect(tabUrl).toBe(undefined)
+})
+
+test('correctly decrease the badge counter if a snooze item is being reopened', async () => {
+  const userId = 1
+  const snoozeId = 1
+
+  storageSyncGetSpy.mockResolvedValue({
+    [userId]: [{ id: snoozeId, status: SNOOZE_STATUS_DONE }],
+    [SK_BADGE_COUNTER]: 1,
+  })
+
+  storageSyncSetSpy.mockResolvedValue(null)
+
+  const oldSnooze = {
+    id: snoozeId,
+    status: SNOOZE_STATUS_DONE,
+  }
+  
+  const updatedSnooze = {
+    ...oldSnooze,
+    status: SNOOZE_STATUS_PENDING,
+  }
+
+  await updateSnooze({ userId, updatedSnooze, oldSnooze })
+  // if the chrome.runtime.sendMessage has been called, it means that the badge counter has been decreased
+  expect(chrome.runtime.sendMessage).toHaveBeenCalledWith({
+    action: ACTION_UPDATE_BADGE_COUNTER,
+    msg: 1,
+  })
 })
