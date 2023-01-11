@@ -151,7 +151,7 @@ export const removeSnooze = async (userId, snooze) => {
   })
 
   await setSnoozeList(userId, updatedList)
-  const badgeCounter = await getBadgeCounter(userId)
+  const badgeCounter = await getBadgeCounter()
 
   if (badgeCounter > 0 && oldSnooze.status === SNOOZE_STATUS_DONE && oldSnooze.status !== updatedSnooze.status) {
     // the snooze has been "reopened"
@@ -192,6 +192,15 @@ export const incrementBadgeCounter = async (increment = 1) => {
   badgeCounter += increment
   await writeToSyncStorage({ badgeCounter })
   return badgeCounter
+}
+
+/**
+ * Resets the badge counter value to 0.
+ * @returns void
+ */
+export const resetBadgeCounter = async () => {
+  await writeToSyncStorage({ badgeCounter: 0 })
+  await sendMessage(ACTION_UPDATE_BADGE_COUNTER, 0)
 }
 
 /**

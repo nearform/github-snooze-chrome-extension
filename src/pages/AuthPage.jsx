@@ -18,6 +18,7 @@ import { getUserByPat } from '../api/github'
 import {
   clearLocalStorage,
   clearSyncStorage,
+  resetBadgeCounter,
   writeToLocalStorage
 } from '../api/chrome'
 import DialogButton from '../components/DialogButton'
@@ -72,6 +73,7 @@ function AuthPage({ isAuthenticated, pat }) {
 
   const handleLogout = async () => {
     await clearLocalStorage()
+    await resetBadgeCounter()
     window.location.reload()
   }
 
