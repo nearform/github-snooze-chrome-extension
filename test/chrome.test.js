@@ -1,4 +1,4 @@
-import { getCurrentTabUrl, updateSnooze } from '../src/api/chrome'
+import { getCurrentTabUrl, resetBadgeCounter, updateSnooze } from '../src/api/chrome'
 import { ACTION_UPDATE_BADGE_COUNTER, SK_BADGE_COUNTER, SNOOZE_STATUS_DONE, SNOOZE_STATUS_PENDING } from '../src/constants'
 
 const cleanup = () => {
@@ -108,5 +108,24 @@ test('correctly decrease the badge counter if a snooze item is being reopened', 
   expect(chrome.runtime.sendMessage).toHaveBeenCalledWith({
     action: ACTION_UPDATE_BADGE_COUNTER,
     msg: 1,
+  })
+})
+
+test('correctly reset the badge counter if the reset function is called', async () => {
+  const userId = 1
+  const snoozeId = 1
+
+  storageSyncGetSpy.mockResolvedValue({
+    [userId]: [{ id: snoozeId, status: SNOOZE_STATUS_DONE }],
+    [SK_BADGE_COUNTER]: 1,
+  })
+
+  storageSyncSetSpy.mockResolvedValue(null)
+
+  await resetBadgeCounter()
+  // if the chrome.runtime.sendMessage has been called, it means that the badge counter has been decreased
+  expect(chrome.runtime.sendMessage).toHaveBeenCalledWith({
+    action: ACTION_UPDATE_BADGE_COUNTER,
+    msg: 0,
   })
 })
