@@ -70,7 +70,7 @@ const App = () => {
       return setErrorMessage('Please set a date in the future')
     }
 
-    const entityInfo = getEntityInfo(snooze.url)  
+    const entityInfo = getEntityInfo(snooze.url)
     const entity = await getEntity(entityInfo, pat)
 
     if (entity?.error) {
