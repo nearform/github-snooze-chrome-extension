@@ -139,12 +139,18 @@ function AuthPage({ isAuthenticated, pat }) {
             <StyledText as="span">Issues</StyledText> and{' '}
             <StyledText as="span">Pull requests</StyledText>
           </Typography>
+          <Typography component="p">
+            NOTE:
+          </Typography>
+          <Typography component="p">
+            - The <StyledText as="span">Discussions</StyledText> permission is not available for fine-grained PATs.
+          </Typography>
         </>
       }
       {tokenType === TOKEN_TYPES.CLASSIC && <>
           <Typography variant="subtitle1" component="sub">
-            Set the following scopes: <StyledText as="span">repo</StyledText> and{' '}
-            <StyledText as="span">read:user</StyledText>.
+            Set the following scopes: <StyledText as="span">repo</StyledText>, <StyledText as="span">read:user</StyledText> and{' '}
+            <StyledText as="span">write:discussions</StyledText>.
           </Typography>
         </>
       }

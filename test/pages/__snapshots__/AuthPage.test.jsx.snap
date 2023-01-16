@@ -163,6 +163,22 @@ exports[`AuthPage.js renders the Auth Page for authenticated users 1`] = `
       Pull requests
     </span>
   </sub>
+  <p
+    class="MuiTypography-root MuiTypography-body1 css-14sfki5-MuiTypography-root"
+  >
+    NOTE:
+  </p>
+  <p
+    class="MuiTypography-root MuiTypography-body1 css-14sfki5-MuiTypography-root"
+  >
+    - The 
+    <span
+      class="css-jqunji"
+    >
+      Discussions
+    </span>
+     permission is not available for fine-grained PATs.
+  </p>
   <div
     class="MuiBox-root css-1pg8bi"
   />
@@ -433,6 +449,22 @@ exports[`AuthPage.js renders the Auth Page for unauthenticated users 1`] = `
       Pull requests
     </span>
   </sub>
+  <p
+    class="MuiTypography-root MuiTypography-body1 css-14sfki5-MuiTypography-root"
+  >
+    NOTE:
+  </p>
+  <p
+    class="MuiTypography-root MuiTypography-body1 css-14sfki5-MuiTypography-root"
+  >
+    - The 
+    <span
+      class="css-jqunji"
+    >
+      Discussions
+    </span>
+     permission is not available for fine-grained PATs.
+  </p>
   <div
     class="MuiBox-root css-1pg8bi"
   />

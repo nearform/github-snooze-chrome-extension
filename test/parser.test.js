@@ -20,4 +20,14 @@ describe('parser.js', () => {
     expect(entityInfo.type).toBe('issues')
     expect(entityInfo.number).toBe('50')
   })
+
+  test('should return the proper entity info with a valid url - discussion', () => {
+    const url = 'https://github.com/owner/repo/discussions/50'
+    const entityInfo = getEntityInfo(url)
+    expect(entityInfo).toBeDefined()
+    expect(entityInfo.owner).toBe('owner')
+    expect(entityInfo.repo).toBe('repo')
+    expect(entityInfo.type).toBe('discussions')
+    expect(entityInfo.number).toBe('50')
+  })
 })

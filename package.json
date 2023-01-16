@@ -32,6 +32,7 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/lab": "^5.0.0-alpha.115",
     "@mui/material": "^5.11.4",
+    "@urql/exchange-auth": "^1.0.0",
     "@vitejs/plugin-react": "^3.0.1",
     "chrono-node": "^2.5.0",
     "graphql": "^16.6.0",

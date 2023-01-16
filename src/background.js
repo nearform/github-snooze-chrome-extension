@@ -1,12 +1,12 @@
 import {
   getSnoozeList,
-  incrementBadgeCounter,
   readAllFromLocalStorage,
   setSnoozeList,
   updateBadgeCounterUI,
   sendBrowserNotification,
   getCurrentTabUrlBackground,
-  readFromLocalStorage
+  readFromLocalStorage,
+  writeToSyncStorage
 } from './api/chrome'
 import { getEntity } from './api/github'
 import {
@@ -67,10 +67,11 @@ chrome.alarms.onAlarm.addListener(async () => {
   const snoozesList = await getSnoozeList(user.id)
 
   const updatedSnoozeList = []
+
   for (const snooze of snoozesList) {
     const hasPassed = dateHasPassed(snooze.notifyAt, now.getTime())
     if (hasPassed && snooze.status === SNOOZE_STATUS_PENDING) {
-      const updatedSnooze = await notify(snooze, pat)
+      const updatedSnooze = await notify(snooze, pat, snoozesList)
       updatedSnoozeList.push(updatedSnooze)
     } else {
       updatedSnoozeList.push(snooze)
@@ -82,18 +83,26 @@ chrome.alarms.onAlarm.addListener(async () => {
   await setSnoozeList(user.id, updatedSnoozeList)
 })
 
-const notify = async (snooze, pat) => {
+const notify = async (snooze, pat, snoozesList) => {
   const { entityInfo } = snooze
-
   const entity = await getEntity(entityInfo, pat)
+
+  if (!entity || entity.error) {
+    return snooze
+  }
   const { updated_at: updatedAt } = entity
   snooze.status = SNOOZE_STATUS_DONE
+
   if (updatedAt !== entityInfo.updatedAt) {
     // there has been an update, so don't notify the user
     return snooze
   }
 
-  await incrementBadgeCounter()
+  const sentNotificationsCount = snoozesList.filter(
+    sn => sn.status === SNOOZE_STATUS_DONE || sn.id === snooze.id
+  ).length || 0
+
+  await writeToSyncStorage({ badgeCounter: sentNotificationsCount })
 
   snooze.badgeCount = true
 

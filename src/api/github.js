@@ -1,3 +1,6 @@
+import { DISCUSSION_QUERY } from '../graphql/queries';
+import { getGraphqlClient } from '../graphql/client';
+
 export const getUserByPat = async token => {
   const response = await fetch(
     `https://api.github.com/user`,
@@ -21,6 +24,39 @@ export const getUserByPat = async token => {
 
 export const getEntity = async (entityInfo, token) => {
   const { owner, repo, type, number } = entityInfo
+
+  if (type === 'discussions') {
+    try {
+      const result  = await getGraphqlClient()
+      .query(DISCUSSION_QUERY, {
+        number: parseInt(number),
+        owner: owner,
+        name: repo
+      })
+      .toPromise()
+      .then(result => {
+        if (result.error) {
+          return {
+            error: 'Error while fetching the discussion. Fine-grained PATs are not supported yet.'
+          }
+        }
+
+        return result.data
+      });
+
+      if (result.error) {
+        return result;
+      }
+      return {
+        updated_at: result?.repository.discussion.updatedAt
+      }
+    } catch (error) {
+      return {
+        error
+      }
+    }
+  }
+
   const effectiveType = type === 'pull' ? 'pulls' : type
   const response = await fetch(
     `https://api.github.com/repos/${owner}/${repo}/${effectiveType}/${number}`,

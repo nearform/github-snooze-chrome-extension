@@ -85,7 +85,7 @@ exports[`SnoozeItem shows the proper SnoozeItem - future notification date 1`] =
       <h6
         class="MuiTypography-root MuiTypography-subtitle1 css-i5mk92-MuiTypography-root"
       >
-        Scheduled for Jul 28 2200 10:00
+        Scheduled for Jul 28 2200 12:00
       </h6>
     </div>
   </div>
@@ -177,7 +177,7 @@ exports[`SnoozeItem shows the proper SnoozeItem - past notification date 1`] = `
       <h6
         class="MuiTypography-root MuiTypography-subtitle1 css-i5mk92-MuiTypography-root"
       >
-        Notified at Jul 28 2022 10:00
+        Notified at Jul 28 2022 12:00
       </h6>
     </div>
   </div>

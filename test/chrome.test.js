@@ -10,7 +10,6 @@ const cleanup = () => {
 
 let sendResponseSpy, storageSyncGetSpy, storageSyncSetSpy
 
-
 beforeEach(() => {
   cleanup()
   const originalImpl = global.chrome.runtime.onMessage.addListener // prevent infinite-loop

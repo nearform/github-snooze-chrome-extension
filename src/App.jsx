@@ -9,9 +9,7 @@ import { addSnooze, checkUrlAlreadySnoozed, getSnoozeList, updateSnooze } from '
 import { getEntityInfo } from './parser'
 import { getEntity } from './api/github'
 import { SNOOZE_STATUS_PENDING } from './constants'
-import { DISCUSSION_QUERY } from './graphql/queries'
 import RoutesWrapper from './components/RoutesWrapper'
-import { useQuery } from 'urql';
 
 const App = () => {
   const {
@@ -24,42 +22,6 @@ const App = () => {
   } = useInitApp()
   const [errorMessage, setErrorMessage] = useState('')
   const [snoozeList, setSnoozeList] = useState(snoozes)
-  // const [snoozeType, setSnoozeType] = useState('')
-
-  const entityInfo = !currentUrl || getEntityInfo(currentUrl)
-  const {  number, owner, repo } = entityInfo
-
-  const [result, executeQuery] = useQuery({
-    query: DISCUSSION_QUERY,
-    variables: {
-      number: parseInt(number),
-      owner: owner,
-      name: repo
-    },
-    pause: true // execute query manually
-  });
-
-  const { data, fetching, error } = result
-
-  useEffect(() => {
-    if (error?.message) { 
-      setErrorMessage(error.message) // Maybe put generic message "Something went wrong...."
-    }
-
-    if(data) {
-      // const updatedAt = data?.repository.discussions.updated_at
-      // const snooze = {
-      //   id: uuid.v4(),
-      //   url: currentUrl,
-      //   // notifyAt: notifyDate.getTime(), need to add a hook to pass the notify date
-      //   entityInfo: { ...entityInfo, updatedAt },
-      //   status: SNOOZE_STATUS_PENDING
-      // }
-      // const useAddSnooze = async () => await addSnooze(user.id, snooze) // "useAddSnooze" cannot be called inside a callback
-      // const updatedSnoozeList = useAddSnooze() // update snooze list based on snoozeType
-      // setSnoozeList(updatedSnoozeList)
-    }
-  }, [fetching, error, data]) 
 
   const handleAddSnooze = async notifyDate => {
     setErrorMessage('')
@@ -75,18 +37,15 @@ const App = () => {
     }
 
     const entityInfo = getEntityInfo(currentUrl)
-    const { type } = entityInfo
-    let entity
-    if (type === 'discussions') {
-      await executeQuery() // await doesn't seem to wait for the query response
-      // setSnoozeType('add')
-      return // do the rest in the effect, when data is ready
-    }
-    else {
-      entity = await getEntity(entityInfo, pat)
+    const entity = await getEntity(entityInfo, pat)
+
+    if (entity?.error) {
+      return setErrorMessage(
+        entity.error
+      )
     }
 
-    if (entity.message === 'Not Found') {
+    if (entity?.message === 'Not Found') {
       return setErrorMessage(
         'The provided URL is not valid. Unable to fetch entity information from GitHub.'
       )
@@ -111,10 +70,16 @@ const App = () => {
       return setErrorMessage('Please set a date in the future')
     }
 
-    const entityInfo = getEntityInfo(snooze.url)
+    const entityInfo = getEntityInfo(snooze.url)  
     const entity = await getEntity(entityInfo, pat)
 
-    if (entity.message === 'Not Found') {
+    if (entity?.error) {
+      return setErrorMessage(
+        entity.error
+      )
+    }
+
+    if (entity?.message === 'Not Found') {
       return setErrorMessage(
         'The provided URL is not valid. Unable to fetch entity information from GitHub.'
       )
