@@ -39,11 +39,18 @@ const App = () => {
     const entityInfo = getEntityInfo(currentUrl)
     const entity = await getEntity(entityInfo, pat)
 
-    if (entity.message === 'Not Found') {
+    if (entity?.error) {
+      return setErrorMessage(
+        entity.error
+      )
+    }
+
+    if (entity?.message === 'Not Found') {
       return setErrorMessage(
         'The provided URL is not valid. Unable to fetch entity information from GitHub.'
       )
     }
+
     const { updated_at: updatedAt } = entity
 
     const snooze = {
@@ -66,7 +73,13 @@ const App = () => {
     const entityInfo = getEntityInfo(snooze.url)
     const entity = await getEntity(entityInfo, pat)
 
-    if (entity.message === 'Not Found') {
+    if (entity?.error) {
+      return setErrorMessage(
+        entity.error
+      )
+    }
+
+    if (entity?.message === 'Not Found') {
       return setErrorMessage(
         'The provided URL is not valid. Unable to fetch entity information from GitHub.'
       )
