@@ -22,40 +22,35 @@ export const getUserByPat = async token => {
   }
 }
 
-export const getEntity = async (entityInfo, token) => {
-  const { owner, repo, type, number } = entityInfo
+const getEntityFromGraphql = async (entityInfo) => {
+  const { number, owner, repo } = entityInfo
+  try {
+    const result  = await getGraphqlClient()
+    .query(DISCUSSION_QUERY, {
+      number: parseInt(number),
+      owner: owner,
+      name: repo
+    })
+    .toPromise()
 
-  if (type === 'discussions') {
-    try {
-      const result  = await getGraphqlClient()
-      .query(DISCUSSION_QUERY, {
-        number: parseInt(number),
-        owner: owner,
-        name: repo
-      })
-      .toPromise()
-      .then(result => {
-        if (result.error) {
-          return {
-            error: 'Error while fetching the discussion. Fine-grained PATs are not supported yet.'
-          }
-        }
-
-        return result.data
-      });
-
-      if (result.error) {
-        return result;
-      }
+    if (result.error) {
       return {
-        updated_at: result?.repository.discussion.updatedAt
-      }
-    } catch (error) {
-      return {
-        error
+        error: 'Error while fetching the discussion. Fine-grained PATs are not supported yet.'
       }
     }
+
+    return {
+      updated_at: result?.data?.repository.discussion.updatedAt
+    }
+  } catch (error) {
+    return {
+      error
+    }
   }
+}
+
+const getEntityFromAPI = async (entityInfo, token) => {
+  const { owner, repo, type, number } = entityInfo
 
   const effectiveType = type === 'pull' ? 'pulls' : type
   const response = await fetch(
@@ -65,6 +60,16 @@ export const getEntity = async (entityInfo, token) => {
 
   const data = await response.json()
   return data
+}
+
+export const getEntity = async (entityInfo, token) => {
+  const { type } = entityInfo
+
+  if (type === 'discussions') {
+    return await getEntityFromGraphql(entityInfo)
+  } else {
+    return await getEntityFromAPI(entityInfo, token)
+  }
 }
 
 const getRequestHeaders = (httpMethod, token) => {

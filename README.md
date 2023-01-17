@@ -40,7 +40,7 @@ You will need to:
 - select the following scopes:
     - `repo`: used for getting the repository information, such as last update date time on issues and pull requests
     - `read:user`: used for retrieving the current logged in user information _(GitHub ID and username)_
-    - `write:discussions`: used to have access to the discussions API
+    - `read:discussions`: used to have access to the discussions API
 
 
 ## Security

@@ -5,21 +5,23 @@ import { SK_PAT, SK_USER } from '../constants';
 import { readFromLocalStorage } from '../api/chrome';
 
 const getAuth = async ({ authState }) => {
-  if (!authState) {
-      const { pat } = await readFromLocalStorage([SK_PAT, SK_USER])
-
-      if (!pat) {
-          throw Error('PAT not available.') 
-      }
-
-      return { token: pat }
+  if (authState) {
+    return {
+      token: null
+    };
   }
 
-  return null;
+  const { pat } = await readFromLocalStorage([SK_PAT, SK_USER])
+
+  if (!pat) {
+      throw Error('PAT not available.') 
+  }
+
+  return { token: pat }
 };
 
 const addAuthToOperation = ({ authState, operation }) => {
-  if (!authState || !authState.token) {
+  if (!authState?.token) {
     return operation;
   }
 

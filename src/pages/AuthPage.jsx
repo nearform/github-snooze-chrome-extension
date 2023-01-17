@@ -150,7 +150,7 @@ function AuthPage({ isAuthenticated, pat }) {
       {tokenType === TOKEN_TYPES.CLASSIC && <>
           <Typography variant="subtitle1" component="sub">
             Set the following scopes: <StyledText as="span">repo</StyledText>, <StyledText as="span">read:user</StyledText> and{' '}
-            <StyledText as="span">write:discussions</StyledText>.
+            <StyledText as="span">read:discussions</StyledText>.
           </Typography>
         </>
       }
