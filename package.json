@@ -63,7 +63,7 @@
     "@storybook/test-runner": "^0.9.3",
     "@storybook/testing-library": "^0.0.13",
     "@testing-library/react": "^13.4.0",
-    "@types/chrome": "^0.0.209",
+    "@types/chrome": "^0.0.210",
     "@types/firefox-webext-browser": "^109.0.0",
     "@types/jest": "^29.2.6",
     "@types/react": "^18.0.27",
