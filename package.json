@@ -53,7 +53,7 @@
     "@crxjs/vite-plugin": "^1.0.14",
     "@storybook/addon-actions": "^6.5.16",
     "@storybook/addon-essentials": "^6.5.16",
-    "@storybook/addon-interactions": "^6.5.15",
+    "@storybook/addon-interactions": "^6.5.16",
     "@storybook/addon-links": "^6.5.16",
     "@storybook/builder-webpack4": "^6.5.16",
     "@storybook/jest": "^0.0.10",
