@@ -57,7 +57,7 @@
     "@storybook/addon-links": "^6.5.16",
     "@storybook/builder-webpack4": "^6.5.16",
     "@storybook/jest": "^0.0.10",
-    "@storybook/manager-webpack4": "^6.5.10",
+    "@storybook/manager-webpack4": "^6.5.16",
     "@storybook/react": "^6.5.15",
     "@storybook/storybook-deployer": "^2.8.16",
     "@storybook/test-runner": "^0.9.3",
