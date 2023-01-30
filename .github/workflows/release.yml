@@ -12,6 +12,8 @@ on:
           - patch
           - minor
           - major
+      baseTag:
+        description: 'base release tag'
   pull_request:
     types: [closed]
 
