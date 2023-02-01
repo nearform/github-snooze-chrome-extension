@@ -60,7 +60,7 @@
     "@storybook/manager-webpack4": "^6.5.10",
     "@storybook/react": "^6.5.16",
     "@storybook/storybook-deployer": "^2.8.16",
-    "@storybook/test-runner": "^0.9.3",
+    "@storybook/test-runner": "^0.9.4",
     "@storybook/testing-library": "^0.0.13",
     "@testing-library/react": "^13.4.0",
     "@types/chrome": "^0.0.210",
