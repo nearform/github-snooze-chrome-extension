@@ -83,7 +83,7 @@
     "playwright": "^1.30.0",
     "prettier": "^2.8.3",
     "prop-types": "^15.8.1",
-    "storycap": "^3.1.9",
+    "storycap": "^4.0.0",
     "styled-jsx": "^5.1.2",
     "vite": "^4.1.1",
     "vite-plugin-zip-pack": "^1.0.5"
