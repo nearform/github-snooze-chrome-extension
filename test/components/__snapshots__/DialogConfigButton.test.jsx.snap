@@ -4,7 +4,7 @@ exports[`DialogConfigButton.js shows the proper disabled DialogFormButton 1`] = 
 <DocumentFragment>
   <div>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeSmall MuiButton-outlinedSizeSmall Mui-disabled MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeSmall MuiButton-outlinedSizeSmall css-nnjl0l-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeSmall MuiButton-outlinedSizeSmall Mui-disabled MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeSmall MuiButton-outlinedSizeSmall css-1f4hgl2-MuiButtonBase-root-MuiButton-root"
       data-testid="open-settings-dialog"
       disabled=""
       tabindex="-1"
@@ -30,7 +30,7 @@ exports[`DialogConfigButton.js shows the proper enabled DialogFormButton 1`] = `
 <DocumentFragment>
   <div>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeSmall MuiButton-outlinedSizeSmall css-nnjl0l-MuiButtonBase-root-MuiButton-root"
+      class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeSmall MuiButton-outlinedSizeSmall MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeSmall MuiButton-outlinedSizeSmall css-1f4hgl2-MuiButtonBase-root-MuiButton-root"
       data-testid="open-settings-dialog"
       tabindex="0"
       type="button"
