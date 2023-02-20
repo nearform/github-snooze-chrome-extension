@@ -48,7 +48,7 @@
     "@babel/core": "^7.21.0",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.12.10",
-    "@commitlint/cli": "^17.4.3",
+    "@commitlint/cli": "^17.4.4",
     "@commitlint/config-conventional": "^17.4.4",
     "@crxjs/vite-plugin": "^1.0.14",
     "@storybook/addon-actions": "^6.5.16",
