@@ -34,7 +34,7 @@
     "@mui/material": "^5.11.12",
     "@urql/exchange-auth": "^2.0.0",
     "@vitejs/plugin-react": "^3.1.0",
-    "chrono-node": "^2.5.1",
+    "chrono-node": "^2.6.0",
     "graphql": "^16.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
