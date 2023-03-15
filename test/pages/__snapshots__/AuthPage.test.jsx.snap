@@ -119,7 +119,7 @@ exports[`AuthPage.js renders the Auth Page for authenticated users 1`] = `
     class="MuiTypography-root MuiTypography-body1 css-1jbn652-MuiTypography-root"
   >
     <a
-      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-3xhuak-MuiTypography-root-MuiLink-root"
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-15n48k6-MuiTypography-root-MuiLink-root"
       href="https://github.com/settings/personal-access-tokens/new"
       target="_blank"
     >
@@ -405,7 +405,7 @@ exports[`AuthPage.js renders the Auth Page for unauthenticated users 1`] = `
     class="MuiTypography-root MuiTypography-body1 css-1jbn652-MuiTypography-root"
   >
     <a
-      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-3xhuak-MuiTypography-root-MuiLink-root"
+      class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-15n48k6-MuiTypography-root-MuiLink-root"
       href="https://github.com/settings/personal-access-tokens/new"
       target="_blank"
     >
